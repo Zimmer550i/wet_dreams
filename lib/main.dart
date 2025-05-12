@@ -1,4 +1,3 @@
-import 'package:wet_dreams/design_system.dart';
 import 'package:wet_dreams/themes/dark_theme.dart';
 import 'package:wet_dreams/themes/light_theme.dart';
 import 'package:wet_dreams/utils/app_colors.dart';
@@ -53,8 +52,7 @@ class MyApp extends StatelessWidget {
               ),
               transitionDuration: const Duration(milliseconds: 500),
               getPages: AppRoutes.pages,
-              // initialRoute: AppRoutes.splashScreen,
-              home: DesignSystem(),
+              initialRoute: AppRoutes.splash,
             );
           },
         );

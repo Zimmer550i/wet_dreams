@@ -88,7 +88,7 @@ class ProfilePicture extends StatelessWidget {
                       ),
                       child: Center(
                         child: SvgPicture.asset(
-                          AppIcons.edit,
+                          AppIcons.bell,
                           colorFilter: ColorFilter.mode(
                             AppColors.blue[400]!,
                             BlendMode.srcIn,
@@ -109,7 +109,7 @@ class ProfilePicture extends StatelessWidget {
                   ),
                   padding: EdgeInsets.all(8),
                   child: SvgPicture.asset(
-                    AppIcons.edit,
+                    AppIcons.bell,
                     colorFilter: ColorFilter.mode(
                       AppColors.blue,
                       BlendMode.srcIn,

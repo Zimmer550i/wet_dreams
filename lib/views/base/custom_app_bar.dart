@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:wet_dreams/utils/app_colors.dart';
+import 'package:wet_dreams/utils/app_icons.dart';
 import 'package:wet_dreams/utils/app_texts.dart';
+import 'package:wet_dreams/utils/custom_svg.dart';
 
 class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
   final String title;
@@ -14,6 +16,7 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
   Widget build(BuildContext context) {
     return AppBar(
       backgroundColor: AppColors.black[600],
+      automaticallyImplyLeading: false,
       titleSpacing: 0,
       title: SizedBox(
         height: 44,
@@ -21,8 +24,9 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
           children: [
             SizedBox(width: 18),
             hasLeading
-                ? SizedBox(width: 20, height: 20)
+                ? CustomSvg(asset: AppIcons.back)
                 : SizedBox(height: 20, width: 20),
+            const SizedBox(width: 24),
             Text(
               title,
               style: AppTexts.tsmr.copyWith(color: AppColors.black[50]),
@@ -35,7 +39,8 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
         child: Container(
           height: 0.5,
           width: double.infinity,
-          color: AppColors.black.shade300),
+          color: AppColors.black.shade300,
+        ),
       ),
     );
   }

@@ -91,23 +91,6 @@ class _CustomTextFieldState extends State<CustomTextField> {
             child: Row(
               spacing: 12,
               children: [
-                if (widget.isPassword)
-                  GestureDetector(
-                    onTap: () {
-                      setState(() {
-                        isObscured = !isObscured;
-                      });
-                    },
-                    child: SvgPicture.asset(
-                      AppIcons.lock,
-                      height: 20,
-                      width: 20,
-                      colorFilter: ColorFilter.mode(
-                        isFocused ? AppColors.blue : AppColors.black.shade100,
-                        BlendMode.srcIn,
-                      ),
-                    ),
-                  ),
                 if (widget.leading != null)
                   SvgPicture.asset(
                     widget.leading!,
@@ -122,10 +105,8 @@ class _CustomTextFieldState extends State<CustomTextField> {
                   child: TextField(
                     focusNode: focusNode,
                     controller: widget.controller,
-                    keyboardType:
-                        widget.leading == AppIcons.phone
-                            ? TextInputType.phone
-                            : widget.textInputType,
+                    cursorColor: AppColors.blue,
+                    keyboardType: widget.textInputType,
                     obscureText: isObscured,
                     enabled: !widget.isDisabled && widget.onTap == null,
                     onTapOutside: (event) {
@@ -141,7 +122,9 @@ class _CustomTextFieldState extends State<CustomTextField> {
                       border: InputBorder.none,
                       contentPadding: EdgeInsets.zero,
                       hintText: widget.hintText,
-                      hintStyle: AppTexts.tsmr.copyWith(color: AppColors.black[300]),
+                      hintStyle: AppTexts.tsmr.copyWith(
+                        color: AppColors.black[300],
+                      ),
                     ),
                   ),
                 ),
@@ -163,7 +146,7 @@ class _CustomTextFieldState extends State<CustomTextField> {
                       });
                     },
                     child: SvgPicture.asset(
-                      isObscured ? AppIcons.eye : AppIcons.eyeOff,
+                      isObscured ? AppIcons.eyeOff : AppIcons.eyeOff,
                       height: 20,
                       width: 20,
                       colorFilter: ColorFilter.mode(

@@ -14,6 +14,7 @@ class CustomButton extends StatefulWidget {
   final String? leading;
   final double padding;
   final double radius;
+  final double fontSize;
   const CustomButton({
     super.key,
     required this.text,
@@ -24,6 +25,7 @@ class CustomButton extends StatefulWidget {
     this.isSecondary = false,
     this.isLoading = false,
     this.isDisabled = false,
+    this.fontSize = 16,
     this.height = 50,
     this.width = double.infinity,
   });
@@ -46,7 +48,7 @@ class _CustomButtonState extends State<CustomButton> {
         decoration: BoxDecoration(
           color:
               widget.isSecondary
-                  ? AppColors.blue[25]
+                  ? AppColors.blue[50]
                   : widget.isDisabled
                   ? AppColors.blue.shade300
                   : AppColors.blue.shade500,
@@ -81,7 +83,11 @@ class _CustomButtonState extends State<CustomButton> {
                     Text(
                       widget.text,
                       style: AppTexts.tsmb.copyWith(
-                        color: AppColors.blue.shade900,
+                        fontSize: widget.fontSize,
+                        color:
+                            widget.isSecondary
+                                ? AppColors.black
+                                : AppColors.blue.shade900,
                       ),
                     ),
                   ],

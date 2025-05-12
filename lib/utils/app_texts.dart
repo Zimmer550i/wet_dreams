@@ -6,7 +6,7 @@ class AppTexts {
     fontFamily: "Sen",
     fontSize: 72,
     height: 88 / 72,
-    fontWeight: FontWeight.w400,
+    fontVariations: [FontVariation("wght", 400)],
     color: Colors.white,
   );
 
@@ -14,7 +14,7 @@ class AppTexts {
     fontFamily: "Sen",
     fontSize: 60,
     height: 72 / 60,
-    fontWeight: FontWeight.w400,
+    fontVariations: [FontVariation("wght", 400)],
     color: Colors.white,
   );
 
@@ -22,7 +22,7 @@ class AppTexts {
     fontFamily: "Sen",
     fontSize: 48,
     height: 60 / 48,
-    fontWeight: FontWeight.w400,
+    fontVariations: [FontVariation("wght", 400)],
     color: Colors.white,
   );
 
@@ -30,7 +30,7 @@ class AppTexts {
     fontFamily: "Sen",
     fontSize: 36,
     height: 44 / 36,
-    fontWeight: FontWeight.w400,
+    fontVariations: [FontVariation("wght", 400)],
     color: Colors.white,
   );
 
@@ -38,7 +38,28 @@ class AppTexts {
     fontFamily: "Sen",
     fontSize: 30,
     height: 36 / 30,
-    fontWeight: FontWeight.w400,
+    fontVariations: [FontVariation("wght", 400)],
+    color: Colors.white,
+  );
+  static TextStyle dsmm = TextStyle(
+    fontFamily: "Sen",
+    fontSize: 30,
+    height: 36 / 30,
+    fontVariations: [FontVariation("wght", 500)],
+    color: Colors.white,
+  );
+  static TextStyle dsms = TextStyle(
+    fontFamily: "Sen",
+    fontSize: 30,
+    height: 36 / 30,
+    fontVariations: [FontVariation("wght", 600)],
+    color: Colors.white,
+  );
+  static TextStyle dsmb = TextStyle(
+    fontFamily: "Sen",
+    fontSize: 30,
+    height: 36 / 30,
+    fontVariations: [FontVariation("wght", 700)],
     color: Colors.white,
   );
 
@@ -46,7 +67,7 @@ class AppTexts {
     fontFamily: "Sen",
     fontSize: 24,
     height: 32 / 24,
-    fontWeight: FontWeight.w400,
+    fontVariations: [FontVariation("wght", 400)],
     color: Colors.white,
   );
 
@@ -54,7 +75,7 @@ class AppTexts {
     fontFamily: "Sen",
     fontSize: 20,
     height: 30 / 20,
-    fontWeight: FontWeight.w400,
+    fontVariations: [FontVariation("wght", 400)],
     color: Colors.white,
   );
 
@@ -62,7 +83,7 @@ class AppTexts {
     fontFamily: "Sen",
     fontSize: 18,
     height: 28 / 18,
-    fontWeight: FontWeight.w400,
+    fontVariations: [FontVariation("wght", 400)],
     color: Colors.white,
   );
 
@@ -70,7 +91,7 @@ class AppTexts {
     fontFamily: "Sen",
     fontSize: 16,
     height: 24 / 16,
-    fontWeight: FontWeight.w400,
+    fontVariations: [FontVariation("wght", 400)],
     color: Colors.white,
   );
 
@@ -78,7 +99,7 @@ class AppTexts {
     fontFamily: "Sen",
     fontSize: 16,
     height: 24 / 16,
-    fontWeight: FontWeight.w500,
+    fontVariations: [FontVariation("wght", 500)],
     color: Colors.white,
   );
 
@@ -86,7 +107,7 @@ class AppTexts {
     fontFamily: "Sen",
     fontSize: 16,
     height: 24 / 16,
-    fontWeight: FontWeight.w600,
+    fontVariations: [FontVariation("wght", 600)],
     color: Colors.white,
   );
 
@@ -94,7 +115,7 @@ class AppTexts {
     fontFamily: "Sen",
     fontSize: 16,
     height: 24 / 16,
-    fontWeight: FontWeight.w700,
+    fontVariations: [FontVariation("wght", 700)],
     color: Colors.white,
   );
 
@@ -102,7 +123,7 @@ class AppTexts {
     fontFamily: "Sen",
     fontSize: 14,
     height: 20 / 14,
-    fontWeight: FontWeight.w400,
+    fontVariations: [FontVariation("wght", 400)],
     color: Colors.white,
   );
 
@@ -110,7 +131,7 @@ class AppTexts {
     fontFamily: "Sen",
     fontSize: 14,
     height: 20 / 14,
-    fontWeight: FontWeight.w500,
+    fontVariations: [FontVariation("wght", 500)],
     color: Colors.white,
   );
 
@@ -118,7 +139,7 @@ class AppTexts {
     fontFamily: "Sen",
     fontSize: 14,
     height: 20 / 14,
-    fontWeight: FontWeight.w600,
+    fontVariations: [FontVariation("wght", 600)],
     color: Colors.white,
   );
 
@@ -126,7 +147,7 @@ class AppTexts {
     fontFamily: "Sen",
     fontSize: 14,
     height: 20 / 14,
-    fontWeight: FontWeight.w700,
+    fontVariations: [FontVariation("wght", 700)],
     color: Colors.white,
   );
 
@@ -134,7 +155,7 @@ class AppTexts {
     fontFamily: "Sen",
     fontSize: 12,
     height: 18 / 12,
-    fontWeight: FontWeight.w400,
+    fontVariations: [FontVariation("wght", 400)],
     color: Colors.white,
   );
 
@@ -142,7 +163,7 @@ class AppTexts {
     fontFamily: "Sen",
     fontSize: 12,
     height: 18 / 12,
-    fontWeight: FontWeight.w500,
+    fontVariations: [FontVariation("wght", 500)],
     color: Colors.white,
   );
 
@@ -150,7 +171,7 @@ class AppTexts {
     fontFamily: "Sen",
     fontSize: 12,
     height: 18 / 12,
-    fontWeight: FontWeight.w600,
+    fontVariations: [FontVariation("wght", 600)],
     color: Colors.white,
   );
 
@@ -158,7 +179,7 @@ class AppTexts {
     fontFamily: "Sen",
     fontSize: 12,
     height: 18 / 12,
-    fontWeight: FontWeight.w700,
+    fontVariations: [FontVariation("wght", 700)],
     color: Colors.white,
   );
 }
