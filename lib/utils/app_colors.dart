@@ -82,5 +82,5 @@ class AppColors {
     900: Color(0xff6b6b6b),
   });
 
-  static Color red = Color(0xffE65347);
+  static Color red = Color(0xfff00000);
 }

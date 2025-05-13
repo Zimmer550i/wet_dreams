@@ -6,7 +6,7 @@ import 'package:wet_dreams/views/base/custom_button.dart';
 import 'package:wet_dreams/views/base/custom_text_field.dart';
 import 'package:wet_dreams/views/screens/auth/forget_password.dart';
 import 'package:wet_dreams/views/screens/auth/signup.dart';
-import 'package:wet_dreams/views/screens/home.dart';
+import 'package:wet_dreams/views/screens/app.dart';
 
 class Login extends StatefulWidget {
   const Login({super.key});
@@ -21,7 +21,7 @@ class _LoginState extends State<Login> {
   bool rememberMe = false;
 
   void handleLogin() async {
-    Get.off(() => Home());
+    Get.off(() => App());
   }
 
   @override

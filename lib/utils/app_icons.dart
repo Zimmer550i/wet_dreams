@@ -1,5 +1,5 @@
 class AppIcons {
-  static const String group = 'assets/icons/group.svg';
+  static const String calculator = 'assets/icons/calculator.svg';
   static const String buy = 'assets/icons/buy.svg';
   static const String curvyShape = 'assets/icons/curvy_shape.svg';
   static const String swim = 'assets/icons/swim.svg';

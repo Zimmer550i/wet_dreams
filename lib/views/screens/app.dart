@@ -1,0 +1,54 @@
+import 'package:flutter/material.dart';
+import 'package:wet_dreams/views/base/custom_bottom_navbar.dart';
+import 'package:wet_dreams/views/screens/home.dart';
+import 'package:wet_dreams/views/screens/pool.dart';
+
+class App extends StatefulWidget {
+  const App({super.key});
+
+  @override
+  State<App> createState() => _AppState();
+}
+
+class _AppState extends State<App> {
+  final controller = PageController();
+  int index = 0;
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      body: SafeArea(
+        child: Column(
+          children: [
+            Expanded(
+              child: PageView(
+                controller: controller,
+                children: [
+                  Home(key: PageStorageKey("home")),
+                  Pool(key: PageStorageKey("pool")),
+                  FlutterLogo(size: 700),
+                ],
+              ),
+            ),
+            CustomBottomNavbar(
+              index: index,
+              onChanged: (p0) {
+                setState(() {
+                  index = p0;
+                });
+                controller.animateToPage(
+                  index,
+                  duration: Duration(
+                    milliseconds:
+                        (controller.page! - index).abs().toInt() * 100,
+                  ),
+                  curve: Curves.ease,
+                );
+              },
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+}
