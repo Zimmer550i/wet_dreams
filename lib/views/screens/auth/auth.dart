@@ -7,6 +7,7 @@ import 'package:wet_dreams/utils/app_texts.dart';
 import 'package:wet_dreams/utils/custom_svg.dart';
 import 'package:wet_dreams/views/base/custom_button.dart';
 import 'package:wet_dreams/views/screens/auth/login.dart';
+import 'package:wet_dreams/views/screens/auth/signup.dart';
 
 class Auth extends StatelessWidget {
   const Auth({super.key});
@@ -69,7 +70,11 @@ class Auth extends StatelessWidget {
                     },
                   ),
                   const SizedBox(height: 12),
-                  CustomButton(text: "Create Account", fontSize: 18),
+                  CustomButton(
+                    text: "Create Account",
+                    fontSize: 18,
+                    onTap: () => Get.to(() => Signup()),
+                  ),
                 ],
               ),
             ),
