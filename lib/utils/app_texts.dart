@@ -71,6 +71,14 @@ class AppTexts {
     color: Colors.white,
   );
 
+  static TextStyle dxsm = TextStyle(
+    fontFamily: "Sen",
+    fontSize: 24,
+    height: 32 / 24,
+    fontVariations: [FontVariation("wght", 500)],
+    color: Colors.white,
+  );
+
   static TextStyle txlr = TextStyle(
     fontFamily: "Sen",
     fontSize: 20,
@@ -79,11 +87,43 @@ class AppTexts {
     color: Colors.white,
   );
 
+  static TextStyle txlm = TextStyle(
+    fontFamily: "Sen",
+    fontSize: 20,
+    height: 30 / 20,
+    fontVariations: [FontVariation("wght", 500)],
+    color: Colors.white,
+  );
+
+  static TextStyle txls = TextStyle(
+    fontFamily: "Sen",
+    fontSize: 20,
+    height: 30 / 20,
+    fontVariations: [FontVariation("wght", 600)],
+    color: Colors.white,
+  );
+
+  static TextStyle txlb = TextStyle(
+    fontFamily: "Sen",
+    fontSize: 20,
+    height: 30 / 20,
+    fontVariations: [FontVariation("wght", 700)],
+    color: Colors.white,
+  );
+
   static TextStyle tlgr = TextStyle(
     fontFamily: "Sen",
     fontSize: 18,
     height: 28 / 18,
     fontVariations: [FontVariation("wght", 400)],
+    color: Colors.white,
+  );
+
+  static TextStyle tlgm = TextStyle(
+    fontFamily: "Sen",
+    fontSize: 18,
+    height: 28 / 18,
+    fontVariations: [FontVariation("wght", 500)],
     color: Colors.white,
   );
 

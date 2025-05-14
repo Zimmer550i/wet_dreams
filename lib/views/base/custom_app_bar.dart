@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:get/get_navigation/src/extension_navigation.dart';
+import 'package:get/instance_manager.dart';
 import 'package:wet_dreams/utils/app_colors.dart';
 import 'package:wet_dreams/utils/app_icons.dart';
 import 'package:wet_dreams/utils/app_texts.dart';
@@ -24,7 +26,11 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
           children: [
             SizedBox(width: 18),
             hasLeading
-                ? CustomSvg(asset: AppIcons.back)
+                ? GestureDetector(
+                  onTap: () => Get.back(),
+                  behavior: HitTestBehavior.translucent,
+                  child: CustomSvg(asset: AppIcons.back),
+                )
                 : SizedBox(height: 20, width: 20),
             const SizedBox(width: 24),
             Text(

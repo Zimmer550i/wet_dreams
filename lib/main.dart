@@ -1,5 +1,4 @@
 import 'package:wet_dreams/themes/dark_theme.dart';
-import 'package:wet_dreams/themes/light_theme.dart';
 import 'package:wet_dreams/utils/app_colors.dart';
 import 'package:wet_dreams/utils/app_constants.dart';
 import 'package:wet_dreams/utils/message.dart';
@@ -42,7 +41,8 @@ class MyApp extends StatelessWidget {
               debugShowCheckedModeBanner: false,
               scaffoldMessengerKey: rootScaffoldMessengerKey,
               navigatorKey: Get.key,
-              theme: themeController.darkTheme ? dark() : light(),
+              // theme: themeController.darkTheme ? dark() : light(),
+              theme: dark(),
               defaultTransition: Transition.fadeIn,
               locale: localizeController.locale,
               translations: Messages(languages: languages),

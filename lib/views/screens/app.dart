@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:wet_dreams/views/base/custom_bottom_navbar.dart';
 import 'package:wet_dreams/views/screens/home.dart';
 import 'package:wet_dreams/views/screens/pool.dart';
+import 'package:wet_dreams/views/screens/profile/profile.dart';
 
 class App extends StatefulWidget {
   const App({super.key});
@@ -26,7 +27,7 @@ class _AppState extends State<App> {
                 children: [
                   Home(key: PageStorageKey("home")),
                   Pool(key: PageStorageKey("pool")),
-                  FlutterLogo(size: 700),
+                  Profile(),
                 ],
               ),
             ),

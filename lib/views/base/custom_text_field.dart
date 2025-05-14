@@ -145,9 +145,9 @@ class _CustomTextFieldState extends State<CustomTextField> {
                         isObscured = !isObscured;
                       });
                     },
+                    behavior: HitTestBehavior.translucent,
                     child: SvgPicture.asset(
-                      isObscured ? AppIcons.eyeOff : AppIcons.eyeOff,
-                      height: 20,
+                      isObscured ? AppIcons.eyeOff : AppIcons.eye,
                       width: 20,
                       colorFilter: ColorFilter.mode(
                         isFocused ? AppColors.blue : AppColors.black.shade100,

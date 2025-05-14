@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:wet_dreams/helpers/route.dart';
 import 'package:wet_dreams/utils/app_colors.dart';
 import 'package:wet_dreams/utils/app_texts.dart';
 import 'package:wet_dreams/views/base/custom_button.dart';
 import 'package:wet_dreams/views/base/custom_text_field.dart';
 import 'package:wet_dreams/views/screens/auth/forget_password.dart';
 import 'package:wet_dreams/views/screens/auth/signup.dart';
-import 'package:wet_dreams/views/screens/app.dart';
 
 class Login extends StatefulWidget {
   const Login({super.key});
@@ -21,7 +21,7 @@ class _LoginState extends State<Login> {
   bool rememberMe = false;
 
   void handleLogin() async {
-    Get.off(() => App());
+    Get.offNamed(AppRoutes.app);
   }
 
   @override

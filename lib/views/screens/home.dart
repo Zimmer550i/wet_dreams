@@ -5,6 +5,7 @@ import 'package:wet_dreams/utils/app_colors.dart';
 import 'package:wet_dreams/utils/app_icons.dart';
 import 'package:wet_dreams/utils/app_texts.dart';
 import 'package:wet_dreams/utils/custom_svg.dart';
+import 'package:wet_dreams/views/screens/notifications.dart';
 
 class Home extends StatelessWidget {
   const Home({super.key});
@@ -71,32 +72,35 @@ class Home extends StatelessWidget {
                   ],
                 ),
                 Spacer(),
-                Stack(
-                  clipBehavior: Clip.none,
-                  children: [
-                    Container(
-                      height: 40,
-                      width: 40,
-                      decoration: BoxDecoration(
-                        color: AppColors.blue.shade100,
-                        shape: BoxShape.circle,
-                      ),
-                      child: Center(child: CustomSvg(asset: AppIcons.bell)),
-                    ),
-                    Positioned(
-                      top: -5,
-                      right: -5,
-                      child: Container(
-                        height: 25,
-                        width: 25,
+                GestureDetector(
+                  onTap: () => Get.to(() => Notifications()),
+                  child: Stack(
+                    clipBehavior: Clip.none,
+                    children: [
+                      Container(
+                        height: 40,
+                        width: 40,
                         decoration: BoxDecoration(
+                          color: AppColors.blue.shade100,
                           shape: BoxShape.circle,
-                          color: AppColors.red,
                         ),
-                        child: Center(child: Text("2", style: AppTexts.tmdb)),
+                        child: Center(child: CustomSvg(asset: AppIcons.bell)),
                       ),
-                    ),
-                  ],
+                      Positioned(
+                        top: -5,
+                        right: -5,
+                        child: Container(
+                          height: 25,
+                          width: 25,
+                          decoration: BoxDecoration(
+                            shape: BoxShape.circle,
+                            color: AppColors.red,
+                          ),
+                          child: Center(child: Text("2", style: AppTexts.tmdb)),
+                        ),
+                      ),
+                    ],
+                  ),
                 ),
               ],
             ),

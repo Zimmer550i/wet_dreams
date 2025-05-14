@@ -5,12 +5,14 @@ import 'package:wet_dreams/utils/app_icons.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:wet_dreams/utils/custom_image_picker.dart';
+import 'package:wet_dreams/utils/custom_svg.dart';
 
 class ProfilePicture extends StatelessWidget {
   final double size;
   final String? image;
   final File? imageFile;
   final bool showLoading;
+  final bool isEditable;
   final Function(File)? imagePickerCallback;
 
   const ProfilePicture({
@@ -18,6 +20,7 @@ class ProfilePicture extends StatelessWidget {
     this.image,
     this.size = 140,
     this.showLoading = true,
+    this.isEditable = false,
     this.imagePickerCallback,
     this.imageFile,
   });
@@ -27,13 +30,13 @@ class ProfilePicture extends StatelessWidget {
     return GestureDetector(
       behavior: HitTestBehavior.translucent,
       onTap: () async {
-        if (imagePickerCallback == null) {
+        if (!isEditable) {
           return;
         }
 
         File? image = await customImagePicker();
 
-        if (image != null) {
+        if (image != null  && imagePickerCallback != null) {
           imagePickerCallback!(image);
         }
       },
@@ -97,24 +100,21 @@ class ProfilePicture extends StatelessWidget {
                       ),
                     ),
           ),
-          if (imagePickerCallback != null)
+          if (isEditable)
             Positioned(
-              left: size / 1.5,
+              left: 0,
+              right: 0,
               bottom: -12,
               child: Center(
                 child: Container(
+                  height: 32,
+                  width: 32,
                   decoration: BoxDecoration(
-                    color: AppColors.black[900],
-                    borderRadius: BorderRadius.circular(99),
+                    color: AppColors.blue,
+                    shape: BoxShape.circle,
                   ),
                   padding: EdgeInsets.all(8),
-                  child: SvgPicture.asset(
-                    AppIcons.bell,
-                    colorFilter: ColorFilter.mode(
-                      AppColors.blue,
-                      BlendMode.srcIn,
-                    ),
-                  ),
+                  child: CustomSvg(asset: AppIcons.edit, size: 16),
                 ),
               ),
             ),
