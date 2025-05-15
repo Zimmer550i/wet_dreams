@@ -28,7 +28,7 @@ class OverlayConfirmation extends StatelessWidget {
       insetPadding: EdgeInsets.symmetric(horizontal: 16),
       contentPadding: EdgeInsets.symmetric(horizontal: 16, vertical: 28),
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
-      backgroundColor: AppColors.indigo[25],
+      backgroundColor: AppColors.blue[50],
       content: Column(
         crossAxisAlignment: CrossAxisAlignment.center,
         mainAxisSize: MainAxisSize.min,
@@ -47,7 +47,7 @@ class OverlayConfirmation extends StatelessWidget {
             Text(
               highlight!,
               style: TextStyle(
-                color: AppColors.indigo,
+                color: AppColors.blue,
                 fontSize: 20,
                 fontVariations: [FontVariation("wght", 600)],
               ),

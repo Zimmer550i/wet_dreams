@@ -1,7 +1,11 @@
 import 'package:flutter/material.dart';
 
 class Formatter {
-  static String timeFormatter({TimeOfDay? time, DateTime? dateTime, bool showDate = false}) {
+  static String timeFormatter({
+    TimeOfDay? time,
+    DateTime? dateTime,
+    bool showDate = false,
+  }) {
     String rtn = "";
 
     if (time == null && dateTime != null) {
@@ -92,7 +96,10 @@ class Formatter {
     return rtn;
   }
 
-  static String durationFormatter(Duration duration, {bool showSeconds = false}) {
+  static String durationFormatter(
+    Duration duration, {
+    bool showSeconds = false,
+  }) {
     String rtn = "";
 
     if (duration.inDays != 0) {
@@ -113,12 +120,24 @@ class Formatter {
       duration -= Duration(hours: duration.inMinutes);
     }
 
-    if(showSeconds){
+    if (showSeconds) {
       rtn += " ";
       rtn += duration.inSeconds.toString();
       rtn += "s";
     }
 
     return rtn;
+  }
+
+  static String toTitleCase(String text) {
+    if (text.isEmpty) return text;
+
+    return text
+        .split(' ')
+        .map((word) {
+          if (word.isEmpty) return word;
+          return word[0].toUpperCase() + word.substring(1).toLowerCase();
+        })
+        .join(' ');
   }
 }

@@ -15,6 +15,7 @@ class CustomTextField extends StatefulWidget {
   final double radius;
   final TextEditingController? controller;
   final bool isPassword;
+  final int lines;
   final void Function()? onTap;
   const CustomTextField({
     super.key,
@@ -25,6 +26,7 @@ class CustomTextField extends StatefulWidget {
     this.isPassword = false,
     this.isDisabled = false,
     this.radius = 50,
+    this.lines = 1,
     this.textInputType,
     this.controller,
     this.onTap,
@@ -78,8 +80,8 @@ class _CustomTextFieldState extends State<CustomTextField> {
             }
           },
           child: Container(
-            height: 50,
-            padding: EdgeInsets.symmetric(horizontal: 20),
+            height: widget.lines == 1 ? 50 : null,
+            padding: EdgeInsets.symmetric(horizontal: 20, vertical: widget.lines == 1 ? 0 : 20),
             decoration: BoxDecoration(
               color: AppColors.black[400],
               borderRadius: BorderRadius.circular(widget.radius),
@@ -105,6 +107,7 @@ class _CustomTextFieldState extends State<CustomTextField> {
                   child: TextField(
                     focusNode: focusNode,
                     controller: widget.controller,
+                    maxLines: widget.lines,
                     cursorColor: AppColors.blue,
                     keyboardType: widget.textInputType,
                     obscureText: isObscured,

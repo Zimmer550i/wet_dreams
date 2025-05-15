@@ -6,13 +6,13 @@ void showSnackBar(String message, {bool isError = true}) {
   rootScaffoldMessengerKey.currentState?.hideCurrentSnackBar();
   rootScaffoldMessengerKey.currentState?.showSnackBar(
     SnackBar(
-      backgroundColor: isError ? AppColors.red : AppColors.indigo,
+      backgroundColor: isError ? AppColors.red : AppColors.blue,
       content: Text(
         message,
         style: TextStyle(
           fontVariations: [FontVariation("wght", 400)],
           fontSize: 14,
-          color: AppColors.indigo[25],
+          color: AppColors.blue[50],
         ),
       ),
     ),

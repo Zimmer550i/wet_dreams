@@ -5,6 +5,12 @@ import 'package:wet_dreams/utils/app_colors.dart';
 import 'package:wet_dreams/utils/app_icons.dart';
 import 'package:wet_dreams/utils/app_texts.dart';
 import 'package:wet_dreams/utils/custom_svg.dart';
+import 'package:wet_dreams/views/screens/home/buy_special_products.dart';
+import 'package:wet_dreams/views/screens/home/chemical_calculator.dart';
+import 'package:wet_dreams/views/screens/home/frequent_problems.dart';
+import 'package:wet_dreams/views/screens/home/periodic_maintenance.dart';
+import 'package:wet_dreams/views/screens/home/report_problem.dart';
+import 'package:wet_dreams/views/screens/home/tricks_and_secrets.dart';
 import 'package:wet_dreams/views/screens/notifications.dart';
 
 class Home extends StatelessWidget {
@@ -15,31 +21,37 @@ class Home extends StatelessWidget {
       icon: AppIcons.warning,
       title: "ISSUES FREQUENT",
       subTitle: "(In The Pool)",
+      route: FrequentProblems(),
     ),
     ClickableButtonModel(
       icon: AppIcons.news,
       title: "MAINTENANCE NEWSPAPER",
       subTitle: "(For Individuals)",
+      route: PeriodicMaintenance(),
     ),
     ClickableButtonModel(
       icon: AppIcons.buy,
       title: "BUY PRODUCTS",
       subTitle: "(To Take Care Of Your Pool)",
+      route: BuySpecialProducts(),
     ),
     ClickableButtonModel(
       icon: AppIcons.calculator,
-      title: "BUY PRODUCTS",
-      subTitle: "(To Take Care Of Your Pool)",
+      title: "CALCULATOR OF CHEMICALS",
+      subTitle: "(Effective)",
+      route: ChemicalCalculator(),
     ),
     ClickableButtonModel(
       icon: AppIcons.tipsAndTricks,
       title: "TRICKS AND SECRETS",
       subTitle: "(Little Known)",
+      route: TricksAndSecrets(),
     ),
     ClickableButtonModel(
       icon: AppIcons.swim,
       title: "I HAVE A PROBLEM IN MY POOL",
       subTitle: "(Critical And Urgent)",
+      route: ReportProblem(),
     ),
   ];
 
@@ -129,7 +141,7 @@ class Home extends StatelessWidget {
                       return GestureDetector(
                         onTap: () {
                           if (e.route != null) {
-                            Get.to(() => e.route);
+                            Get.to(() => e.route!);
                           } else if (e.routeString != null) {
                             Get.toNamed(e.routeString!);
                           }
