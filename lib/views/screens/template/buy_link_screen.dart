@@ -45,7 +45,7 @@ class BuyLinkScreen extends StatelessWidget {
                   Text(
                     data.subTitle ?? "",
                     textAlign: TextAlign.center,
-                    style: AppTexts.tlgb.copyWith(color: AppColors.black[50]),
+                    style: AppTexts.txsr.copyWith(color: AppColors.black[50]),
                   ),
                   const SizedBox(height: 16),
                   Text(

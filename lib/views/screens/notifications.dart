@@ -50,11 +50,12 @@ class Notifications extends StatelessWidget {
                           },
                           icon: CustomSvg(asset: AppIcons.threeDot),
                           menuPadding: EdgeInsets.all(0),
+                          padding: EdgeInsets.all(0),
                           color: AppColors.black.shade400,
                           itemBuilder: (context) {
                             return [
                               PopupMenuItem(
-                                child: Text("Delete", style: AppTexts.tmdm),
+                                child: Text("Delete", style: AppTexts.tsmm),
                               ),
                             ];
                           },
