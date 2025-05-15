@@ -8,6 +8,7 @@ import 'package:wet_dreams/utils/app_texts.dart';
 import 'package:wet_dreams/utils/custom_svg.dart';
 import 'package:wet_dreams/utils/formatter.dart';
 import 'package:wet_dreams/views/base/custom_app_bar.dart';
+import 'package:wet_dreams/views/screens/template/buy_link_screen.dart';
 
 class BuySpecialProducts extends StatelessWidget {
   const BuySpecialProducts({super.key});
@@ -16,42 +17,72 @@ class BuySpecialProducts extends StatelessWidget {
     ClickableButtonModel(
       title: "pH Measuring Pack",
       subTitle: "drops, strips and pH-",
+      icon: AppIcons.frame23,
+      link:
+          "https://www.youtube.com/watch?v=oYRw02g706M&pp=ygUNYmFuZ2xhZGVzaCA0aw%3D%3D",
     ),
     ClickableButtonModel(
       title: "Salt Measuring Pack",
       subTitle: "salt, salt bag",
+      icon: AppIcons.frame24,
+      link:
+          "https://www.youtube.com/watch?v=oYRw02g706M&pp=ygUNYmFuZ2xhZGVzaCA0aw%3D%3D",
     ),
     ClickableButtonModel(
       title: "Chlorine Measuring Pack",
       subTitle: "drops, strips and  Chlorine tablets",
+      icon: AppIcons.frame25,
+      link:
+          "https://www.youtube.com/watch?v=oYRw02g706M&pp=ygUNYmFuZ2xhZGVzaCA0aw%3D%3D",
     ),
     ClickableButtonModel(
       title: "Green Pool Pack",
       subTitle: "drops, pH-, Fast  Chlorine, Flocculant",
+      icon: AppIcons.frame26,
+      link:
+          "https://www.youtube.com/watch?v=oYRw02g706M&pp=ygUNYmFuZ2xhZGVzaCA0aw%3D%3D",
     ),
     ClickableButtonModel(
       title: "Cloudy Pool Pack ",
       subTitle: "drops, pH Flocculant, clarifier",
+      icon: AppIcons.frame32,
+      link:
+          "https://www.youtube.com/watch?v=oYRw02g706M&pp=ygUNYmFuZ2xhZGVzaCA0aw%3D%3D",
     ),
     ClickableButtonModel(
       title: "Maintenance Pack",
       subTitle: "fast chlorine, slow  chlorine",
+      icon: AppIcons.frame27,
+      link:
+          "https://www.youtube.com/watch?v=oYRw02g706M&pp=ygUNYmFuZ2xhZGVzaCA0aw%3D%3D",
     ),
     ClickableButtonModel(
       title: "pH Raise Pack ",
       subTitle: "drops, alcaplus, pH+",
+      icon: AppIcons.frame28,
+      link:
+          "https://www.youtube.com/watch?v=oYRw02g706M&pp=ygUNYmFuZ2xhZGVzaCA0aw%3D%3D",
     ),
     ClickableButtonModel(
       title: "Saline Disinfection Pack",
       subTitle: "chlorinator +  chlorinator course",
+      icon: AppIcons.frame29,
+      link:
+          "https://www.youtube.com/watch?v=oYRw02g706M&pp=ygUNYmFuZ2xhZGVzaCA0aw%3D%3D",
     ),
     ClickableButtonModel(
       title: "Energy Saving Pack",
       subTitle: "cartridge, VV  pump, pool tiger",
+      icon: AppIcons.frame30,
+      link:
+          "https://www.youtube.com/watch?v=oYRw02g706M&pp=ygUNYmFuZ2xhZGVzaCA0aw%3D%3D",
     ),
     ClickableButtonModel(
       title: "Premium Pool Pack",
       subTitle: "Low salt, VV Pump, Pool Domina Course",
+      icon: AppIcons.frame31,
+      link:
+          "https://www.youtube.com/watch?v=oYRw02g706M&pp=ygUNYmFuZ2xhZGVzaCA0aw%3D%3D",
     ),
   ];
 
@@ -85,8 +116,8 @@ class BuySpecialProducts extends StatelessWidget {
   Widget tabButton(ClickableButtonModel e) {
     return GestureDetector(
       onTap: () {
-        if (e.route != null) {
-          Get.to(() => e.route!);
+        if (e.icon != null) {
+          Get.to(() => BuyLinkScreen(e));
         }
       },
       child: Container(

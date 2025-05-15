@@ -4,8 +4,10 @@ class ClickableButtonModel {
   final String? icon;
   final String? title;
   final String? subTitle;
+  final String? details;
   final Widget? route;
   final String? routeString;
+  final String? link;
 
   const ClickableButtonModel({
     this.icon,
@@ -13,5 +15,7 @@ class ClickableButtonModel {
     this.subTitle,
     this.route,
     this.routeString,
+    this.details,
+    this.link,
   });
 }

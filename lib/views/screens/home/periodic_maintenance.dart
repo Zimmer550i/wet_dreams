@@ -8,20 +8,66 @@ import 'package:wet_dreams/utils/app_texts.dart';
 import 'package:wet_dreams/utils/custom_svg.dart';
 import 'package:wet_dreams/utils/formatter.dart';
 import 'package:wet_dreams/views/base/custom_app_bar.dart';
+import 'package:wet_dreams/views/screens/template/video_link_screen.dart';
 
 class PeriodicMaintenance extends StatelessWidget {
   const PeriodicMaintenance({super.key});
 
   final List<ClickableButtonModel> data = const [
-    ClickableButtonModel(title: "FQL Method for a Perfect Pool"),
-    ClickableButtonModel(title: "The 3 Chemical parameters to control"),
-    ClickableButtonModel(title: "When to Wash the Filter"),
-    ClickableButtonModel(title: "How Many Hours to Filter"),
-    ClickableButtonModel(title: "I have the Green Pool"),
-    ClickableButtonModel(title: "I have a cloudy pool"),
-    ClickableButtonModel(title: "I have algae in the pool"),
-    ClickableButtonModel(title: "How to Raise pH"),
-    ClickableButtonModel(title: "How to lower pH"),
+    ClickableButtonModel(
+      title: "FQL Method for a Perfect Pool",
+      icon: AppIcons.frame10,
+      link:
+          "https://www.youtube.com/watch?v=oYRw02g706M&pp=ygUNYmFuZ2xhZGVzaCA0aw%3D%3D",
+    ),
+    ClickableButtonModel(
+      title: "The 3 Chemical parameters to control",
+      icon: AppIcons.frame12,
+      link:
+          "https://www.youtube.com/watch?v=oYRw02g706M&pp=ygUNYmFuZ2xhZGVzaCA0aw%3D%3D",
+    ),
+    ClickableButtonModel(
+      title: "When to Wash the Filter",
+      icon: AppIcons.frame34,
+      link:
+          "https://www.youtube.com/watch?v=oYRw02g706M&pp=ygUNYmFuZ2xhZGVzaCA0aw%3D%3D",
+    ),
+    ClickableButtonModel(
+      title: "How Many Hours to Filter",
+      icon: AppIcons.frame15,
+      link:
+          "https://www.youtube.com/watch?v=oYRw02g706M&pp=ygUNYmFuZ2xhZGVzaCA0aw%3D%3D",
+    ),
+    ClickableButtonModel(
+      title: "I have the Green Pool",
+      icon: AppIcons.frame17,
+      link:
+          "https://www.youtube.com/watch?v=oYRw02g706M&pp=ygUNYmFuZ2xhZGVzaCA0aw%3D%3D",
+    ),
+    ClickableButtonModel(
+      title: "I have a cloudy pool",
+      icon: AppIcons.frame19,
+      link:
+          "https://www.youtube.com/watch?v=oYRw02g706M&pp=ygUNYmFuZ2xhZGVzaCA0aw%3D%3D",
+    ),
+    ClickableButtonModel(
+      title: "I have algae in the pool",
+      icon: AppIcons.frame20,
+      link:
+          "https://www.youtube.com/watch?v=oYRw02g706M&pp=ygUNYmFuZ2xhZGVzaCA0aw%3D%3D",
+    ),
+    ClickableButtonModel(
+      title: "How to Raise pH",
+      icon: AppIcons.frame21,
+      link:
+          "https://www.youtube.com/watch?v=oYRw02g706M&pp=ygUNYmFuZ2xhZGVzaCA0aw%3D%3D",
+    ),
+    ClickableButtonModel(
+      title: "How to lower pH",
+      icon: AppIcons.frame22,
+      link:
+          "https://www.youtube.com/watch?v=oYRw02g706M&pp=ygUNYmFuZ2xhZGVzaCA0aw%3D%3D",
+    ),
   ];
 
   @override
@@ -82,8 +128,8 @@ class PeriodicMaintenance extends StatelessWidget {
   Widget tabButton(ClickableButtonModel e) {
     return GestureDetector(
       onTap: () {
-        if (e.route != null) {
-          Get.to(() => e.route!);
+        if (e.icon != null) {
+          Get.to(() => VideoLinkScreen(e));
         }
       },
       child: Container(

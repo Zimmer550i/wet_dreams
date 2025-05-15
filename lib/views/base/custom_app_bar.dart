@@ -24,15 +24,20 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
         height: 44,
         child: Row(
           children: [
-            SizedBox(width: 18),
-            hasLeading
-                ? GestureDetector(
-                  onTap: () => Get.back(),
-                  behavior: HitTestBehavior.translucent,
-                  child: CustomSvg(asset: AppIcons.back),
-                )
-                : SizedBox(height: 20, width: 20),
-            const SizedBox(width: 24),
+            SizedBox(width: 12),
+            InkWell(
+              onTap: () => hasLeading ? Get.back() : null,
+              borderRadius: BorderRadius.circular(8),
+              child: SizedBox(
+                height: 32,
+                width: 32,
+                child:
+                    hasLeading
+                        ? Center(child: CustomSvg(asset: AppIcons.back))
+                        : const SizedBox(),
+              ),
+            ),
+            const SizedBox(width: 18),
             Text(
               title,
               style: AppTexts.tsmr.copyWith(color: AppColors.black[50]),

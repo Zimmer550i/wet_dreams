@@ -127,6 +127,22 @@ class AppTexts {
     color: Colors.white,
   );
 
+  static TextStyle tlgs = TextStyle(
+    fontFamily: "Sen",
+    fontSize: 18,
+    height: 28 / 18,
+    fontVariations: [FontVariation("wght", 600)],
+    color: Colors.white,
+  );
+
+  static TextStyle tlgb = TextStyle(
+    fontFamily: "Sen",
+    fontSize: 18,
+    height: 28 / 18,
+    fontVariations: [FontVariation("wght", 700)],
+    color: Colors.white,
+  );
+
   static TextStyle tmdr = TextStyle(
     fontFamily: "Sen",
     fontSize: 16,

@@ -8,16 +8,42 @@ import 'package:wet_dreams/utils/app_texts.dart';
 import 'package:wet_dreams/utils/custom_svg.dart';
 import 'package:wet_dreams/utils/formatter.dart';
 import 'package:wet_dreams/views/base/custom_app_bar.dart';
+import 'package:wet_dreams/views/screens/template/video_link_screen.dart';
 
 class TricksAndSecrets extends StatelessWidget {
   const TricksAndSecrets({super.key});
 
   final List<ClickableButtonModel> data = const [
-    ClickableButtonModel(title: "Reduce electricity costs"),
-    ClickableButtonModel(title: "Optimize your salt chlorinator"),
-    ClickableButtonModel(title: "Get clearer water"),
-    ClickableButtonModel(title: "Filter wirelessly and save costs"),
-    ClickableButtonModel(title: "More efficient start to the season"),
+    ClickableButtonModel(
+      title: "Reduce electricity costs",
+      icon: AppIcons.frame11,
+      link:
+          "https://www.youtube.com/watch?v=oYRw02g706M&pp=ygUNYmFuZ2xhZGVzaCA0aw%3D%3D",
+    ),
+    ClickableButtonModel(
+      title: "Optimize your salt chlorinator",
+      icon: AppIcons.frame13,
+      link:
+          "https://www.youtube.com/watch?v=oYRw02g706M&pp=ygUNYmFuZ2xhZGVzaCA0aw%3D%3D",
+    ),
+    ClickableButtonModel(
+      title: "Get clearer water",
+      icon: AppIcons.frame14,
+      link:
+          "https://www.youtube.com/watch?v=oYRw02g706M&pp=ygUNYmFuZ2xhZGVzaCA0aw%3D%3D",
+    ),
+    ClickableButtonModel(
+      title: "Filter wirelessly and save costs",
+      icon: AppIcons.frame16,
+      link:
+          "https://www.youtube.com/watch?v=oYRw02g706M&pp=ygUNYmFuZ2xhZGVzaCA0aw%3D%3D",
+    ),
+    ClickableButtonModel(
+      title: "More efficient start to the season",
+      icon: AppIcons.frame18,
+      link:
+          "https://www.youtube.com/watch?v=oYRw02g706M&pp=ygUNYmFuZ2xhZGVzaCA0aw%3D%3D",
+    ),
   ];
 
   @override
@@ -50,8 +76,8 @@ class TricksAndSecrets extends StatelessWidget {
   Widget tabButton(ClickableButtonModel e) {
     return GestureDetector(
       onTap: () {
-        if (e.route != null) {
-          Get.to(() => e.route!);
+        if (e.icon != null) {
+          Get.to(() => VideoLinkScreen(e));
         }
       },
       child: Container(

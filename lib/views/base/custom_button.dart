@@ -12,20 +12,24 @@ class CustomButton extends StatefulWidget {
   final double? width;
   final bool isLoading;
   final String? leading;
+  final String? trailing;
   final double padding;
   final double radius;
   final double fontSize;
+  final double iconSize;
   const CustomButton({
     super.key,
     required this.text,
     this.onTap,
     this.leading,
+    this.trailing,
     this.padding = 40,
     this.radius = 99,
     this.isSecondary = false,
     this.isLoading = false,
     this.isDisabled = false,
     this.fontSize = 16,
+    this.iconSize = 24,
     this.height = 50,
     this.width = double.infinity,
   });
@@ -71,8 +75,8 @@ class _CustomButtonState extends State<CustomButton> {
                     if (widget.leading != null)
                       SvgPicture.asset(
                         widget.leading!,
-                        height: 24,
-                        width: 24,
+                        height: widget.iconSize,
+                        width: widget.iconSize,
                         colorFilter: ColorFilter.mode(
                           widget.isSecondary
                               ? AppColors.blue
@@ -90,6 +94,18 @@ class _CustomButtonState extends State<CustomButton> {
                                 : AppColors.blue.shade900,
                       ),
                     ),
+                    if (widget.trailing != null)
+                      SvgPicture.asset(
+                        widget.trailing!,
+                        height: widget.iconSize,
+                        width: widget.iconSize,
+                        colorFilter: ColorFilter.mode(
+                          widget.isSecondary
+                              ? AppColors.blue
+                              : AppColors.blue.shade900,
+                          BlendMode.srcIn,
+                        ),
+                      ),
                   ],
                 ),
       ),
