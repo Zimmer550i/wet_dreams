@@ -43,7 +43,7 @@ class MyApp extends StatelessWidget {
               navigatorKey: Get.key,
               // theme: themeController.darkTheme ? dark() : light(),
               theme: dark(),
-              defaultTransition: Transition.fadeIn,
+              defaultTransition: Transition.cupertino,
               locale: localizeController.locale,
               translations: Messages(languages: languages),
               fallbackLocale: Locale(
