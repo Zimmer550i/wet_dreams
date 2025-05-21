@@ -1,12 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:wet_dreams/controllers/auth_controller.dart';
 import 'package:wet_dreams/helpers/route.dart';
 import 'package:wet_dreams/utils/app_colors.dart';
 import 'package:wet_dreams/utils/app_texts.dart';
+import 'package:wet_dreams/utils/show_snackbar.dart';
 import 'package:wet_dreams/views/base/custom_button.dart';
 import 'package:wet_dreams/views/base/custom_text_field.dart';
 import 'package:wet_dreams/views/screens/auth/forget_password.dart';
 import 'package:wet_dreams/views/screens/auth/signup.dart';
+import 'package:wet_dreams/views/screens/auth/verification.dart';
 
 class Login extends StatefulWidget {
   const Login({super.key});
@@ -16,12 +19,35 @@ class Login extends StatefulWidget {
 }
 
 class _LoginState extends State<Login> {
+  final auth = Get.find<AuthController>();
   final emailCtrl = TextEditingController();
   final passCtrl = TextEditingController();
-  bool rememberMe = false;
+  bool rememberMe = true;
+  bool isLoading = false;
 
   void handleLogin() async {
-    Get.offNamed(AppRoutes.app);
+    setState(() {
+      isLoading = true;
+    });
+
+    final message = await auth.login(
+      emailCtrl.text,
+      passCtrl.text,
+      rememberMe: rememberMe,
+    );
+
+    setState(() {
+      isLoading = false;
+    });
+
+    if (message == "success") {
+      Get.offNamed(AppRoutes.app);
+    } else if (message == "verify") {
+      auth.sendOtp(emailCtrl.text);
+      Get.to(() => Verification(email: emailCtrl.text));
+    } else {
+      showSnackBar(message);
+    }
   }
 
   @override
@@ -137,7 +163,11 @@ class _LoginState extends State<Login> {
                       ],
                     ),
                     const SizedBox(height: 30),
-                    CustomButton(text: "LOGIN", onTap: handleLogin),
+                    CustomButton(
+                      text: "LOGIN",
+                      onTap: handleLogin,
+                      isLoading: isLoading,
+                    ),
                     const SizedBox(height: 40),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.center,

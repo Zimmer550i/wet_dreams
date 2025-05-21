@@ -3,39 +3,72 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:pinput/pinput.dart';
+import 'package:wet_dreams/controllers/auth_controller.dart';
+import 'package:wet_dreams/helpers/route.dart';
 import 'package:wet_dreams/utils/app_colors.dart';
 import 'package:wet_dreams/utils/app_icons.dart';
 import 'package:wet_dreams/utils/app_texts.dart';
 import 'package:wet_dreams/utils/custom_svg.dart';
+import 'package:wet_dreams/utils/show_snackbar.dart';
 import 'package:wet_dreams/views/base/custom_button.dart';
 import 'package:wet_dreams/views/screens/auth/create_new_password.dart';
-import 'package:wet_dreams/views/screens/auth/login.dart';
 
 class Verification extends StatefulWidget {
-  final String? email;
+  final String email;
   final bool resettingPass;
-  const Verification({super.key, this.email, this.resettingPass = false});
+  const Verification({
+    super.key,
+    required this.email,
+    this.resettingPass = false,
+  });
 
   @override
   State<Verification> createState() => _VerificationState();
 }
 
 class _VerificationState extends State<Verification> {
+  final auth = Get.find<AuthController>();
   final otpCtrl = TextEditingController();
   final FocusNode _focusNode = FocusNode();
   int sec = 0;
   Timer? _timer;
+  bool isLoading = false;
+
+  @override
+  void initState() {
+    super.initState();
+  }
 
   handleVerification() async {
-    if (widget.resettingPass) {
-      Get.to(() => CreateNewPassword());
+    setState(() {
+      isLoading = true;
+    });
+
+    final message = await auth.verifyEmail(widget.email, otpCtrl.text);
+
+    setState(() {
+      isLoading = false;
+    });
+
+    if (message == "success") {
+      if (widget.resettingPass) {
+        Get.to(() => CreateNewPassword());
+      } else {
+        Get.offAllNamed(AppRoutes.app);
+      }
     } else {
-      Get.off(() => Login());
+      showSnackBar(message);
     }
   }
 
   resendOtp() async {
-    restartTime();
+    final message = await auth.sendOtp(widget.email);
+
+    if (message == "success") {
+      restartTime();
+    } else {
+      showSnackBar(message);
+    }
   }
 
   restartTime() async {
@@ -101,10 +134,7 @@ class _VerificationState extends State<Verification> {
                           style: AppTexts.tmdr,
                         ),
                         const SizedBox(height: 3),
-                        Text(
-                          widget.email ?? "example@gmail.com",
-                          style: AppTexts.tmdb,
-                        ),
+                        Text(widget.email, style: AppTexts.tmdb),
                       ],
                     ),
                   ),
@@ -151,6 +181,7 @@ class _VerificationState extends State<Verification> {
                     ),
                     const SizedBox(height: 5),
                     Pinput(
+                      length: 6,
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       controller: otpCtrl,
                       focusNode: _focusNode,
@@ -180,7 +211,11 @@ class _VerificationState extends State<Verification> {
                       ),
                     ),
                     const SizedBox(height: 30),
-                    CustomButton(text: "VERIFY", onTap: handleVerification),
+                    CustomButton(
+                      text: "VERIFY",
+                      onTap: handleVerification,
+                      isLoading: isLoading,
+                    ),
                   ],
                 ),
               ),

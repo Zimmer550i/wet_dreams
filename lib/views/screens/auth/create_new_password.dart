@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:get/get_navigation/src/extension_navigation.dart';
 import 'package:get/instance_manager.dart';
+import 'package:wet_dreams/controllers/auth_controller.dart';
 import 'package:wet_dreams/utils/app_colors.dart';
 import 'package:wet_dreams/utils/app_icons.dart';
 import 'package:wet_dreams/utils/app_texts.dart';
 import 'package:wet_dreams/utils/custom_svg.dart';
+import 'package:wet_dreams/utils/show_snackbar.dart';
 import 'package:wet_dreams/views/base/custom_button.dart';
 import 'package:wet_dreams/views/base/custom_text_field.dart';
 import 'package:wet_dreams/views/screens/auth/password_confirmation.dart';
@@ -18,12 +20,27 @@ class CreateNewPassword extends StatefulWidget {
 }
 
 class _CreateNewPasswordState extends State<CreateNewPassword> {
+  final auth = Get.find<AuthController>();
   final passCtrl = TextEditingController();
   final conPassCtrl = TextEditingController();
-
+  bool isLoading = false;
 
   handleCreatePassword() async {
-    Get.to(() => PasswordConfirmation());
+    setState(() {
+      isLoading = true;
+    });
+
+    final message = await auth.resetPassword(passCtrl.text, conPassCtrl.text);
+
+    setState(() {
+      isLoading = false;
+    });
+
+    if (message == "success") {
+      Get.to(() => PasswordConfirmation());
+    } else {
+      showSnackBar(message);
+    }
   }
 
   @override
@@ -99,7 +116,11 @@ class _CreateNewPasswordState extends State<CreateNewPassword> {
                       controller: conPassCtrl,
                     ),
                     const SizedBox(height: 30),
-                    CustomButton(text: "CONFIRM", onTap: handleCreatePassword),
+                    CustomButton(
+                      text: "CONFIRM",
+                      onTap: handleCreatePassword,
+                      isLoading: isLoading,
+                    ),
                   ],
                 ),
               ),

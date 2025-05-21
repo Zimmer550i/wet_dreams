@@ -1,3 +1,5 @@
+import 'package:wet_dreams/controllers/auth_controller.dart';
+import 'package:wet_dreams/controllers/user_controller.dart';
 import 'package:wet_dreams/helpers/route.dart';
 import 'package:wet_dreams/models/clickable_button_model.dart';
 import 'package:wet_dreams/utils/app_colors.dart';
@@ -22,6 +24,8 @@ class Profile extends StatefulWidget {
 }
 
 class _ProfileState extends State<Profile> {
+  final user = Get.find<UserController>();
+
   final List<ClickableButtonModel> data = [
     ClickableButtonModel(
       icon: AppIcons.userCircle,
@@ -66,7 +70,7 @@ class _ProfileState extends State<Profile> {
                 Align(
                   alignment: Alignment.center,
                   child: Text(
-                    "Waisul Islam",
+                    user.userInfo.value!.fullName,
                     style: AppTexts.txls.copyWith(color: AppColors.black[50]),
                   ),
                 ),
@@ -142,6 +146,8 @@ class _ProfileState extends State<Profile> {
                         text: "Logout",
                         isSecondary: true,
                         onTap: () async {
+                          Get.back();
+                          Get.find<AuthController>().logout();
                           Get.offAllNamed(AppRoutes.splash);
                         },
                       ),

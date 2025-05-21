@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:get/get_navigation/src/extension_navigation.dart';
 import 'package:get/instance_manager.dart';
+import 'package:wet_dreams/controllers/auth_controller.dart';
 import 'package:wet_dreams/utils/app_colors.dart';
 import 'package:wet_dreams/utils/app_icons.dart';
 import 'package:wet_dreams/utils/app_texts.dart';
 import 'package:wet_dreams/utils/custom_svg.dart';
+import 'package:wet_dreams/utils/show_snackbar.dart';
 import 'package:wet_dreams/views/base/custom_button.dart';
 import 'package:wet_dreams/views/base/custom_text_field.dart';
 import 'package:wet_dreams/views/screens/auth/verification.dart';
@@ -17,13 +19,38 @@ class Signup extends StatefulWidget {
 }
 
 class _SignupState extends State<Signup> {
+  final auth = Get.find<AuthController>();
   final nameCtrl = TextEditingController();
   final emailCtrl = TextEditingController();
   final passCtrl = TextEditingController();
   final conPassCtrl = TextEditingController();
+  bool isLoading = false;
 
   handleSignup() async {
-    Get.to(() => Verification());
+    if (passCtrl.text.trim() != conPassCtrl.text.trim()) {
+      showSnackBar("Password didn't match");
+      return;
+    }
+
+    setState(() {
+      isLoading = true;
+    });
+
+    final message = await auth.signup(
+      nameCtrl.text,
+      emailCtrl.text,
+      passCtrl.text,
+    );
+
+    setState(() {
+      isLoading = false;
+    });
+
+    if (message == "success") {
+      Get.to(() => Verification(email: emailCtrl.text,));
+    } else {
+      showSnackBar(message);
+    }
   }
 
   @override
@@ -110,7 +137,11 @@ class _SignupState extends State<Signup> {
                       controller: conPassCtrl,
                     ),
                     const SizedBox(height: 30),
-                    CustomButton(text: "SIGN UP", onTap: handleSignup),
+                    CustomButton(
+                      text: "SIGN UP",
+                      onTap: handleSignup,
+                      isLoading: isLoading,
+                    ),
                   ],
                 ),
               ),

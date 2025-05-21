@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:wet_dreams/controllers/auth_controller.dart';
+import 'package:wet_dreams/helpers/route.dart';
 import 'package:wet_dreams/views/screens/auth/auth.dart';
 
 class Splash extends StatefulWidget {
@@ -10,6 +12,8 @@ class Splash extends StatefulWidget {
 }
 
 class _SplashState extends State<Splash> {
+  final Duration waitTime = Duration(seconds: 2);
+
   @override
   void initState() {
     super.initState();
@@ -17,13 +21,21 @@ class _SplashState extends State<Splash> {
   }
 
   void routeController() async {
-    Future.delayed(Duration(seconds: 1), () {
-      Get.to(() => Auth());
-    });
+    final stopWatch = Stopwatch()..start();
+
+    await Future.delayed(waitTime - stopWatch.elapsed);
+
+    if (await Get.find<AuthController>().previouslyLoggedIn()) {
+      Get.offAllNamed(AppRoutes.app);
+    } else {
+      Get.off(() => Auth());
+    }
   }
 
   @override
   Widget build(BuildContext context) {
-    return Center(child: Image.asset("assets/images/splash.png"));
+    return Scaffold(
+      body: Center(child: Image.asset("assets/images/splash.png")),
+    );
   }
 }

@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:get/get_navigation/src/extension_navigation.dart';
 import 'package:get/instance_manager.dart';
+import 'package:wet_dreams/controllers/auth_controller.dart';
 import 'package:wet_dreams/utils/app_colors.dart';
 import 'package:wet_dreams/utils/app_icons.dart';
 import 'package:wet_dreams/utils/app_texts.dart';
 import 'package:wet_dreams/utils/custom_svg.dart';
+import 'package:wet_dreams/utils/show_snackbar.dart';
 import 'package:wet_dreams/views/base/custom_button.dart';
 import 'package:wet_dreams/views/base/custom_text_field.dart';
 import 'package:wet_dreams/views/screens/auth/verification.dart';
@@ -18,7 +20,10 @@ class ForgetPassword extends StatefulWidget {
 }
 
 class _ForgetPasswordState extends State<ForgetPassword> {
+  final auth = Get.find<AuthController>();
   final emailCtrl = TextEditingController();
+
+  bool isLoading = false;
 
   @override
   void initState() {
@@ -27,7 +32,21 @@ class _ForgetPasswordState extends State<ForgetPassword> {
   }
 
   handleResetPassword() async {
-    Get.to(() => Verification(email: emailCtrl.text, resettingPass: true));
+    setState(() {
+      isLoading = true;
+    });
+
+    final message = await auth.sendOtp(emailCtrl.text);
+
+    setState(() {
+      isLoading = false;
+    });
+
+    if (message == "success") {
+      Get.to(() => Verification(email: emailCtrl.text, resettingPass: true));
+    } else {
+      showSnackBar(message);
+    }
   }
 
   @override
@@ -96,7 +115,11 @@ class _ForgetPasswordState extends State<ForgetPassword> {
                       radius: 10,
                     ),
                     const SizedBox(height: 30),
-                    CustomButton(text: "SEND CODE", onTap: handleResetPassword),
+                    CustomButton(
+                      text: "SEND CODE",
+                      onTap: handleResetPassword,
+                      isLoading: isLoading,
+                    ),
                   ],
                 ),
               ),

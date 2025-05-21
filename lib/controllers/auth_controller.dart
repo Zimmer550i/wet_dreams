@@ -9,20 +9,30 @@ class AuthController extends GetxController {
   RxBool isLoggedIn = RxBool(false);
   final api = ApiService();
 
-  Future<String> login(String email, String password) async {
+  Future<String> login(
+    String email,
+    String password, {
+    bool rememberMe = true,
+  }) async {
     try {
       final response = await api.post("/api-auth/login/", {
-        "email": email,
-        "password": password,
+        "email": email.trim(),
+        "password": password.trim(),
       });
       var body = jsonDecode(response.body);
 
       if (response.statusCode == 200) {
         Get.find<UserController>().setInfo(body['data']);
-        setToken(body['access_token']);
+        if (rememberMe) {
+          setToken(body['access_token']);
+        }
 
         return "success";
       } else {
+        if (body['error'] == "Please verify your email address.") {
+          return "verify";
+        }
+
         return body['message'] ?? "Connection Error";
       }
     } catch (e) {
@@ -33,9 +43,9 @@ class AuthController extends GetxController {
   Future<String> signup(String name, String email, String password) async {
     try {
       final response = await api.post("/api-auth/signup/", {
-        "full_name": name,
-        "email": email,
-        "password": password,
+        "full_name": name.trim(),
+        "email": email.trim(),
+        "password": password.trim(),
       });
 
       if (response.statusCode == 200 || response.statusCode == 201) {
@@ -48,26 +58,10 @@ class AuthController extends GetxController {
     }
   }
 
-  // Future<String> forgotPassword(String email) async {
-  //   try {
-  //     final response = await api.post("/auth/forgot-password", {
-  //       "email": email,
-  //     });
-
-  //     if (response.statusCode == 200) {
-  //       return "success";
-  //     } else {
-  //       return jsonDecode(response.body)['message'] ?? "Connection Error";
-  //     }
-  //   } catch (e) {
-  //     return e.toString();
-  //   }
-  // }
-
   Future<String> sendOtp(String email) async {
     try {
       final response = await api.post("/api-auth/resend_code/", {
-        "email": email,
+        "email": email.trim(),
       });
 
       if (response.statusCode == 200) {
@@ -83,8 +77,8 @@ class AuthController extends GetxController {
   Future<String> verifyEmail(String email, String code) async {
     try {
       final response = await api.post("/api-auth/verify_email/", {
-        "email": email,
-        "otp": code,
+        "email": email.trim(),
+        "otp": code.trim(),
       });
       var body = jsonDecode(response.body);
 
@@ -103,8 +97,8 @@ class AuthController extends GetxController {
   Future<String> resetPassword(String pass, String conPass) async {
     try {
       final response = await api.post("/api-auth/forgot_password/", {
-        "newPassword": pass,
-        "confirmPassword": conPass,
+        "new_password": pass.trim(),
+        "confirm_password": conPass.trim(),
       }, authReq: true);
       var body = jsonDecode(response.body);
 
@@ -123,7 +117,7 @@ class AuthController extends GetxController {
     if (token != null) {
       debugPrint('🔍 Token found. Fetching user info...');
       final message = await Get.find<UserController>().getInfo();
-      if (message == "Success") {
+      if (message == "success") {
         isLoggedIn.value = true;
         return true;
       }
