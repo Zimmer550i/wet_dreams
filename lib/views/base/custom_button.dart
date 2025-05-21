@@ -63,7 +63,10 @@ class _CustomButtonState extends State<CustomButton> {
             widget.isLoading
                 ? Center(
                   child: CircularProgressIndicator(
-                    color: AppColors.blue[25],
+                    color:
+                        widget.isSecondary
+                            ? AppColors.blue
+                            : AppColors.blue[50],
                     strokeWidth: 4,
                   ),
                 )

@@ -37,6 +37,7 @@ class _VerificationState extends State<Verification> {
   @override
   void initState() {
     super.initState();
+    restartTime();
   }
 
   handleVerification() async {
@@ -62,11 +63,19 @@ class _VerificationState extends State<Verification> {
   }
 
   resendOtp() async {
+    if (_timer != null && _timer!.isActive) {
+      return;
+    }
+    restartTime();
     final message = await auth.sendOtp(widget.email);
 
     if (message == "success") {
-      restartTime();
+      showSnackBar("Otp sent to ${widget.email}", isError: false);
     } else {
+      if (_timer != null && _timer!.isActive) {
+        _timer!.cancel();
+      }
+
       showSnackBar(message);
     }
   }
@@ -77,7 +86,7 @@ class _VerificationState extends State<Verification> {
     }
 
     setState(() {
-      sec = 60;
+      sec = 30;
     });
 
     _timer = Timer.periodic(Duration(seconds: 1), (timer) {
@@ -86,7 +95,9 @@ class _VerificationState extends State<Verification> {
           sec = sec - 1;
         });
       } else {
-        _timer!.cancel();
+        setState(() {
+          _timer!.cancel();
+        });
       }
     });
   }
@@ -165,9 +176,14 @@ class _VerificationState extends State<Verification> {
                           behavior: HitTestBehavior.translucent,
                           child: Text(
                             " Resend ",
-                            style: AppTexts.tsmb.copyWith(
-                              color: AppColors.black[50],
-                            ),
+                            style:
+                                (_timer != null && _timer!.isActive)
+                                    ? AppTexts.tsmr.copyWith(
+                                      color: AppColors.black[50],
+                                    )
+                                    : AppTexts.tsmb.copyWith(
+                                      color: AppColors.black[50],
+                                    ),
                           ),
                         ),
                         if (_timer != null && _timer!.isActive)

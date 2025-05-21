@@ -12,7 +12,7 @@ void showSnackBar(String message, {bool isError = true}) {
         style: TextStyle(
           fontVariations: [FontVariation("wght", 400)],
           fontSize: 14,
-          color: AppColors.blue[50],
+          color: isError ? AppColors.blue[50] : AppColors.black,
         ),
       ),
     ),
