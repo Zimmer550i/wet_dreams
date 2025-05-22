@@ -39,11 +39,10 @@ class UserController extends GetxController {
   Future<String> updateInfo(Map<String, dynamic> data) async {
     isLoading.value = true;
     try {
-      final response = await api.post(
+      final response = await api.patch(
         "/api-auth/update_profile/",
         data,
         authReq: true,
-        isMultiPart: true,
       );
 
       if (response.statusCode == 200) {
@@ -91,7 +90,7 @@ class UserController extends GetxController {
       return null;
     }
 
-    String baseUrl = ApiService().baseUrl.replaceAll("/api/v1", "");
+    String baseUrl = api.baseUrl;
 
     return baseUrl + userInfo.value!.profilePic!;
   }

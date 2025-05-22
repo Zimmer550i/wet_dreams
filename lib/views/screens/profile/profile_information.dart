@@ -1,7 +1,10 @@
 import 'dart:io';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:wet_dreams/controllers/user_controller.dart';
 import 'package:wet_dreams/utils/app_colors.dart';
 import 'package:wet_dreams/utils/app_texts.dart';
+import 'package:wet_dreams/utils/show_snackbar.dart';
 import 'package:wet_dreams/views/base/custom_app_bar.dart';
 import 'package:wet_dreams/views/base/custom_button.dart';
 import 'package:wet_dreams/views/base/custom_text_field.dart';
@@ -15,24 +18,57 @@ class ProfileInformation extends StatefulWidget {
 }
 
 class _ProfileInformationState extends State<ProfileInformation> {
+  final user = Get.find<UserController>();
   final nameCtrl = TextEditingController();
   final emailCtrl = TextEditingController();
   final phoneCtrl = TextEditingController();
   File? image;
   bool isEditing = false;
+  bool isLoading = false;
 
   @override
   void initState() {
     super.initState();
 
-    nameCtrl.text = "Wasiul Islam";
-    emailCtrl.text = "wasiul0491@gmail.com";
-    phoneCtrl.text = "01969696969";
+    nameCtrl.text = user.userInfo.value!.fullName;
+    emailCtrl.text = user.userInfo.value!.email;
+    phoneCtrl.text = user.userInfo.value!.profilePic ?? "No image";
   }
 
   void updateProfile() async {
     setState(() {
+      isLoading = true;
+    });
+
+    Map<String, dynamic> payload = {};
+
+    if (nameCtrl.text != user.userInfo.value!.fullName) {
+      payload.addAll({"full_name": nameCtrl.text});
+    }
+
+    if (image != null) {
+      payload.addAll({"profile_pic": image});
+    }
+
+    if (payload == {}) {
+      setState(() {
+        isLoading = false;
+      });
+      return;
+    }
+
+    final message = await user.updateInfo(payload);
+
+    if (message == "success") {
+      user.getInfo();
+      showSnackBar("User info updated", isError: false);
+    } else {
+      showSnackBar(message);
+    }
+
+    setState(() {
       isEditing = false;
+      isLoading = false;
     });
   }
 
@@ -50,7 +86,7 @@ class _ProfileInformationState extends State<ProfileInformation> {
                 Center(
                   child: ProfilePicture(
                     imageFile: image,
-                    image: "https://thispersondoesnotexist.com",
+                    image: user.getImageUrl(),
                     size: 120,
                     isEditable: isEditing,
                     imagePickerCallback: (p0) {
@@ -64,7 +100,7 @@ class _ProfileInformationState extends State<ProfileInformation> {
                 Align(
                   alignment: Alignment.center,
                   child: Text(
-                    "Waisul Islam",
+                    user.userInfo.value!.fullName,
                     style: AppTexts.txls.copyWith(color: AppColors.black[50]),
                   ),
                 ),
@@ -81,15 +117,16 @@ class _ProfileInformationState extends State<ProfileInformation> {
                     controller: emailCtrl,
                     isDisabled: !isEditing,
                   ),
-                const SizedBox(height: 24),
-                CustomTextField(
-                  title: "Phone Number",
-                  controller: phoneCtrl,
-                  isDisabled: !isEditing,
-                ),
+                // const SizedBox(height: 24),
+                // CustomTextField(
+                //   title: "Phone Number",
+                //   controller: phoneCtrl,
+                //   isDisabled: !isEditing,
+                // ),
                 const SizedBox(height: 30),
                 CustomButton(
                   text: isEditing ? "Update Profile" : "Edit Profile",
+                  isLoading: isLoading,
                   onTap: () {
                     if (!isEditing) {
                       setState(() {

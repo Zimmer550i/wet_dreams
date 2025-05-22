@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:get/instance_manager.dart';
+import 'package:wet_dreams/controllers/user_controller.dart';
+import 'package:wet_dreams/utils/show_snackbar.dart';
 import 'package:wet_dreams/views/base/custom_app_bar.dart';
 import 'package:wet_dreams/views/base/custom_button.dart';
 import 'package:wet_dreams/views/base/custom_text_field.dart';
@@ -11,9 +14,33 @@ class ChangePassword extends StatefulWidget {
 }
 
 class _ChangePasswordState extends State<ChangePassword> {
+  final user = Get.find<UserController>();
   final oldCtrl = TextEditingController();
   final newCtrl = TextEditingController();
   final confirmCtrl = TextEditingController();
+  bool isLoading = false;
+
+  void handleCallback() async {
+    setState(() {
+      isLoading = true;
+    });
+
+    final message = await user.changePassword(
+      oldCtrl.text,
+      newCtrl.text,
+      confirmCtrl.text,
+    );
+
+    if (message == "success") {
+      showSnackBar("Password changed successfully", isError: false);
+    } else {
+      showSnackBar(message);
+    }
+
+    setState(() {
+      isLoading = false;
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -47,7 +74,11 @@ class _ChangePasswordState extends State<ChangePassword> {
                   isPassword: true,
                 ),
                 const SizedBox(height: 40),
-                CustomButton(text: "Set Password")
+                CustomButton(
+                  text: "Set Password",
+                  onTap: handleCallback,
+                  isLoading: isLoading,
+                ),
               ],
             ),
           ),

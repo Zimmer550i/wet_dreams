@@ -62,7 +62,7 @@ class _ProfileState extends State<Profile> {
                 const SizedBox(height: 44),
                 Center(
                   child: ProfilePicture(
-                    image: "https://thispersondoesnotexist.com",
+                    image: user.getImageUrl(),
                     size: 120,
                   ),
                 ),
