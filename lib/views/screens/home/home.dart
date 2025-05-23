@@ -1,59 +1,33 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:get/get.dart';
 import 'package:flutter/material.dart';
-import 'package:wet_dreams/models/clickable_button_model.dart';
+import 'package:wet_dreams/controllers/home_controller.dart';
+import 'package:wet_dreams/services/api_service.dart';
 import 'package:wet_dreams/utils/app_colors.dart';
 import 'package:wet_dreams/utils/app_icons.dart';
 import 'package:wet_dreams/utils/app_texts.dart';
 import 'package:wet_dreams/utils/custom_svg.dart';
-import 'package:wet_dreams/views/screens/home/buy_special_products.dart';
+import 'package:wet_dreams/views/base/custom_loading.dart';
 import 'package:wet_dreams/views/screens/home/chemical_calculator.dart';
-import 'package:wet_dreams/views/screens/home/frequent_problems.dart';
-import 'package:wet_dreams/views/screens/home/periodic_maintenance.dart';
 import 'package:wet_dreams/views/screens/home/report_problem.dart';
-import 'package:wet_dreams/views/screens/home/tricks_and_secrets.dart';
 import 'package:wet_dreams/views/screens/notifications.dart';
+import 'package:wet_dreams/views/screens/template/link_collection_screen.dart';
 
-class Home extends StatelessWidget {
+class Home extends StatefulWidget {
   const Home({super.key});
 
-  final data = const [
-    ClickableButtonModel(
-      icon: AppIcons.warning,
-      title: "ISSUES FREQUENT",
-      subTitle: "(In The Pool)",
-      route: FrequentProblems(),
-    ),
-    ClickableButtonModel(
-      icon: AppIcons.news,
-      title: "MAINTENANCE NEWSPAPER",
-      subTitle: "(For Individuals)",
-      route: PeriodicMaintenance(),
-    ),
-    ClickableButtonModel(
-      icon: AppIcons.buy,
-      title: "BUY PRODUCTS",
-      subTitle: "(To Take Care Of Your Pool)",
-      route: BuySpecialProducts(),
-    ),
-    ClickableButtonModel(
-      icon: AppIcons.calculator,
-      title: "CALCULATOR OF CHEMICALS",
-      subTitle: "(Effective)",
-      route: ChemicalCalculator(),
-    ),
-    ClickableButtonModel(
-      icon: AppIcons.tipsAndTricks,
-      title: "TRICKS AND SECRETS",
-      subTitle: "(Little Known)",
-      route: TricksAndSecrets(),
-    ),
-    ClickableButtonModel(
-      icon: AppIcons.swim,
-      title: "I HAVE A PROBLEM IN MY POOL",
-      subTitle: "(Critical And Urgent)",
-      route: ReportProblem(),
-    ),
-  ];
+  @override
+  State<Home> createState() => _HomeState();
+}
+
+class _HomeState extends State<Home> {
+  final home = Get.find<HomeController>();
+
+  @override
+  void initState() {
+    super.initState();
+    home.getServices();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -127,61 +101,95 @@ class Home extends StatelessWidget {
             const SizedBox(height: 24),
             Expanded(
               child: SingleChildScrollView(
-                child: GridView(
-                  gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                    crossAxisCount: 2,
-                    childAspectRatio: 1.07,
-                    mainAxisSpacing: 18,
-                    crossAxisSpacing: 18,
-                  ),
-                  shrinkWrap: true,
-                  physics: NeverScrollableScrollPhysics(),
-                  children: [
-                    ...data.map((e) {
-                      return GestureDetector(
-                        onTap: () {
-                          if (e.route != null) {
-                            Get.to(() => e.route!);
-                          } else if (e.routeString != null) {
-                            Get.toNamed(e.routeString!);
-                          }
-                        },
-                        child: Container(
-                          decoration: BoxDecoration(
-                            color: AppColors.blue,
-                            borderRadius: BorderRadius.circular(8),
-                          ),
-                          child: Center(
-                            child: Padding(
-                              padding: const EdgeInsets.all(10),
-                              child: Column(
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                children: [
-                                  CustomSvg(asset: e.icon!, size: 32),
-                                  const SizedBox(height: 16),
-                                  Text(
-                                    e.title!,
-                                    textAlign: TextAlign.center,
-                                    style: AppTexts.txss.copyWith(
-                                      color: AppColors.black.shade400,
+                child: Obx(
+                  () =>
+                      home.homeButtons.isEmpty
+                          ? CustomLoading()
+                          : GridView(
+                            gridDelegate:
+                                SliverGridDelegateWithFixedCrossAxisCount(
+                                  crossAxisCount: 2,
+                                  childAspectRatio: 1.07,
+                                  mainAxisSpacing: 18,
+                                  crossAxisSpacing: 18,
+                                ),
+                            shrinkWrap: true,
+                            children: [
+                              ...home.homeButtons.map((e) {
+                                return GestureDetector(
+                                  onTap: () {
+                                    switch (e.type) {
+                                      case "service":
+                                        Get.to(
+                                          () => LinkCollectionScreen(
+                                            title: e.title,
+                                            serviceId: e.serviceId,
+                                          ),
+                                        );
+                                        break;
+                                      case "shop":
+                                        Get.to(
+                                          () => LinkCollectionScreen(
+                                            title: e.title,
+                                            serviceId: e.serviceId,
+                                            isShoping: true,
+                                          ),
+                                        );
+                                        break;
+                                      case "calculator":
+                                        Get.to(() => ChemicalCalculator());
+                                        break;
+                                      case "query":
+                                        Get.to(() => ReportProblem());
+                                        break;
+                                      default:
+                                    }
+                                  },
+                                  child: Container(
+                                    decoration: BoxDecoration(
+                                      color: AppColors.blue,
+                                      borderRadius: BorderRadius.circular(8),
+                                    ),
+                                    child: Center(
+                                      child: Padding(
+                                        padding: const EdgeInsets.all(10),
+                                        child: Column(
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.center,
+                                          children: [
+                                            CachedNetworkImage(
+                                              imageUrl:
+                                                  ApiService().baseUrl + e.icon,
+                                              height: 32,
+                                              width: 32,
+                                            ),
+                                            const SizedBox(height: 16),
+                                            Text(
+                                              e.title,
+                                              textAlign: TextAlign.center,
+                                              style: AppTexts.txss.copyWith(
+                                                color: AppColors.black.shade400,
+                                              ),
+                                            ),
+                                            const SizedBox(height: 4),
+                                            if (e.shortDescription != null)
+                                              Text(
+                                                e.shortDescription!,
+                                                textAlign: TextAlign.center,
+                                                style: AppTexts.txsr.copyWith(
+                                                  color:
+                                                      AppColors.black.shade400,
+                                                ),
+                                              ),
+                                          ],
+                                        ),
+                                      ),
                                     ),
                                   ),
-                                  const SizedBox(height: 4),
-                                  Text(
-                                    e.subTitle!,
-                                    textAlign: TextAlign.center,
-                                    style: AppTexts.txsr.copyWith(
-                                      color: AppColors.black.shade400,
-                                    ),
-                                  ),
-                                ],
-                              ),
-                            ),
+                                );
+                              }),
+                            ],
                           ),
-                        ),
-                      );
-                    }),
-                  ],
                 ),
               ),
             ),

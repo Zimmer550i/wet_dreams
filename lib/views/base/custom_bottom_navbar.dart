@@ -25,9 +25,8 @@ class CustomBottomNavbar extends StatelessWidget {
         ],
       ),
       child: Padding(
-        padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 24),
+        padding: const EdgeInsets.symmetric(vertical: 10),
         child: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
             item("Home", AppIcons.home, 0),
             item("Pool", AppIcons.pool, 1),
@@ -41,26 +40,28 @@ class CustomBottomNavbar extends StatelessWidget {
   Widget item(String name, String icon, int pos) {
     bool isSelected = pos == index;
 
-    return GestureDetector(
-      onTap: () {
-        if (onChanged != null) onChanged!(pos);
-      },
-      behavior: HitTestBehavior.translucent,
-      child: Column(
-        children: [
-          CustomSvg(
-            asset: icon,
-            size: 24,
-            color: isSelected ? AppColors.blue : AppColors.black.shade100,
-          ),
-          const SizedBox(height: 5),
-          Text(
-            name,
-            style: AppTexts.tsmm.copyWith(
+    return Expanded(
+      child: GestureDetector(
+        onTap: () {
+          if (onChanged != null) onChanged!(pos);
+        },
+        behavior: HitTestBehavior.translucent,
+        child: Column(
+          children: [
+            CustomSvg(
+              asset: icon,
+              size: 24,
               color: isSelected ? AppColors.blue : AppColors.black.shade100,
             ),
-          ),
-        ],
+            const SizedBox(height: 5),
+            Text(
+              name,
+              style: AppTexts.tsmm.copyWith(
+                color: isSelected ? AppColors.blue : AppColors.black.shade100,
+              ),
+            ),
+          ],
+        ),
       ),
     );
   }

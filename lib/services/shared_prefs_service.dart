@@ -1,4 +1,7 @@
+import 'package:http/http.dart' as http;
 import 'package:shared_preferences/shared_preferences.dart';
+
+enum CacheFrequency { oneHour, sixHours, oneDay }
 
 class SharedPrefsService {
   static Future<void> set(String key, dynamic value) async {
@@ -20,5 +23,59 @@ class SharedPrefsService {
   static Future<void> clear() async {
     final prefs = await SharedPreferences.getInstance();
     await prefs.clear();
+  }
+
+  static Duration _frequencyToDuration(CacheFrequency frequency) {
+    switch (frequency) {
+      case CacheFrequency.oneHour:
+        return Duration(hours: 1);
+      case CacheFrequency.sixHours:
+        return Duration(hours: 6);
+      case CacheFrequency.oneDay:
+        return Duration(days: 1);
+    }
+  }
+
+  Future<http.Response> cacheResponse({
+    required String key,
+    required CacheFrequency frequency,
+    required Future<http.Response> Function() fetchCallback,
+    bool override = false
+  }) async {
+    final prefs = await SharedPreferences.getInstance();
+
+    final cachedData = prefs.getString(key);
+    final cachedTimestampStr = prefs.getString('${key}_timestamp');
+    final now = DateTime.now();
+
+    // Check if the cache is present
+    if (cachedData != null && cachedTimestampStr != null && !override) {
+      final cachedTimestamp = DateTime.tryParse(cachedTimestampStr);
+      if (cachedTimestamp != null) {
+        final expiryDuration = _frequencyToDuration(frequency);
+        if (now.difference(cachedTimestamp) < expiryDuration) {
+          return http.Response(cachedData, 200);
+        } else {
+          // Cache expired, clear cached data and timestamp
+          await prefs.remove(key);
+          await prefs.remove('${key}_timestamp');
+        }
+      } else {
+        // Invalid timestamp, clear cache
+        await prefs.remove(key);
+        await prefs.remove('${key}_timestamp');
+      }
+    }
+
+    // Cache missing or expired, call callback to fetch fresh data
+    final response = await fetchCallback();
+
+    // Save response body and timestamp to prefs
+    if (response.statusCode == 200 || response.statusCode == 201) {
+      await prefs.setString(key, response.body);
+      await prefs.setString('${key}_timestamp', now.toIso8601String());
+    }
+
+    return response;
   }
 }

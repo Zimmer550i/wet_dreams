@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 
@@ -18,12 +19,18 @@ class CustomSvg extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return SvgPicture.asset(
-      asset,
-      height: size ?? height,
-      width: size ?? width,
-      colorFilter:
-          color != null ? ColorFilter.mode(color!, BlendMode.srcIn) : null,
-    );
+    return asset.contains(".svg")
+        ? SvgPicture.asset(
+          asset,
+          height: size ?? height,
+          width: size ?? width,
+          colorFilter:
+              color != null ? ColorFilter.mode(color!, BlendMode.srcIn) : null,
+        )
+        : CachedNetworkImage(
+          imageUrl: asset,
+          height: size ?? height,
+          width: size ?? width,
+        );
   }
 }
