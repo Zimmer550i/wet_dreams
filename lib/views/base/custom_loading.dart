@@ -2,10 +2,13 @@ import 'package:flutter/material.dart';
 import 'package:wet_dreams/utils/app_colors.dart';
 
 class CustomLoading extends StatelessWidget {
-  const CustomLoading({super.key});
+  final Color? color;
+  const CustomLoading({super.key, this.color});
 
   @override
   Widget build(BuildContext context) {
-    return Center(child: CircularProgressIndicator(color: AppColors.blue[50]));
+    return Center(
+      child: CircularProgressIndicator(color: color ?? AppColors.blue[50]),
+    );
   }
 }

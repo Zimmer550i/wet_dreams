@@ -1,13 +1,27 @@
 import 'package:flutter/material.dart';
+import 'package:get/get_state_manager/src/rx_flutter/rx_obx_widget.dart';
+import 'package:get/instance_manager.dart';
+import 'package:wet_dreams/controllers/user_controller.dart';
 import 'package:wet_dreams/utils/app_colors.dart';
 import 'package:wet_dreams/utils/app_texts.dart';
 import 'package:wet_dreams/views/base/custom_app_bar.dart';
+import 'package:wet_dreams/views/base/custom_loading.dart';
 
-class PrivacyPolicy extends StatelessWidget {
+class PrivacyPolicy extends StatefulWidget {
   const PrivacyPolicy({super.key});
 
-  final String data =
-      "Lorem ipsum dolor sit amet consectetur. Fringilla a cras vitae orci. Egestas duis id nisl sed ante congue scelerisque. Eleifend facilisis aliquet tempus morbi leo sagittis. Pellentesque odio amet turpis habitant. Imperdiet tincidunt nisl consectetur hendrerit accumsan vehicula imperdiet mattis. Neque a vitae diam pharetra duis habitasse convallis luctus pulvinar. Pharetra nunc morbi elementum nisl magnis convallis arcu enim tortor. Cursus a sed tortor enim mi imperdiet massa donec mauris. Sem morbi morbi posuere faucibus. Cras risus ultrices duis pharetra sit porttitor elementum sagittis elementum. Ut vitae blandit pulvinar fermentum in id sed. At pellentesque non semper eget egestas vulputate id volutpat quis. Dolor etiam sodales at elementum mattis nibh quam placerat ut. Suspendisse est adipiscing proin et. Leo nisi bibendum donec ac non eget euismod suscipit. At ultricies nullam ipsum tellus. Non dictum orci at tortor convallis tortor suspendisse. Ac duis senectus arcu nullam in suspendisse vitae. Tellus interdum enim lorem vel morbi lectus.";
+  @override
+  State<PrivacyPolicy> createState() => _PrivacyPolicyState();
+}
+
+class _PrivacyPolicyState extends State<PrivacyPolicy> {
+  final user = Get.find<UserController>();
+
+  @override
+  void initState() {
+    super.initState();
+    user.getPrivacyPolicy();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -17,12 +31,22 @@ class PrivacyPolicy extends StatelessWidget {
         padding: const EdgeInsets.symmetric(horizontal: 24),
         child: SingleChildScrollView(
           child: SafeArea(
-            child: Padding(
-              padding: const EdgeInsets.only(top: 20),
-              child: Text(
-                data,
-                style: AppTexts.txsr.copyWith(color: AppColors.black[50]),
-              ),
+            child: Obx(
+              () =>
+                  user.privacyPolicy.value == null
+                      ? Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: CustomLoading(),
+                      )
+                      : Padding(
+                        padding: const EdgeInsets.only(top: 20),
+                        child: Text(
+                          user.privacyPolicy.value!,
+                          style: AppTexts.txsr.copyWith(
+                            color: AppColors.black[50],
+                          ),
+                        ),
+                      ),
             ),
           ),
         ),

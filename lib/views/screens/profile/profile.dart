@@ -1,6 +1,5 @@
 import 'package:wet_dreams/controllers/auth_controller.dart';
 import 'package:wet_dreams/controllers/user_controller.dart';
-import 'package:wet_dreams/helpers/route.dart';
 import 'package:wet_dreams/models/clickable_button_model.dart';
 import 'package:wet_dreams/utils/app_colors.dart';
 import 'package:wet_dreams/utils/app_icons.dart';
@@ -61,17 +60,18 @@ class _ProfileState extends State<Profile> {
               children: [
                 const SizedBox(height: 44),
                 Center(
-                  child: ProfilePicture(
-                    image: user.getImageUrl(),
-                    size: 120,
+                  child: Obx(
+                    () => ProfilePicture(image: user.getImageUrl(), size: 120),
                   ),
                 ),
                 SizedBox(height: 16),
                 Align(
                   alignment: Alignment.center,
-                  child: Text(
-                    user.userInfo.value!.fullName,
-                    style: AppTexts.txls.copyWith(color: AppColors.black[50]),
+                  child: Obx(
+                    () => Text(
+                      user.userInfo.value!.fullName,
+                      style: AppTexts.txls.copyWith(color: AppColors.black[50]),
+                    ),
                   ),
                 ),
                 const SizedBox(height: 24),
@@ -148,7 +148,6 @@ class _ProfileState extends State<Profile> {
                         onTap: () async {
                           Get.back();
                           Get.find<AuthController>().logout();
-                          Get.offAllNamed(AppRoutes.splash);
                         },
                       ),
                     ),

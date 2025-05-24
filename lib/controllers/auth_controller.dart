@@ -4,6 +4,8 @@ import 'package:get/get.dart';
 import 'package:wet_dreams/controllers/user_controller.dart';
 import 'package:wet_dreams/services/api_service.dart';
 import 'package:wet_dreams/services/shared_prefs_service.dart';
+import 'package:wet_dreams/utils/show_snackbar.dart';
+import 'package:wet_dreams/views/screens/auth/login.dart';
 
 class AuthController extends GetxController {
   RxBool isLoggedIn = RxBool(false);
@@ -128,6 +130,8 @@ class AuthController extends GetxController {
 
   Future<void> logout() async {
     await SharedPrefsService.clear();
+    Get.offAll(() => Login());
+    showSnackBar("You have been logged out");
     isLoggedIn.value = false;
   }
 

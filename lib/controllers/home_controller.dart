@@ -68,9 +68,7 @@ class HomeController extends GetxController {
           itemList.add(ItemListModel.fromJson(i));
         }
 
-        footer = Rxn(
-          FooterModel.fromJson(body['footer'])
-        );
+        footer = Rxn(FooterModel.fromJson(body['footer']));
 
         return "success";
       } else {
@@ -101,15 +99,45 @@ class HomeController extends GetxController {
       if (response.statusCode == 200) {
         var temp = ItemModel.fromJson(body['data']);
 
-        item.value = 
-          ItemModel(
-            itemId: temp.itemId,
-            image: api.baseUrl + temp.image,
-            title: temp.title,
-            description: temp.description,
-            createdAt: temp.createdAt,
-            updatedAt: temp.updatedAt,
-          );
+        item.value = ItemModel(
+          itemId: temp.itemId,
+          image: api.baseUrl + temp.image,
+          title: temp.title,
+          description: temp.description,
+          createdAt: temp.createdAt,
+          updatedAt: temp.updatedAt,
+        );
+
+        return "success";
+      } else {
+        return body['message'] ?? "Connection Error";
+      }
+    } catch (e) {
+      return "Unexpected error: ${e.toString()}";
+    }
+  }
+
+  Future<String> sendQuery(Map<String, dynamic> payload) async {
+    try {
+      item = Rxn();
+      final response = await api.post(
+        "/api-apps/send_query/",
+        payload,
+        authReq: true,
+      );
+      final body = jsonDecode(response.body);
+
+      if (response.statusCode == 200) {
+        var temp = ItemModel.fromJson(body['data']);
+
+        item.value = ItemModel(
+          itemId: temp.itemId,
+          image: api.baseUrl + temp.image,
+          title: temp.title,
+          description: temp.description,
+          createdAt: temp.createdAt,
+          updatedAt: temp.updatedAt,
+        );
 
         return "success";
       } else {

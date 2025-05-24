@@ -1,7 +1,9 @@
 import 'dart:io';
 import 'dart:convert';
 import 'package:flutter/widgets.dart';
+import 'package:get/get.dart';
 import 'package:http/http.dart' as http;
+import 'package:wet_dreams/controllers/auth_controller.dart';
 import 'package:wet_dreams/services/shared_prefs_service.dart';
 
 class ApiService {
@@ -72,6 +74,7 @@ class ApiService {
       }
 
       if (showAPICalls) _logResponse(response, 'POST', uri);
+      _checkTokenExpiry(authReq, response);
 
       return response;
     } catch (e) {
@@ -94,6 +97,7 @@ class ApiService {
       final response = await http.get(uri, headers: headers);
 
       if (showAPICalls) _logResponse(response, 'GET', uri);
+      _checkTokenExpiry(authReq, response);
 
       return response;
     } catch (e) {
@@ -143,6 +147,7 @@ class ApiService {
       }
 
       if (showAPICalls) _logResponse(response, 'PATCH', uri);
+      _checkTokenExpiry(authReq, response);
 
       return response;
     } catch (e) {
@@ -159,6 +164,7 @@ class ApiService {
       final response = await http.delete(uri, headers: headers);
 
       if (showAPICalls) _logResponse(response, 'DELETE', uri);
+      _checkTokenExpiry(authReq, response);
 
       return response;
     } catch (e) {
@@ -170,5 +176,11 @@ class ApiService {
   Future<void> setToken(String token) async {
     await SharedPrefsService.set('token', token);
     debugPrint('💾 Token Saved: $token');
+  }
+
+  void _checkTokenExpiry(bool authReq, http.Response response) {
+    if (response.statusCode == 401 && authReq) {
+      Get.find<AuthController>().logout();
+    }
   }
 }

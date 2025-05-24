@@ -1,7 +1,7 @@
 import 'package:http/http.dart' as http;
 import 'package:shared_preferences/shared_preferences.dart';
 
-enum CacheFrequency { oneHour, sixHours, oneDay }
+enum CacheFrequency { none, oneHour, sixHours, oneDay, oneWeek }
 
 class SharedPrefsService {
   static Future<void> set(String key, dynamic value) async {
@@ -27,12 +27,16 @@ class SharedPrefsService {
 
   static Duration _frequencyToDuration(CacheFrequency frequency) {
     switch (frequency) {
+      case CacheFrequency.none:
+        return Duration(seconds: 0);
       case CacheFrequency.oneHour:
         return Duration(hours: 1);
       case CacheFrequency.sixHours:
         return Duration(hours: 6);
       case CacheFrequency.oneDay:
         return Duration(days: 1);
+      case CacheFrequency.oneWeek:
+        return Duration(days: 7);
     }
   }
 
@@ -40,7 +44,7 @@ class SharedPrefsService {
     required String key,
     required CacheFrequency frequency,
     required Future<http.Response> Function() fetchCallback,
-    bool override = false
+    bool override = false,
   }) async {
     final prefs = await SharedPreferences.getInstance();
 

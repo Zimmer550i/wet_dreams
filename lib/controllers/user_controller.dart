@@ -2,10 +2,12 @@ import 'dart:convert';
 import 'package:get/get.dart';
 import 'package:wet_dreams/models/user.dart';
 import 'package:wet_dreams/services/api_service.dart';
+import 'package:wet_dreams/services/shared_prefs_service.dart';
 
 class UserController extends GetxController {
   final userInfo = Rxn<User>();
   final api = ApiService();
+  final RxnString privacyPolicy = RxnString();
 
   RxBool isLoading = RxBool(false);
 
@@ -93,5 +95,31 @@ class UserController extends GetxController {
     String baseUrl = api.baseUrl;
 
     return baseUrl + userInfo.value!.profilePic!;
+  }
+
+  Future<String> getPrivacyPolicy() async {
+    isLoading.value = true;
+    try {
+      final response = await SharedPrefsService().cacheResponse(
+        key: "privacy",
+        frequency: CacheFrequency.oneDay,
+        fetchCallback:
+            () => api.get("/api-apps/privacy_policies/", authReq: true),
+      );
+      final body = jsonDecode(response.body);
+
+      if (response.statusCode == 200) {
+        privacyPolicy.value = body['data'][0]['content'];
+
+        isLoading.value = false;
+        return "success";
+      } else {
+        isLoading.value = false;
+        return jsonDecode(response.body)['message'] ?? "Connection Error";
+      }
+    } catch (e) {
+      isLoading.value = false;
+      return "Unexpected error: ${e.toString()}";
+    }
   }
 }
