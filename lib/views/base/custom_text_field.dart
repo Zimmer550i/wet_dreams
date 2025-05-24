@@ -13,6 +13,8 @@ class CustomTextField extends StatefulWidget {
   final TextInputType? textInputType;
   final bool isDisabled;
   final double radius;
+  final double? height;
+  final double? width;
   final TextEditingController? controller;
   final bool isPassword;
   final int lines;
@@ -31,6 +33,8 @@ class CustomTextField extends StatefulWidget {
     this.controller,
     this.onTap,
     this.errorText,
+    this.height = 50,
+    this.width,
   });
 
   @override
@@ -80,8 +84,12 @@ class _CustomTextFieldState extends State<CustomTextField> {
             }
           },
           child: Container(
-            height: widget.lines == 1 ? 50 : null,
-            padding: EdgeInsets.symmetric(horizontal: 20, vertical: widget.lines == 1 ? 0 : 20),
+            height: widget.lines == 1 ? widget.height : null,
+            width: widget.width,
+            padding: EdgeInsets.symmetric(
+              horizontal: 20,
+              vertical: widget.lines == 1 ? 0 : 20,
+            ),
             decoration: BoxDecoration(
               color: AppColors.black[400],
               borderRadius: BorderRadius.circular(widget.radius),
@@ -92,6 +100,7 @@ class _CustomTextFieldState extends State<CustomTextField> {
             ),
             child: Row(
               spacing: 12,
+              crossAxisAlignment: CrossAxisAlignment.center,
               children: [
                 if (widget.leading != null)
                   SvgPicture.asset(
@@ -123,6 +132,7 @@ class _CustomTextFieldState extends State<CustomTextField> {
                     ),
                     decoration: InputDecoration(
                       border: InputBorder.none,
+                      isDense: true,
                       contentPadding: EdgeInsets.zero,
                       hintText: widget.hintText,
                       hintStyle: AppTexts.tsmr.copyWith(

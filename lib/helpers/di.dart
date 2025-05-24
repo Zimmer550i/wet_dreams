@@ -5,6 +5,7 @@ import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:wet_dreams/controllers/auth_controller.dart';
+import 'package:wet_dreams/controllers/calculator_controller.dart';
 import 'package:wet_dreams/controllers/user_controller.dart';
 import '../controllers/home_controller.dart';
 import '../controllers/localization_controller.dart';
@@ -26,6 +27,7 @@ Future<Map<String, Map<String, String>>> init() async {
   Get.put(AuthController());
   Get.put(UserController());
   Get.put(HomeController());
+  Get.put(CalculatorController());
 
   //Retrieving localized data
   Map<String, Map<String, String>> _languages = Map();
