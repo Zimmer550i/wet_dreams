@@ -35,7 +35,7 @@ class _LinkCollectionScreenState extends State<LinkCollectionScreen> {
   @override
   void initState() {
     super.initState();
-    home.getItems(widget.serviceId);
+    fetchData();
   }
 
   @override
@@ -181,5 +181,13 @@ class _LinkCollectionScreenState extends State<LinkCollectionScreen> {
         ),
       ),
     );
+  }
+
+  void fetchData() async {
+    final message = await home.getItems(widget.serviceId);
+
+    if (message != "success") {
+      showSnackBar(message);
+    }
   }
 }

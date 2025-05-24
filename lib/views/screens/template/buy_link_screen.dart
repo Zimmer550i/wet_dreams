@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:wet_dreams/controllers/home_controller.dart';
+import 'package:wet_dreams/services/api_service.dart';
 import 'package:wet_dreams/utils/app_colors.dart';
 import 'package:wet_dreams/utils/app_icons.dart';
 import 'package:wet_dreams/utils/app_texts.dart';
@@ -55,7 +56,11 @@ class _BuyLinkScreenState extends State<BuyLinkScreen> {
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.center,
                           children: [
-                            CustomSvg(asset: home.item.value!.image, size: 80),
+                            CustomSvg(
+                              asset:
+                                  ApiService().baseUrl + home.item.value!.image,
+                              size: 80,
+                            ),
                             Padding(
                               padding: const EdgeInsets.symmetric(
                                 horizontal: 40,
@@ -69,7 +74,7 @@ class _BuyLinkScreenState extends State<BuyLinkScreen> {
                               ),
                             ),
                             Text(
-                              "",
+                              home.item.value!.shortTitle ?? "",
                               textAlign: TextAlign.center,
                               style: AppTexts.txsr.copyWith(
                                 color: AppColors.black[50],
@@ -90,8 +95,11 @@ class _BuyLinkScreenState extends State<BuyLinkScreen> {
                               padding: 24,
                               width: null,
                               onTap: () async {
-                                if (home.item.value!.externalSourceUrl != null) {
-                                  final Uri url = Uri.parse(home.item.value!.externalSourceUrl!);
+                                if (home.item.value!.externalSourceUrl !=
+                                    null) {
+                                  final Uri url = Uri.parse(
+                                    home.item.value!.externalSourceUrl!,
+                                  );
                                   if (await canLaunchUrl(url)) {
                                     await launchUrl(
                                       url,

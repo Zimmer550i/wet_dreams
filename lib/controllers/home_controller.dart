@@ -24,7 +24,6 @@ class HomeController extends GetxController {
         fetchCallback: () {
           return api.get("/api-apps/DashboardServices/", authReq: true);
         },
-        override: true,
       );
       final body = jsonDecode(response.body);
 
@@ -48,7 +47,7 @@ class HomeController extends GetxController {
     try {
       itemList = RxList.empty();
       final response = await prefs.cacheResponse(
-        key: "homeItems",
+        key: "homeItems:$id",
         frequency: CacheFrequency.sixHours,
         fetchCallback: () {
           return api.get(
@@ -57,7 +56,6 @@ class HomeController extends GetxController {
             authReq: true,
           );
         },
-        override: true,
       );
       final body = jsonDecode(response.body);
 
@@ -68,7 +66,11 @@ class HomeController extends GetxController {
           itemList.add(ItemListModel.fromJson(i));
         }
 
-        footer = Rxn(FooterModel.fromJson(body['footer']));
+        if (body['footer'] != null) {
+          footer = Rxn(FooterModel.fromJson(body['footer']));
+        } else {
+          footer.value = null;
+        }
 
         return "success";
       } else {
@@ -83,7 +85,7 @@ class HomeController extends GetxController {
     try {
       item = Rxn();
       final response = await prefs.cacheResponse(
-        key: "homeItem",
+        key: "item:$id",
         frequency: CacheFrequency.oneHour,
         fetchCallback: () {
           return api.get(
@@ -92,21 +94,11 @@ class HomeController extends GetxController {
             authReq: true,
           );
         },
-        override: true,
       );
       final body = jsonDecode(response.body);
 
       if (response.statusCode == 200) {
-        var temp = ItemModel.fromJson(body['data']);
-
-        item.value = ItemModel(
-          itemId: temp.itemId,
-          image: api.baseUrl + temp.image,
-          title: temp.title,
-          description: temp.description,
-          createdAt: temp.createdAt,
-          updatedAt: temp.updatedAt,
-        );
+        item.value = ItemModel.fromJson(body['data']);
 
         return "success";
       } else {

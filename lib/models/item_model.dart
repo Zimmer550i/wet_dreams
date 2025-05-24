@@ -2,6 +2,7 @@ class ItemModel {
   final String itemId;
   final String image;
   final String title;
+  final String? shortTitle;
   final String description;
   final String? externalSourceUrl;
   final DateTime createdAt;
@@ -15,6 +16,7 @@ class ItemModel {
     this.externalSourceUrl,
     required this.createdAt,
     required this.updatedAt,
+    this.shortTitle,
   });
 
   factory ItemModel.fromJson(Map<String, dynamic> json) {
@@ -23,6 +25,7 @@ class ItemModel {
       image: json['image'],
       title: json['title'],
       description: json['description'],
+      shortTitle: json['short_title'],
       externalSourceUrl: json['external_source_url'],
       createdAt: DateTime.parse(json['created_at']),
       updatedAt: DateTime.parse(json['updated_at']),
@@ -35,6 +38,7 @@ class ItemModel {
       'image': image,
       'title': title,
       'description': description,
+      'short_title': shortTitle,
       'external_source_url': externalSourceUrl,
       'created_at': createdAt.toIso8601String(),
       'updated_at': updatedAt.toIso8601String(),
