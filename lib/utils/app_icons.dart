@@ -3,6 +3,7 @@ class AppIcons {
   static const String arrowRightSmall = 'assets/icons/arrow_right_small.svg';
   static const String calculator = 'assets/icons/calculator.svg';
   static const String buy = 'assets/icons/buy.svg';
+  static const String paypal = 'assets/icons/paypal.svg';
   static const String youtube = 'assets/icons/youtube.svg';
   static const String curvyShape = 'assets/icons/curvy_shape.svg';
   static const String swim = 'assets/icons/swim.svg';

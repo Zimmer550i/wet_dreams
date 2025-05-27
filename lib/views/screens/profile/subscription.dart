@@ -24,6 +24,7 @@ class Subscription extends StatelessWidget {
                 SubscriptionWidget(
                   icon: AppIcons.basic,
                   title: "Basic Plan",
+                  isPurchased: true,
                   subTitle: "Free",
                   pros: [
                     "Issues Frequent",

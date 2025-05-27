@@ -7,10 +7,11 @@ import 'package:wet_dreams/utils/app_colors.dart';
 import 'package:wet_dreams/utils/app_icons.dart';
 import 'package:wet_dreams/utils/app_texts.dart';
 import 'package:wet_dreams/utils/custom_svg.dart';
+import 'package:wet_dreams/views/base/custom_button.dart';
 import 'package:wet_dreams/views/base/custom_loading.dart';
-import 'package:wet_dreams/views/screens/home/chemical_calculator.dart';
 import 'package:wet_dreams/views/screens/home/report_problem.dart';
 import 'package:wet_dreams/views/screens/notifications.dart';
+import 'package:wet_dreams/views/screens/profile/subscription.dart';
 import 'package:wet_dreams/views/screens/template/link_collection_screen.dart';
 
 class Home extends StatefulWidget {
@@ -137,7 +138,8 @@ class _HomeState extends State<Home> {
                                         );
                                         break;
                                       case "calculator":
-                                        Get.to(() => ChemicalCalculator());
+                                        // Get.to(() => ChemicalCalculator());
+                                        premiumFeature(context);
                                         break;
                                       case "query":
                                         Get.to(() => ReportProblem());
@@ -196,6 +198,67 @@ class _HomeState extends State<Home> {
           ],
         ),
       ),
+    );
+  }
+
+  Future<dynamic> premiumFeature(BuildContext context) {
+    return showModalBottomSheet(
+      context: context,
+      backgroundColor: AppColors.black,
+      builder: (_) {
+        return SafeArea(
+          child: Container(
+            decoration: BoxDecoration(
+              border: Border(
+                top: BorderSide(width: 0.5, color: AppColors.black[50]!),
+              ),
+              borderRadius: BorderRadius.vertical(top: Radius.circular(16)),
+            ),
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                const SizedBox(height: 75),
+                Text(
+                  "You have encountered a Premium Feature",
+                  style: AppTexts.tmdr.copyWith(color: AppColors.black[100]),
+                ),
+                const SizedBox(height: 4),
+                Text(
+                  "Upgrade now?",
+                  style: AppTexts.txls.copyWith(color: AppColors.black[50]),
+                ),
+                const SizedBox(height: 20),
+                Row(
+                  children: [
+                    const SizedBox(width: 40),
+                    Expanded(
+                      child: CustomButton(
+                        text: "Not now",
+                        isSecondary: true,
+                        onTap: () {
+                          Get.back();
+                        },
+                      ),
+                    ),
+                    const SizedBox(width: 18),
+                    Expanded(
+                      child: CustomButton(
+                        text: "Upgrade",
+                        onTap: () {
+                          Get.back();
+                          Get.to(() => Subscription());
+                        },
+                      ),
+                    ),
+                    const SizedBox(width: 40),
+                  ],
+                ),
+                const SizedBox(height: 48),
+              ],
+            ),
+          ),
+        );
+      },
     );
   }
 }
