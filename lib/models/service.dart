@@ -4,6 +4,7 @@ class Service {
   final String title;
   final String? shortDescription;
   final String type;
+  final bool isPremium; // new field
 
   Service({
     required this.serviceId,
@@ -11,6 +12,7 @@ class Service {
     required this.title,
     this.shortDescription,
     required this.type,
+    required this.isPremium, // required in constructor
   });
 
   factory Service.fromJson(Map<String, dynamic> json) {
@@ -20,6 +22,7 @@ class Service {
       title: json['title'] as String,
       shortDescription: json['short_description'] as String?,
       type: json['type'] as String,
+      isPremium: json['is_premium'] as bool, // parse from JSON
     );
   }
 
@@ -30,6 +33,7 @@ class Service {
       'title': title,
       'short_description': shortDescription,
       'type': type,
+      'is_premium': isPremium, // add to JSON
     };
   }
 }

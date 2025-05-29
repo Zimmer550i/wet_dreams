@@ -2,6 +2,7 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:get/get.dart';
 import 'package:flutter/material.dart';
 import 'package:wet_dreams/controllers/home_controller.dart';
+import 'package:wet_dreams/controllers/user_controller.dart';
 import 'package:wet_dreams/services/api_service.dart';
 import 'package:wet_dreams/utils/app_colors.dart';
 import 'package:wet_dreams/utils/app_icons.dart';
@@ -10,6 +11,7 @@ import 'package:wet_dreams/utils/custom_svg.dart';
 import 'package:wet_dreams/views/base/custom_button.dart';
 import 'package:wet_dreams/views/base/custom_loading.dart';
 import 'package:wet_dreams/views/screens/home/report_problem.dart';
+import 'package:wet_dreams/views/screens/home/volume_of_my_pool.dart';
 import 'package:wet_dreams/views/screens/notifications.dart';
 import 'package:wet_dreams/views/screens/profile/subscription.dart';
 import 'package:wet_dreams/views/screens/template/link_collection_screen.dart';
@@ -119,6 +121,18 @@ class _HomeState extends State<Home> {
                               ...home.homeButtons.map((e) {
                                 return GestureDetector(
                                   onTap: () {
+                                    if (e.isPremium) {
+                                      final user = Get.find<UserController>();
+
+                                      if (user
+                                              .userInfo
+                                              .value!
+                                              .subscriptionStatus !=
+                                          "subscribed") {
+                                        // premiumFeature(context);
+                                        // return;
+                                      }
+                                    }
                                     switch (e.type) {
                                       case "service":
                                         Get.to(
@@ -138,8 +152,7 @@ class _HomeState extends State<Home> {
                                         );
                                         break;
                                       case "calculator":
-                                        // Get.to(() => ChemicalCalculator());
-                                        premiumFeature(context);
+                                        Get.to(() => VolumeOfMyPool());
                                         break;
                                       case "query":
                                         Get.to(() => ReportProblem());

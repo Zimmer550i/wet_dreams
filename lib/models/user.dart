@@ -3,6 +3,11 @@ class User {
   final String fullName;
   final String email;
   final String? profilePic;
+  final String subscriptionStatus;
+  final DateTime subscriptionExpiresOn;
+  final bool isExpired;
+  final String subscriptionId;
+  final String packageName;
   final bool isVerified;
   final bool isActive;
   final bool isStaff;
@@ -14,7 +19,12 @@ class User {
     required this.id,
     required this.fullName,
     required this.email,
-    required this.profilePic,
+    this.profilePic,
+    required this.subscriptionStatus,
+    required this.subscriptionExpiresOn,
+    required this.isExpired,
+    required this.subscriptionId,
+    required this.packageName,
     required this.isVerified,
     required this.isActive,
     required this.isStaff,
@@ -29,6 +39,11 @@ class User {
       fullName: json['full_name'],
       email: json['email'],
       profilePic: json['profile_pic'],
+      subscriptionStatus: json['subscription_status'],
+      subscriptionExpiresOn: DateTime.parse(json['subscription_expires_on']),
+      isExpired: json['is_expired'],
+      subscriptionId: json['subscription_id'] ?? '',
+      packageName: json['package_name'] ?? '',
       isVerified: json['is_verified'],
       isActive: json['is_active'],
       isStaff: json['is_staff'],
@@ -44,6 +59,11 @@ class User {
       'full_name': fullName,
       'email': email,
       'profile_pic': profilePic,
+      'subscription_status': subscriptionStatus,
+      'subscription_expires_on': subscriptionExpiresOn.toIso8601String(),
+      'is_expired': isExpired,
+      'subscription_id': subscriptionId,
+      'package_name': packageName,
       'is_verified': isVerified,
       'is_active': isActive,
       'is_staff': isStaff,
