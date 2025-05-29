@@ -1,10 +1,41 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:wet_dreams/controllers/calculator_controller.dart';
 import 'package:wet_dreams/utils/app_colors.dart';
+import 'package:wet_dreams/utils/app_icons.dart';
 import 'package:wet_dreams/utils/app_texts.dart';
+import 'package:wet_dreams/utils/custom_svg.dart';
 import 'package:wet_dreams/utils/formatter.dart';
+import 'package:wet_dreams/utils/show_snackbar.dart';
+import 'package:wet_dreams/views/base/custom_loading.dart';
 
-class Pool extends StatelessWidget {
+class Pool extends StatefulWidget {
   const Pool({super.key});
+
+  @override
+  State<Pool> createState() => _PoolState();
+}
+
+class _PoolState extends State<Pool> {
+  final calc = Get.find<CalculatorController>();
+  bool isLoading = false;
+
+  @override
+  void initState() {
+    super.initState();
+    setState(() {
+      isLoading = true;
+    });
+    calc.getChemicalResults().then((message) {
+      if (message != "success") {
+        showSnackBar(message);
+      }
+
+      setState(() {
+        isLoading = false;
+      });
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -63,8 +94,25 @@ class Pool extends StatelessWidget {
               ],
             ),
             const SizedBox(height: 50),
-            for (int i = 0; i < 3; i++)
-              poolInformation(DateTime.now(), [1.1, 1, 3, 1]),
+            isLoading
+                ? CustomLoading()
+                : Expanded(
+                  child: SingleChildScrollView(
+                    child: Obx(
+                      () => Column(
+                        children: [
+                          for (var i in calc.results)
+                            poolInformation(i.createdAt, [
+                              i.pH,
+                              i.chlorine,
+                              i.alkalinity,
+                              i.cya,
+                            ]),
+                        ],
+                      ),
+                    ),
+                  ),
+                ),
           ],
         ),
       ),
@@ -83,6 +131,7 @@ class Pool extends StatelessWidget {
         ),
         child: Row(
           crossAxisAlignment: CrossAxisAlignment.start,
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
             Expanded(
               child: Column(
@@ -127,14 +176,24 @@ class Pool extends StatelessWidget {
                 ],
               ),
             ),
-            SizedBox(width: 40),
-            GestureDetector(
-              onTap: () {},
-              behavior: HitTestBehavior.translucent,
-              child: Icon(
-                Icons.close_rounded,
-                size: 12,
-                color: AppColors.black[50]!,
+
+            Align(
+              alignment: Alignment.topRight,
+              child: PopupMenuButton<String>(
+                onSelected: (value) {},
+                iconSize: 10,
+                icon: CustomSvg(asset: AppIcons.threeDot, size: 16,),
+                menuPadding: EdgeInsets.all(0),
+                padding: EdgeInsets.all(0),
+                elevation: 24,
+                borderRadius: BorderRadius.circular(24),
+                splashRadius: 24,
+                color: AppColors.black.shade400,
+                itemBuilder: (context) {
+                  return [
+                    PopupMenuItem(child: Text("Delete", style: AppTexts.tsmm)),
+                  ];
+                },
               ),
             ),
           ],
