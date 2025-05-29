@@ -12,6 +12,7 @@ class AppIcons {
   static const String backRounded = 'assets/icons/back_rounded.svg';
   static const String eyeOff = 'assets/icons/eye_off.svg';
   static const String eye = 'assets/icons/eye.svg';
+  static const String arrowDown = 'assets/icons/arrow_down.svg';
   static const String news = 'assets/icons/news.svg';
   static const String settings = 'assets/icons/settings.svg';
   static const String tipsAndTricks = 'assets/icons/tips_and_tricks.svg';

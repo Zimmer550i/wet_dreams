@@ -61,13 +61,17 @@ class _CustomButtonState extends State<CustomButton> {
         ),
         child:
             widget.isLoading
-                ? Center(
-                  child: CircularProgressIndicator(
-                    color:
-                        widget.isSecondary
-                            ? AppColors.blue
-                            : AppColors.blue[50],
-                    strokeWidth: 4,
+                ? FittedBox(
+                  fit: BoxFit.scaleDown,
+                  child: Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: CircularProgressIndicator(
+                      color:
+                          widget.isSecondary
+                              ? AppColors.blue
+                              : AppColors.blue[50],
+                      strokeWidth: 4,
+                    ),
                   ),
                 )
                 : Row(

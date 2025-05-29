@@ -24,4 +24,23 @@ class CalculatorController extends GetxController {
       return "Unexpected error: ${e.toString()}";
     }
   }
+
+  Future<String> calculateVolume(Map<String, dynamic> payload) async {
+    try {
+      final response = await api.post(
+        "/api-apps/calculate_volume/",
+        payload,
+        authReq: true,
+      );
+      final body = jsonDecode(response.body);
+
+      if (response.statusCode == 200) {
+        return "success";
+      } else {
+        return body['message'] ?? "Connection error!";
+      }
+    } catch (e) {
+      return "Unexpected error: ${e.toString()}";
+    }
+  }
 }
