@@ -18,6 +18,7 @@ class Pool extends StatefulWidget {
 
 class _PoolState extends State<Pool> {
   final calc = Get.find<CalculatorController>();
+  num? m3;
   bool isLoading = false;
 
   @override
@@ -25,6 +26,14 @@ class _PoolState extends State<Pool> {
     super.initState();
     setState(() {
       isLoading = true;
+    });
+    calc.getVolume().then((val) {
+      setState(() {
+        m3 = calc.poolVolume.value!.volumeM3;
+      });
+    }).onError((e, j) {
+      showSnackBar(e.toString());
+      return null;
     });
     calc.getChemicalResults().then((message) {
       if (message != "success") {
@@ -70,7 +79,7 @@ class _PoolState extends State<Pool> {
                     color: AppColors.black.shade400,
                     borderRadius: BorderRadius.circular(4),
                   ),
-                  child: Center(child: Text("1.1", style: AppTexts.txsr)),
+                  child: Center(child: Text(m3?.ceil().toString() ?? "", style: AppTexts.txsr)),
                 ),
               ],
             ),
@@ -182,7 +191,7 @@ class _PoolState extends State<Pool> {
               child: PopupMenuButton<String>(
                 onSelected: (value) {},
                 iconSize: 10,
-                icon: CustomSvg(asset: AppIcons.threeDot, size: 16,),
+                icon: CustomSvg(asset: AppIcons.threeDot, size: 16),
                 menuPadding: EdgeInsets.all(0),
                 padding: EdgeInsets.all(0),
                 elevation: 24,

@@ -1,11 +1,12 @@
 import 'dart:convert';
 import 'package:get/get.dart';
 import 'package:wet_dreams/models/chemical_result.dart';
+import 'package:wet_dreams/models/pool_volume.dart';
 import 'package:wet_dreams/services/api_service.dart';
 
 class CalculatorController extends GetxController {
   final api = ApiService();
-
+  Rxn<PoolVolume> poolVolume = Rxn();
   RxList<ChemicalResult> results = RxList();
 
   Future<String> analyzeChemical(Map<String, double> payload) async {
@@ -37,6 +38,8 @@ class CalculatorController extends GetxController {
       final body = jsonDecode(response.body);
 
       if (response.statusCode == 200) {
+        poolVolume.value = PoolVolume.fromJson(body['data']);
+        
         return "success";
       } else {
         return body['message'] ?? "Connection error!";
@@ -62,7 +65,24 @@ class CalculatorController extends GetxController {
         for (var i in data) {
           results.add(ChemicalResult.fromJson(i));
         }
-        
+
+        return "success";
+      } else {
+        return body['message'] ?? "Connection error!";
+      }
+    } catch (e) {
+      return "Unexpected error: ${e.toString()}";
+    }
+  }
+
+  Future<String> getVolume() async {
+    try {
+      final response = await api.get("/api-apps/pool_volumes/", authReq: true);
+      final body = jsonDecode(response.body);
+
+      if (response.statusCode == 200) {
+        poolVolume.value = PoolVolume.fromJson(body['data']);
+
         return "success";
       } else {
         return body['message'] ?? "Connection error!";

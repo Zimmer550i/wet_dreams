@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/instance_manager.dart';
 import 'package:get/route_manager.dart';
 import 'package:wet_dreams/controllers/calculator_controller.dart';
+import 'package:wet_dreams/models/pool_volume.dart';
 import 'package:wet_dreams/utils/app_colors.dart';
 import 'package:wet_dreams/utils/app_texts.dart';
 import 'package:wet_dreams/utils/show_snackbar.dart';
@@ -24,29 +25,95 @@ class _VolumeOfMyPoolState extends State<VolumeOfMyPool> {
     4,
     (index) => TextEditingController(),
   );
-  final List<String> shapes = ["Rectangular", "Circle", "Oval"];
+  final List<String> shapes = ["Rectangular", "Circular", "Oval"];
   final List<List<String>> fields = [
     ["length", "width", "min_depth", "max_depth"],
-    ["diameter", "average_depth"],
-    ["length", "width", "average_depth"],
+    ["diameter", "min_depth", "max_depth"],
+    ["length", "width", "min_depth", "max_depth"],
   ];
   int index = 0;
   bool isLoading = false;
+
+  @override
+  void initState() {
+    super.initState();
+    if (calc.poolVolume.value == null) {
+      calc
+          .getVolume()
+          .then((val) => setValue(calc.poolVolume.value!))
+          .onError((e, j) => showSnackBar(e.toString()));
+    } else {
+      setValue(calc.poolVolume.value!);
+    }
+  }
 
   void handleCallback() async {
     setState(() {
       isLoading = true;
     });
 
-    Map<String, dynamic> payload = {};
+    final currentVolume = calc.poolVolume.value;
 
+    // Helper to parse double safely
+    double? parse(String text) => double.tryParse(text.trim());
+
+    bool hasChanged = false;
+
+    if (currentVolume != null) {
+      if (index == 0 || index == 2) {
+        // Rectangular or Oval
+        hasChanged =
+            currentVolume.length != parse(controllers[0].text) ||
+            currentVolume.width != parse(controllers[1].text) ||
+            currentVolume.minDepth != parse(controllers[2].text) ||
+            currentVolume.maxDepth != parse(controllers[3].text) ||
+            currentVolume.shape.toLowerCase() != shapes[index].toLowerCase();
+      } else if (index == 1) {
+        // Circular
+        hasChanged =
+            currentVolume.diameter != parse(controllers[0].text) ||
+            currentVolume.minDepth != parse(controllers[1].text) ||
+            currentVolume.maxDepth != parse(controllers[2].text) ||
+            currentVolume.shape.toLowerCase() != shapes[index].toLowerCase();
+      }
+    } else {
+      // No existing data, so definitely changed
+      hasChanged = true;
+    }
+
+    if (!hasChanged) {
+      // No change, just navigate forward or do next step
+      setState(() {
+        isLoading = false;
+      });
+      Get.to(() => ChemicalCalculator());
+      return;
+    }
+
+    // Build payload based on index as before
+    Map<String, dynamic> payload = {};
     if (index == 0) {
       payload = {
         "shape": "rectangular",
-        "length": double.tryParse(controllers[0].text.trim()),
-        "width": double.tryParse(controllers[1].text.trim()),
-        "min_depth": double.tryParse(controllers[2].text.trim()),
-        "max_depth": double.tryParse(controllers[3].text.trim()),
+        "length": parse(controllers[0].text),
+        "width": parse(controllers[1].text),
+        "min_depth": parse(controllers[2].text),
+        "max_depth": parse(controllers[3].text),
+      };
+    } else if (index == 1) {
+      payload = {
+        "shape": "circular",
+        "diameter": parse(controllers[0].text),
+        "min_depth": parse(controllers[1].text),
+        "max_depth": parse(controllers[2].text),
+      };
+    } else if (index == 2) {
+      payload = {
+        "shape": "oval",
+        "length": parse(controllers[0].text),
+        "width": parse(controllers[1].text),
+        "min_depth": parse(controllers[2].text),
+        "max_depth": parse(controllers[3].text),
       };
     }
 
@@ -61,6 +128,22 @@ class _VolumeOfMyPoolState extends State<VolumeOfMyPool> {
     setState(() {
       isLoading = false;
     });
+  }
+
+  void setValue(PoolVolume volume) {
+    index = shapes.indexWhere((val) => val.toLowerCase() == volume.shape);
+    if (index == 0 || index == 2) {
+      controllers[0].text = volume.length.toString();
+      controllers[1].text = volume.width.toString();
+      controllers[2].text = volume.minDepth.toString();
+      controllers[3].text = volume.maxDepth.toString();
+    } else if (index == 1) {
+      controllers[0].text = volume.diameter.toString();
+      controllers[1].text = volume.minDepth.toString();
+      controllers[2].text = volume.maxDepth.toString();
+    }
+
+    setState(() {});
   }
 
   @override
