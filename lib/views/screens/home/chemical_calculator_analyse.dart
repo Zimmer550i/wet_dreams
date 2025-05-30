@@ -1,11 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:wet_dreams/models/chemical_result.dart';
 import 'package:wet_dreams/utils/app_colors.dart';
 import 'package:wet_dreams/utils/app_texts.dart';
 import 'package:wet_dreams/utils/formatter.dart';
 import 'package:wet_dreams/views/base/custom_app_bar.dart';
 
 class ChemicalCalculatorAnalyse extends StatelessWidget {
-  const ChemicalCalculatorAnalyse({super.key});
+  final ChemicalResult result;
+  const ChemicalCalculatorAnalyse({super.key, required this.result});
 
   @override
   Widget build(BuildContext context) {
@@ -18,7 +20,12 @@ class ChemicalCalculatorAnalyse extends StatelessWidget {
             child: Column(
               children: [
                 const SizedBox(height: 24),
-                poolInformation(DateTime.now(), [1.1, 1, 3, 2]),
+                poolInformation(result.createdAt, [
+                  result.pH,
+                  result.chlorine,
+                  result.alkalinity,
+                  result.cya,
+                ]),
                 const SizedBox(height: 8),
                 Container(
                   padding: EdgeInsets.all(20),
@@ -29,141 +36,115 @@ class ChemicalCalculatorAnalyse extends StatelessWidget {
                   child: Column(
                     spacing: 12,
                     children: [
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          Text(
-                            "PH -",
-                            style: AppTexts.tsmr.copyWith(
-                              color: AppColors.black[50],
-                            ),
-                          ),
-                          Text(
-                            "100g",
-                            style: AppTexts.tsmr,
-                          ),
-                        ],
-                      ),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          Text(
-                            "Chlorine –",
-                            style: AppTexts.tsmr.copyWith(
-                              color: AppColors.black[50],
-                            ),
-                          ),
-                          Text(
-                            "200g",
-                            style: AppTexts.tsmr,
-                          ),
-                        ],
-                      ),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          Text(
-                            "Flocculant –",
-                            style: AppTexts.tsmr.copyWith(
-                              color: AppColors.black[50],
-                            ),
-                          ),
-                          Text(
-                            "10g",
-                            style: AppTexts.tsmr,
-                          ),
-                        ],
-                      ),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          Text(
-                            "Clarifier –",
-                            style: AppTexts.tsmr.copyWith(
-                              color: AppColors.black[50],
-                            ),
-                          ),
-                          Text(
-                            "10g",
-                            style: AppTexts.tsmr,
-                          ),
-                        ],
-                      ),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          Text(
-                            "PH Raise -",
-                            style: AppTexts.tsmr.copyWith(
-                              color: AppColors.black[50],
-                            ),
-                          ),
-                          Text(
-                            "30g",
-                            style: AppTexts.tsmr,
-                          ),
-                        ],
-                      ),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          Text(
-                            "PH -",
-                            style: AppTexts.tsmr.copyWith(
-                              color: AppColors.black[50],
-                            ),
-                          ),
-                          Text(
-                            "10g",
-                            style: AppTexts.tsmr,
-                          ),
-                        ],
-                      ),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          Text(
-                            "PH Chlorine -",
-                            style: AppTexts.tsmr.copyWith(
-                              color: AppColors.black[50],
-                            ),
-                          ),
-                          Text(
-                            "60g",
-                            style: AppTexts.tsmr,
-                          ),
-                        ],
-                      ),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          Text(
-                            "Clarifier –",
-                            style: AppTexts.tsmr.copyWith(
-                              color: AppColors.black[50],
-                            ),
-                          ),
-                          Text(
-                            "20g",
-                            style: AppTexts.tsmr,
-                          ),
-                        ],
-                      ),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          Text(
-                            "PH Chlorine -",
-                            style: AppTexts.tsmr.copyWith(
-                              color: AppColors.black[50],
-                            ),
-                          ),
-                          Text(
-                            "12g",
-                            style: AppTexts.tsmr,
-                          ),
-                        ],
-                      ),
+                      Text(result.resultSummary, style: AppTexts.tsmr),
+                      // Row(
+                      //   mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      //   children: [
+                      //     Text(
+                      //       "PH -",
+                      //       style: AppTexts.tsmr.copyWith(
+                      //         color: AppColors.black[50],
+                      //       ),
+                      //     ),
+                      //     Text("100g", style: AppTexts.tsmr),
+                      //   ],
+                      // ),
+                      // Row(
+                      //   mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      //   children: [
+                      //     Text(
+                      //       "Chlorine –",
+                      //       style: AppTexts.tsmr.copyWith(
+                      //         color: AppColors.black[50],
+                      //       ),
+                      //     ),
+                      //     Text("200g", style: AppTexts.tsmr),
+                      //   ],
+                      // ),
+                      // Row(
+                      //   mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      //   children: [
+                      //     Text(
+                      //       "Flocculant –",
+                      //       style: AppTexts.tsmr.copyWith(
+                      //         color: AppColors.black[50],
+                      //       ),
+                      //     ),
+                      //     Text("10g", style: AppTexts.tsmr),
+                      //   ],
+                      // ),
+                      // Row(
+                      //   mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      //   children: [
+                      //     Text(
+                      //       "Clarifier –",
+                      //       style: AppTexts.tsmr.copyWith(
+                      //         color: AppColors.black[50],
+                      //       ),
+                      //     ),
+                      //     Text("10g", style: AppTexts.tsmr),
+                      //   ],
+                      // ),
+                      // Row(
+                      //   mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      //   children: [
+                      //     Text(
+                      //       "PH Raise -",
+                      //       style: AppTexts.tsmr.copyWith(
+                      //         color: AppColors.black[50],
+                      //       ),
+                      //     ),
+                      //     Text("30g", style: AppTexts.tsmr),
+                      //   ],
+                      // ),
+                      // Row(
+                      //   mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      //   children: [
+                      //     Text(
+                      //       "PH -",
+                      //       style: AppTexts.tsmr.copyWith(
+                      //         color: AppColors.black[50],
+                      //       ),
+                      //     ),
+                      //     Text("10g", style: AppTexts.tsmr),
+                      //   ],
+                      // ),
+                      // Row(
+                      //   mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      //   children: [
+                      //     Text(
+                      //       "PH Chlorine -",
+                      //       style: AppTexts.tsmr.copyWith(
+                      //         color: AppColors.black[50],
+                      //       ),
+                      //     ),
+                      //     Text("60g", style: AppTexts.tsmr),
+                      //   ],
+                      // ),
+                      // Row(
+                      //   mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      //   children: [
+                      //     Text(
+                      //       "Clarifier –",
+                      //       style: AppTexts.tsmr.copyWith(
+                      //         color: AppColors.black[50],
+                      //       ),
+                      //     ),
+                      //     Text("20g", style: AppTexts.tsmr),
+                      //   ],
+                      // ),
+                      // Row(
+                      //   mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      //   children: [
+                      //     Text(
+                      //       "PH Chlorine -",
+                      //       style: AppTexts.tsmr.copyWith(
+                      //         color: AppColors.black[50],
+                      //       ),
+                      //     ),
+                      //     Text("12g", style: AppTexts.tsmr),
+                      //   ],
+                      // ),
                     ],
                   ),
                 ),

@@ -36,7 +36,7 @@ class _ChemicalCalculatorState extends State<ChemicalCalculator> {
         cyaCtrl.text.trim().isEmpty ||
         calciumHardnessCtrl.text.trim().isEmpty) {
       showSnackBar("Please fill all the fields");
-      return; 
+      return;
     }
     final payload = {
       "pH": double.parse(phCtrl.text.trim()),
@@ -49,7 +49,7 @@ class _ChemicalCalculatorState extends State<ChemicalCalculator> {
     final message = await calc.analyzeChemical(payload);
 
     if (message == "success") {
-      Get.to(() => ChemicalCalculatorAnalyse());
+      Get.to(() => ChemicalCalculatorAnalyse(result: calc.lastResult.value!));
     } else {
       showSnackBar(message);
     }

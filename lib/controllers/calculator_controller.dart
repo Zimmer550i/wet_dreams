@@ -7,6 +7,7 @@ import 'package:wet_dreams/services/api_service.dart';
 class CalculatorController extends GetxController {
   final api = ApiService();
   Rxn<PoolVolume> poolVolume = Rxn();
+  Rxn<ChemicalResult> lastResult = Rxn();
   RxList<ChemicalResult> results = RxList();
 
   Future<String> analyzeChemical(Map<String, double> payload) async {
@@ -19,6 +20,8 @@ class CalculatorController extends GetxController {
       final body = jsonDecode(response.body);
 
       if (response.statusCode == 200) {
+        lastResult.value = ChemicalResult.fromJson(body['data']);
+
         return "success";
       } else {
         return body['message'] ?? "Connection error!";
@@ -39,7 +42,7 @@ class CalculatorController extends GetxController {
 
       if (response.statusCode == 200) {
         poolVolume.value = PoolVolume.fromJson(body['data']);
-        
+
         return "success";
       } else {
         return body['message'] ?? "Connection error!";
