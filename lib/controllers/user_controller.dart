@@ -18,24 +18,6 @@ class UserController extends GetxController {
   RxBool isLoading = RxBool(false);
   Timer? _notificationTimer;
 
-  @override
-  void onInit() {
-    super.onInit();
-
-    // Listen to userInfo changes
-    ever<User?>(userInfo, (user) {
-      if (user != null) {
-        // Start fetching notifications periodically when userInfo is set
-        _startNotificationTimer();
-        // Also fetch immediately
-        _getNotifications();
-      } else {
-        // If userInfo becomes null, stop timer
-        _stopNotificationTimer();
-      }
-    });
-  }
-
   Future<String> getInfo() async {
     isLoading.value = true;
     try {

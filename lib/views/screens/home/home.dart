@@ -31,6 +31,7 @@ class _HomeState extends State<Home> {
   void initState() {
     super.initState();
     home.getServices();
+    user.refreshNotifications();
   }
 
   @override

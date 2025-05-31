@@ -27,7 +27,7 @@ class _AppState extends State<App> {
                 children: [
                   Home(key: PageStorageKey("home")),
                   Pool(key: PageStorageKey("pool")),
-                  Profile(),
+                  Profile(key: PageStorageKey("profile"),),
                 ],
               ),
             ),
@@ -37,13 +37,8 @@ class _AppState extends State<App> {
                 setState(() {
                   index = p0;
                 });
-                controller.animateToPage(
+                controller.jumpToPage(
                   index,
-                  duration: Duration(
-                    milliseconds:
-                        (controller.page! - index).abs().toInt() * 100,
-                  ),
-                  curve: Curves.ease,
                 );
               },
             ),
