@@ -53,7 +53,8 @@ class SharedPrefsService {
     final now = DateTime.now();
 
     // Check if the cache is present
-    if (cachedData != null && cachedTimestampStr != null && !override) {
+    bool cacheExist = cachedData != null && cachedTimestampStr != null;
+    if (!override && cacheExist) {
       final cachedTimestamp = DateTime.tryParse(cachedTimestampStr);
       if (cachedTimestamp != null) {
         final expiryDuration = _frequencyToDuration(frequency);

@@ -25,6 +25,7 @@ class Home extends StatefulWidget {
 
 class _HomeState extends State<Home> {
   final home = Get.find<HomeController>();
+  final user = Get.find<UserController>();
 
   @override
   void initState() {
@@ -61,34 +62,42 @@ class _HomeState extends State<Home> {
                   ],
                 ),
                 Spacer(),
-                GestureDetector(
-                  onTap: () => Get.to(() => Notifications()),
-                  child: Stack(
-                    clipBehavior: Clip.none,
-                    children: [
-                      Container(
-                        height: 40,
-                        width: 40,
-                        decoration: BoxDecoration(
-                          color: AppColors.blue.shade100,
-                          shape: BoxShape.circle,
-                        ),
-                        child: Center(child: CustomSvg(asset: AppIcons.bell)),
-                      ),
-                      Positioned(
-                        top: -5,
-                        right: -5,
-                        child: Container(
-                          height: 25,
-                          width: 25,
+                Obx(
+                  () => GestureDetector(
+                    onTap: () => Get.to(() => Notifications()),
+                    child: Stack(
+                      clipBehavior: Clip.none,
+                      children: [
+                        Container(
+                          height: 40,
+                          width: 40,
                           decoration: BoxDecoration(
+                            color: AppColors.blue.shade100,
                             shape: BoxShape.circle,
-                            color: AppColors.red,
                           ),
-                          child: Center(child: Text("2", style: AppTexts.tmdb)),
+                          child: Center(child: CustomSvg(asset: AppIcons.bell)),
                         ),
-                      ),
-                    ],
+                        if (user.unreadNotifications.value != 0)
+                          Positioned(
+                            top: -5,
+                            right: -5,
+                            child: Container(
+                              height: 25,
+                              width: 25,
+                              decoration: BoxDecoration(
+                                shape: BoxShape.circle,
+                                color: AppColors.red,
+                              ),
+                              child: Center(
+                                child: Text(
+                                  user.unreadNotifications.value.toString(),
+                                  style: AppTexts.tmdb,
+                                ),
+                              ),
+                            ),
+                          ),
+                      ],
+                    ),
                   ),
                 ),
               ],
@@ -108,102 +117,110 @@ class _HomeState extends State<Home> {
                   () =>
                       home.homeButtons.isEmpty
                           ? CustomLoading()
-                          : GridView(
-                            gridDelegate:
-                                SliverGridDelegateWithFixedCrossAxisCount(
-                                  crossAxisCount: 2,
-                                  childAspectRatio: 1.07,
-                                  mainAxisSpacing: 18,
-                                  crossAxisSpacing: 18,
-                                ),
-                            shrinkWrap: true,
-                            children: [
-                              ...home.homeButtons.map((e) {
-                                return GestureDetector(
-                                  onTap: () {
-                                    if (e.isPremium) {
-                                      final user = Get.find<UserController>();
+                          : Padding(
+                            padding: const EdgeInsets.only(bottom: 18.0),
+                            child: GridView(
+                              gridDelegate:
+                                  SliverGridDelegateWithFixedCrossAxisCount(
+                                    crossAxisCount: 2,
+                                    childAspectRatio: 1.07,
+                                    mainAxisSpacing: 18,
+                                    crossAxisSpacing: 18,
+                                  ),
+                              shrinkWrap: true,
+                              physics: NeverScrollableScrollPhysics(),
+                              children: [
+                                ...home.homeButtons.map((e) {
+                                  return GestureDetector(
+                                    onTap: () {
+                                      if (e.isPremium) {
+                                        final user = Get.find<UserController>();
 
-                                      if (user
-                                              .userInfo
-                                              .value!
-                                              .subscriptionStatus !=
-                                          "subscribed") {
-                                        // premiumFeature(context);
-                                        // return;
+                                        if (user
+                                                .userInfo
+                                                .value!
+                                                .subscriptionStatus !=
+                                            "subscribed") {
+                                          // premiumFeature(context);
+                                          // return;
+                                        }
                                       }
-                                    }
-                                    switch (e.type) {
-                                      case "service":
-                                        Get.to(
-                                          () => LinkCollectionScreen(
-                                            title: e.title,
-                                            serviceId: e.serviceId,
-                                          ),
-                                        );
-                                        break;
-                                      case "shop":
-                                        Get.to(
-                                          () => LinkCollectionScreen(
-                                            title: e.title,
-                                            serviceId: e.serviceId,
-                                            isShoping: true,
-                                          ),
-                                        );
-                                        break;
-                                      case "calculator":
-                                        Get.to(() => VolumeOfMyPool());
-                                        break;
-                                      case "query":
-                                        Get.to(() => ReportProblem());
-                                        break;
-                                      default:
-                                    }
-                                  },
-                                  child: Container(
-                                    decoration: BoxDecoration(
-                                      color: AppColors.blue,
-                                      borderRadius: BorderRadius.circular(8),
-                                    ),
-                                    child: Center(
-                                      child: Padding(
-                                        padding: const EdgeInsets.all(10),
-                                        child: Column(
-                                          mainAxisAlignment:
-                                              MainAxisAlignment.center,
-                                          children: [
-                                            CachedNetworkImage(
-                                              imageUrl:
-                                                  ApiService().baseUrl + e.icon,
-                                              height: 32,
-                                              width: 32,
+                                      switch (e.type) {
+                                        case "service":
+                                          Get.to(
+                                            () => LinkCollectionScreen(
+                                              title: e.title,
+                                              serviceId: e.serviceId,
                                             ),
-                                            const SizedBox(height: 16),
-                                            Text(
-                                              e.title,
-                                              textAlign: TextAlign.center,
-                                              style: AppTexts.txss.copyWith(
-                                                color: AppColors.black.shade400,
+                                          );
+                                          break;
+                                        case "shop":
+                                          Get.to(
+                                            () => LinkCollectionScreen(
+                                              title: e.title,
+                                              serviceId: e.serviceId,
+                                              isShoping: true,
+                                            ),
+                                          );
+                                          break;
+                                        case "calculator":
+                                          Get.to(() => VolumeOfMyPool());
+                                          break;
+                                        case "query":
+                                          Get.to(() => ReportProblem());
+                                          break;
+                                        default:
+                                      }
+                                    },
+                                    child: Container(
+                                      decoration: BoxDecoration(
+                                        color: AppColors.blue,
+                                        borderRadius: BorderRadius.circular(8),
+                                      ),
+                                      child: Center(
+                                        child: Padding(
+                                          padding: const EdgeInsets.all(10),
+                                          child: Column(
+                                            mainAxisAlignment:
+                                                MainAxisAlignment.center,
+                                            children: [
+                                              CachedNetworkImage(
+                                                imageUrl:
+                                                    ApiService().baseUrl +
+                                                    e.icon,
+                                                height: 32,
+                                                width: 32,
                                               ),
-                                            ),
-                                            const SizedBox(height: 4),
-                                            if (e.shortDescription != null)
+                                              const SizedBox(height: 16),
                                               Text(
-                                                e.shortDescription!,
+                                                e.title,
                                                 textAlign: TextAlign.center,
-                                                style: AppTexts.txsr.copyWith(
+                                                style: AppTexts.txss.copyWith(
                                                   color:
                                                       AppColors.black.shade400,
                                                 ),
                                               ),
-                                          ],
+                                              const SizedBox(height: 4),
+                                              if (e.shortDescription != null)
+                                                Text(
+                                                  e.shortDescription!,
+                                                  textAlign: TextAlign.center,
+                                                  style: AppTexts.txsr.copyWith(
+                                                    color:
+                                                        AppColors
+                                                            .black
+                                                            .shade400,
+                                                  ),
+                                                ),
+                                            ],
+                                          ),
                                         ),
                                       ),
                                     ),
-                                  ),
-                                );
-                              }),
-                            ],
+                                  );
+                                }),
+                              ],
+                            ),
                           ),
                 ),
               ),

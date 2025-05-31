@@ -13,12 +13,15 @@ class ApiService {
   final bool showAPICalls = true;
 
   late final String baseUrl;
+  int callCount = 0;
 
   ApiService() {
     baseUrl = inDevelopment ? devUrl : prodUrl;
   }
 
   void _logResponse(http.Response response, String method, Uri uri) {
+    callCount++;
+    debugPrint('🆔 $callCount');
     debugPrint('📥 [$method] Response from ${uri.toString()}');
     debugPrint('✅ Status Code: ${response.statusCode}');
     debugPrint('📦 Body: ${response.body}');

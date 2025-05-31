@@ -1,5 +1,8 @@
+import 'dart:async';
 import 'dart:convert';
+import 'dart:math';
 import 'package:get/get.dart';
+import 'package:wet_dreams/models/notification.dart';
 import 'package:wet_dreams/models/user.dart';
 import 'package:wet_dreams/services/api_service.dart';
 import 'package:wet_dreams/services/shared_prefs_service.dart';
@@ -8,8 +11,30 @@ class UserController extends GetxController {
   final userInfo = Rxn<User>();
   final api = ApiService();
   final RxnString privacyPolicy = RxnString();
+  final RxList<Notification> notifications = RxList();
+  final RxInt unreadNotifications = RxInt(0);
+  final notificationRefreshTime = Duration(minutes: 10);
 
   RxBool isLoading = RxBool(false);
+  Timer? _notificationTimer;
+
+  @override
+  void onInit() {
+    super.onInit();
+
+    // Listen to userInfo changes
+    ever<User?>(userInfo, (user) {
+      if (user != null) {
+        // Start fetching notifications periodically when userInfo is set
+        _startNotificationTimer();
+        // Also fetch immediately
+        _getNotifications();
+      } else {
+        // If userInfo becomes null, stop timer
+        _stopNotificationTimer();
+      }
+    });
+  }
 
   Future<String> getInfo() async {
     isLoading.value = true;
@@ -121,5 +146,94 @@ class UserController extends GetxController {
       isLoading.value = false;
       return "Unexpected error: ${e.toString()}";
     }
+  }
+
+  Future<String> _getNotifications() async {
+    try {
+      final response = await api.get(
+        "/api-apps/ViewAllNotification/",
+        authReq: true,
+      );
+      final body = jsonDecode(response.body);
+
+      if (response.statusCode == 200) {
+        notifications.clear();
+        int count = 0;
+
+        final data = body['notifications'];
+
+        for (var i in data) {
+          if (!i["is_read"]) {
+            count++;
+          }
+          notifications.add(Notification.fromJson(i));
+        }
+
+        unreadNotifications.value = count;
+
+        return "success";
+      } else {
+        return body['message'] ?? "Connection Error";
+      }
+    } catch (e) {
+      return "Unexpected error: ${e.toString()}";
+    }
+  }
+
+  Future<String> readNotifications({String? id}) async {
+    try {
+      Map<String, dynamic> payload = {};
+
+      if (id != null) {
+        payload.addAll({"notification_id": id});
+      }
+
+      final response = await api.post(
+        "/api-apps/MarkNotificationAsRead/",
+        payload,
+        authReq: true,
+      );
+      final body = jsonDecode(response.body);
+
+      if (response.statusCode == 200) {
+        if (id == null) {
+          unreadNotifications.value = 0;
+        } else {
+          unreadNotifications.value = max(unreadNotifications.value - 1, 0);
+        }
+
+        return "success";
+      } else {
+        return body['message'] ?? "Connection Error";
+      }
+    } catch (e) {
+      return "Unexpected error: ${e.toString()}";
+    }
+  }
+
+  void _startNotificationTimer() {
+    _notificationTimer?.cancel();
+
+    _notificationTimer = Timer.periodic(notificationRefreshTime, (timer) {
+      _getNotifications();
+    });
+  }
+
+  void _stopNotificationTimer() {
+    _notificationTimer?.cancel();
+    _notificationTimer = null;
+  }
+
+  Future<String> refreshNotifications() async {
+    _stopNotificationTimer();
+    final result = await _getNotifications();
+    _startNotificationTimer();
+    return result;
+  }
+
+  @override
+  void onClose() {
+    _stopNotificationTimer();
+    super.onClose();
   }
 }
