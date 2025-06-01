@@ -33,7 +33,6 @@ class _NotificationsState extends State<Notifications> {
         });
   }
 
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -44,12 +43,13 @@ class _NotificationsState extends State<Notifications> {
             padding: EdgeInsets.symmetric(horizontal: 24),
             child: Obx(
               () => Column(
+                spacing: 16,
                 children: [
-                  const SizedBox(height: 24),
+                  const SizedBox(height: 0),
                   for (var i in user.notifications)
                     GestureDetector(
                       onTap: () async {
-                        if (i.actionUrl!.isNotEmpty) {
+                        if (i.actionUrl != null && i.actionUrl!.isNotEmpty) {
                           final url = Uri.parse(i.actionUrl!);
                           if (await canLaunchUrl(url)) {
                             launchUrl(url);
@@ -57,7 +57,6 @@ class _NotificationsState extends State<Notifications> {
                         }
                       },
                       child: Container(
-                        padding: EdgeInsets.all(8),
                         decoration: BoxDecoration(
                           color: i.isRead ? null : AppColors.blue,
                           border:

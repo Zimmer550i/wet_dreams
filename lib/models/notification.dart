@@ -1,6 +1,6 @@
 class Notification {
-  final int id;
-  final int user;
+  final String id;
+  // final String user;
   final String type;
   final String message;
   final bool isRead;
@@ -9,7 +9,7 @@ class Notification {
 
   Notification({
     required this.id,
-    required this.user,
+    // required this.user,
     required this.type,
     required this.message,
     required this.isRead,
@@ -19,8 +19,8 @@ class Notification {
 
   factory Notification.fromJson(Map<String, dynamic> json) {
     return Notification(
-      id: json['id'],
-      user: json['user'],
+      id: json['notification_id'],
+      // user: json['user'],
       type: json['type'],
       message: json['message'],
       isRead: json['is_read'],
@@ -32,7 +32,7 @@ class Notification {
   Map<String, dynamic> toJson() {
     return {
       'id': id,
-      'user': user,
+      // 'user': user,
       'type': type,
       'message': message,
       'is_read': isRead,

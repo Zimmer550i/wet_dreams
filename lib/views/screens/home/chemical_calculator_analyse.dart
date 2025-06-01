@@ -21,10 +21,10 @@ class ChemicalCalculatorAnalyse extends StatelessWidget {
               children: [
                 const SizedBox(height: 24),
                 poolInformation(result.createdAt, [
-                  result.pH,
-                  result.chlorine,
-                  result.alkalinity,
-                  result.cya,
+                  result.inputValues.pH,
+                  result.inputValues.chlorine,
+                  result.inputValues.alkalinity,
+                  result.inputValues.cya,
                 ]),
                 const SizedBox(height: 8),
                 Container(
@@ -36,19 +36,20 @@ class ChemicalCalculatorAnalyse extends StatelessWidget {
                   child: Column(
                     spacing: 12,
                     children: [
-                      Text(result.resultSummary, style: AppTexts.tsmr),
-                      // Row(
-                      //   mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      //   children: [
-                      //     Text(
-                      //       "PH -",
-                      //       style: AppTexts.tsmr.copyWith(
-                      //         color: AppColors.black[50],
-                      //       ),
-                      //     ),
-                      //     Text("100g", style: AppTexts.tsmr),
-                      //   ],
-                      // ),
+                      // Text(result.resultSummary, style: AppTexts.tsmr),
+                      for (var i in result.adjustments.entries)
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Text(
+                              i.key,
+                              style: AppTexts.tsmr.copyWith(
+                                color: AppColors.black[50],
+                              ),
+                            ),
+                            Text(i.value.toString(), style: AppTexts.tsmr),
+                          ],
+                        ),
                       // Row(
                       //   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       //   children: [
@@ -156,7 +157,7 @@ class ChemicalCalculatorAnalyse extends StatelessWidget {
     );
   }
 
-  Widget poolInformation(DateTime date, List<double> values) {
+  Widget poolInformation(DateTime date, List<String> values) {
     return Padding(
       padding: const EdgeInsets.only(bottom: 16),
       child: Container(

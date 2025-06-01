@@ -8,6 +8,7 @@ import 'package:wet_dreams/utils/app_colors.dart';
 import 'package:wet_dreams/utils/app_icons.dart';
 import 'package:wet_dreams/utils/app_texts.dart';
 import 'package:wet_dreams/utils/custom_svg.dart';
+import 'package:wet_dreams/utils/show_snackbar.dart';
 import 'package:wet_dreams/views/base/custom_button.dart';
 import 'package:wet_dreams/views/base/custom_loading.dart';
 import 'package:wet_dreams/views/screens/home/report_problem.dart';
@@ -30,8 +31,12 @@ class _HomeState extends State<Home> {
   @override
   void initState() {
     super.initState();
-    home.getServices();
-    user.refreshNotifications();
+    home.getServices().then((val) {
+      if (val != "success") {
+        showSnackBar(val);
+      }
+      user.refreshNotifications();
+    });
   }
 
   @override

@@ -155,25 +155,25 @@ class _PoolState extends State<Pool> {
                       mainAxisSize: MainAxisSize.max,
                       children: [
                         Text(
-                          "PH: ${result.pH}",
+                          "PH: ${result.inputValues.pH}",
                           style: AppTexts.txsr.copyWith(
                             color: AppColors.black[200],
                           ),
                         ),
                         Text(
-                          "Cl: ${result.chlorine}",
+                          "Cl: ${result.inputValues.chlorine}",
                           style: AppTexts.txsr.copyWith(
                             color: AppColors.black[200],
                           ),
                         ),
                         Text(
-                          "Alc: ${result.alkalinity}",
+                          "Alc: ${result.inputValues.alkalinity}",
                           style: AppTexts.txsr.copyWith(
                             color: AppColors.black[200],
                           ),
                         ),
                         Text(
-                          "CYA: ${result.cya}",
+                          "CYA: ${result.inputValues.cya}",
                           style: AppTexts.txsr.copyWith(
                             color: AppColors.black[200],
                           ),
