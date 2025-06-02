@@ -78,6 +78,26 @@ class CalculatorController extends GetxController {
     }
   }
 
+  Future<String> deleteChemicalResult(String id) async {
+    try {
+      final response = await api.delete(
+        "/api-apps/pool_volume_delete/$id",
+        authReq: true,
+      );
+      final body = jsonDecode(response.body);
+
+      if (response.statusCode == 200) {
+        // TODO: Delete
+
+        return "success";
+      } else {
+        return body['message'] ?? "Connection error!";
+      }
+    } catch (e) {
+      return "Unexpected error: ${e.toString()}";
+    }
+  }
+
   Future<String> getVolume() async {
     try {
       final response = await api.get("/api-apps/pool_volumes/", authReq: true);

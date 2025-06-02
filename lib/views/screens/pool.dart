@@ -104,7 +104,7 @@ class _PoolState extends State<Pool> {
                 ),
               ],
             ),
-            const SizedBox(height: 50),
+            const SizedBox(height: 16),
             isLoading
                 ? CustomLoading()
                 : Expanded(
@@ -112,6 +112,7 @@ class _PoolState extends State<Pool> {
                     child: Obx(
                       () => Column(
                         children: [
+                          const SizedBox(height: 34,),
                           for (var i in calc.results)
                             poolInformation(i),
                         ],
