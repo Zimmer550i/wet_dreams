@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:get/get_navigation/src/extension_navigation.dart';
-import 'package:get/instance_manager.dart';
+import 'package:get/get.dart';
 import 'package:wet_dreams/controllers/auth_controller.dart';
 import 'package:wet_dreams/utils/app_colors.dart';
 import 'package:wet_dreams/utils/app_icons.dart';
@@ -89,10 +88,10 @@ class _SignupState extends State<Signup> {
                           ),
                         ),
                         const SizedBox(height: 30),
-                        Text("Sign Up", style: AppTexts.dsmb),
+                        Text("sign_up".tr, style: AppTexts.dsmb),
                         const SizedBox(height: 3),
                         Text(
-                          "Please sign up to get started",
+                          "please_sign_up_to_get_started".tr,
                           style: AppTexts.tmdr,
                         ),
                       ],
@@ -112,33 +111,33 @@ class _SignupState extends State<Signup> {
                 child: Column(
                   children: [
                     CustomTextField(
-                      title: "Name",
-                      hintText: "Enter your name",
+                      title: "name".tr,
+                      hintText: "enter_your_name".tr,
                       controller: nameCtrl,
                     ),
                     const SizedBox(height: 24),
                     CustomTextField(
-                      title: "Email",
-                      hintText: "Enter your email address",
+                      title: "email".tr,
+                      hintText: "enter_your_email_address".tr,
                       controller: emailCtrl,
                     ),
                     const SizedBox(height: 24),
                     CustomTextField(
-                      title: "Password",
-                      hintText: "Create a password",
+                      title: "password".tr,
+                      hintText: "create_a_password".tr,
                       isPassword: true,
                       controller: passCtrl,
                     ),
                     const SizedBox(height: 24),
                     CustomTextField(
-                      title: "Re-Type Password",
-                      hintText: "Re-enter your password",
+                      title: "re_type_password".tr,
+                      hintText: "re_enter_your_password".tr,
                       isPassword: true,
                       controller: conPassCtrl,
                     ),
                     const SizedBox(height: 30),
                     CustomButton(
-                      text: "SIGN UP",
+                      text: "sign_up".tr,
                       onTap: handleSignup,
                       isLoading: isLoading,
                     ),

@@ -32,7 +32,7 @@ class _BuyLinkScreenState extends State<BuyLinkScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: CustomAppBar(title: ""),
+      appBar: CustomAppBar(title: "buy_link".tr),
       body: SingleChildScrollView(
         child: SafeArea(
           child: Padding(
@@ -87,7 +87,7 @@ class _BuyLinkScreenState extends State<BuyLinkScreen> {
                             ),
                             const SizedBox(height: 20),
                             CustomButton(
-                              text: "   Buy Product",
+                              text: "buy_product".tr,
                               trailing: AppIcons.forward,
                               iconSize: 20,
                               height: 40,
@@ -106,7 +106,7 @@ class _BuyLinkScreenState extends State<BuyLinkScreen> {
                                       mode: LaunchMode.externalApplication,
                                     );
                                   } else {
-                                    showSnackBar("Could not launch URL");
+                                    showSnackBar("could_not_launch_url".tr);
                                   }
                                 }
                               },

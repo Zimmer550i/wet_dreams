@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:get/get_state_manager/get_state_manager.dart';
-import 'package:get/instance_manager.dart';
+import 'package:get/get.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:wet_dreams/controllers/home_controller.dart';
 import 'package:wet_dreams/services/api_service.dart';
@@ -32,7 +31,7 @@ class _VideoLinkScreenState extends State<VideoLinkScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: CustomAppBar(title: ""),
+      appBar: CustomAppBar(title: "video_link".tr),
       body: SingleChildScrollView(
         child: SafeArea(
           child: Padding(
@@ -76,14 +75,14 @@ class _VideoLinkScreenState extends State<VideoLinkScreen> {
                                 final Uri url = Uri.parse(
                                   home.item.value!.externalSourceUrl!,
                                 );
-                                if (await canLaunchUrl(url)) {
-                                  await launchUrl(
-                                    url,
-                                    mode: LaunchMode.externalApplication,
-                                  );
-                                } else {
-                                  showSnackBar("Could not launch URL");
-                                }
+                              if (await canLaunchUrl(url)) {
+                                await launchUrl(
+                                  url,
+                                  mode: LaunchMode.externalApplication,
+                                );
+                              } else {
+                                showSnackBar("could_not_launch_url".tr);
+                              }
                               }
                             },
                             child: Row(

@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:get/get_core/get_core.dart';
-import 'package:get/get_navigation/get_navigation.dart';
+import 'package:get/get.dart';
 import 'package:wet_dreams/utils/app_icons.dart';
 import 'package:wet_dreams/views/base/subscription_widget.dart';
 import 'package:wet_dreams/views/base/custom_app_bar.dart';
@@ -12,7 +11,7 @@ class Subscription extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: CustomAppBar(title: "Subscribe To Premium"),
+      appBar: CustomAppBar(title: "subscribe_to_premium".tr),
       body: SingleChildScrollView(
         child: SafeArea(
           child: Padding(
@@ -23,30 +22,33 @@ class Subscription extends StatelessWidget {
                 const SizedBox(height: 0),
                 SubscriptionWidget(
                   icon: AppIcons.basic,
-                  title: "Basic Plan",
+                  title: "basic_plan".tr,
                   isPurchased: true,
-                  subTitle: "Free",
+                  subTitle: "free".tr,
                   pros: [
-                    "Issues Frequent",
-                    "Maintenance Newspapar",
-                    "But Products",
-                    "Problem In My Pool",
+                    "issues_frequent".tr,
+                    "maintenance_newspaper".tr,
+                    "but_products".tr,
+                    "problem_in_my_pool".tr,
                   ],
-                  cons: ["Calculator Of Chemicals", "Tricks And Secrets"],
+                  cons: [
+                    "calculator_of_chemicals".tr,
+                    "tricks_and_secrets".tr,
+                  ],
                   onTap: () => Get.to(() => PaymentMethod()),
                 ),
                 SubscriptionWidget(
                   isPremium: true,
                   icon: AppIcons.premium,
-                  title: "Premium Plan",
-                  subTitle: "\$4.9 /month",
+                  title: "premium_plan".tr,
+                  subTitle: "price_per_month".tr,
                   pros: [
-                    "Issues Frequent",
-                    "Maintenance Newspapar",
-                    "But Products",
-                    "Problem In My Pool",
-                    "Calculator Of Chemicals",
-                    "Tricks And Secrets",
+                    "issues_frequent".tr,
+                    "maintenance_newspaper".tr,
+                    "but_products".tr,
+                    "problem_in_my_pool".tr,
+                    "calculator_of_chemicals".tr,
+                    "tricks_and_secrets".tr,
                   ],
                   onTap: () => Get.to(() => PaymentMethod()),
                 ),

@@ -25,7 +25,7 @@ class _NotificationsState extends State<Notifications> {
     user
         .refreshNotifications()
         .onError((e, j) {
-          showSnackBar("Unexpected Error: $e");
+          showSnackBar("unexpected_error".tr + e.toString());
           return '';
         })
         .then((val) {
@@ -36,7 +36,7 @@ class _NotificationsState extends State<Notifications> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: CustomAppBar(title: "Notifications"),
+      appBar: CustomAppBar(title: "notifications".tr),
       body: SingleChildScrollView(
         child: SafeArea(
           child: Padding(
@@ -116,7 +116,7 @@ class _NotificationsState extends State<Notifications> {
                                   return [
                                     PopupMenuItem(
                                       child: Text(
-                                        "Delete",
+                                        "delete".tr,
                                         style: AppTexts.tsmm,
                                       ),
                                     ),

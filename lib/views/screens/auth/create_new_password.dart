@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:get/get_navigation/src/extension_navigation.dart';
-import 'package:get/instance_manager.dart';
+import 'package:get/get.dart';
 import 'package:wet_dreams/controllers/auth_controller.dart';
 import 'package:wet_dreams/utils/app_colors.dart';
 import 'package:wet_dreams/utils/app_icons.dart';
@@ -79,10 +78,10 @@ class _CreateNewPasswordState extends State<CreateNewPassword> {
                           ),
                         ),
                         const SizedBox(height: 30),
-                        Text("Create New Password", style: AppTexts.dsmb),
+                        Text("create_new_password".tr, style: AppTexts.dsmb),
                         const SizedBox(height: 3),
                         Text(
-                          "Please sign up to get started",
+                          "please_sign_up_to_get_started".tr,
                           textAlign: TextAlign.center,
                           style: AppTexts.tmdr,
                         ),
@@ -103,21 +102,21 @@ class _CreateNewPasswordState extends State<CreateNewPassword> {
                 child: Column(
                   children: [
                     CustomTextField(
-                      title: "Password",
-                      hintText: "Create a password",
+                      title: "password".tr,
+                      hintText: "create_a_password".tr,
                       isPassword: true,
                       controller: passCtrl,
                     ),
                     const SizedBox(height: 24),
                     CustomTextField(
-                      title: "Re-Type Password",
-                      hintText: "Re-enter your password",
+                      title: "re_type_password".tr,
+                      hintText: "re_enter_your_password".tr,
                       isPassword: true,
                       controller: conPassCtrl,
                     ),
                     const SizedBox(height: 30),
                     CustomButton(
-                      text: "CONFIRM",
+                      text: "confirm".tr,
                       onTap: handleCreatePassword,
                       isLoading: isLoading,
                     ),

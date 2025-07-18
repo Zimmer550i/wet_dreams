@@ -62,11 +62,11 @@ class _PoolState extends State<Pool> {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                      "Volume (M3) WET App 00",
+                      "volume_m3_wet_app".tr,
                       style: AppTexts.tsmr.copyWith(color: AppColors.black[50]),
                     ),
                     Text(
-                      "(1m3 = 1000 Liters)",
+                      "volume_info".tr,
                       style: AppTexts.txsr.copyWith(
                         color: AppColors.black[200],
                       ),
@@ -89,7 +89,7 @@ class _PoolState extends State<Pool> {
             Row(
               children: [
                 Text(
-                  "Salt Chlorinator:",
+                  "${"salt_chlorinator".tr}:",
                   style: AppTexts.tsmr.copyWith(color: AppColors.black[50]),
                 ),
                 Spacer(),
@@ -100,7 +100,7 @@ class _PoolState extends State<Pool> {
                     color: AppColors.black.shade400,
                     borderRadius: BorderRadius.circular(4),
                   ),
-                  child: Center(child: Text("But", style: AppTexts.txsr)),
+                  child: Center(child: Text("chlorinator_value".tr, style: AppTexts.txsr)),
                 ),
               ],
             ),
@@ -156,25 +156,25 @@ class _PoolState extends State<Pool> {
                       mainAxisSize: MainAxisSize.max,
                       children: [
                         Text(
-                          "PH: ${result.inputValues.pH}",
+                          "${"ph".tr}: ${result.inputValues.pH}",
                           style: AppTexts.txsr.copyWith(
                             color: AppColors.black[200],
                           ),
                         ),
                         Text(
-                          "Cl: ${result.inputValues.chlorine}",
+                          "${"cl".tr}: ${result.inputValues.chlorine}",
                           style: AppTexts.txsr.copyWith(
                             color: AppColors.black[200],
                           ),
                         ),
                         Text(
-                          "Alc: ${result.inputValues.alkalinity}",
+                          "${"alc".tr}: ${result.inputValues.alkalinity}",
                           style: AppTexts.txsr.copyWith(
                             color: AppColors.black[200],
                           ),
                         ),
                         Text(
-                          "CYA: ${result.inputValues.cya}",
+                          "${"cya".tr}: ${result.inputValues.cya}",
                           style: AppTexts.txsr.copyWith(
                             color: AppColors.black[200],
                           ),
@@ -200,7 +200,7 @@ class _PoolState extends State<Pool> {
                   color: AppColors.black.shade400,
                   itemBuilder: (context) {
                     return [
-                      PopupMenuItem(child: Text("Delete", style: AppTexts.tsmm)),
+                      PopupMenuItem(child: Text("delete".tr, style: AppTexts.tsmm)),
                     ];
                   },
                 ),

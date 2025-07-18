@@ -80,10 +80,10 @@ class _LoginState extends State<Login> {
                       children: [
                         const SizedBox(height: 40, width: double.infinity),
                         const SizedBox(height: 30),
-                        Text("Log In", style: AppTexts.dsmb),
+                        Text("log_in".tr, style: AppTexts.dsmb),
                         const SizedBox(height: 3),
                         Text(
-                          "Please sign in to your existing account",
+                          "please_sign_in_to_your_existing_account".tr,
                           style: AppTexts.tmdr,
                         ),
                       ],
@@ -103,14 +103,14 @@ class _LoginState extends State<Login> {
                 child: Column(
                   children: [
                     CustomTextField(
-                      title: "Email",
-                      hintText: "Enter email",
+                      title: "email".tr,
+                      hintText: "enter_email".tr,
                       controller: emailCtrl,
                     ),
                     const SizedBox(height: 24),
                     CustomTextField(
-                      title: "Password",
-                      hintText: "Enter Password",
+                      title: "password".tr,
+                      hintText: "enter_password".tr,
                       isPassword: true,
                       controller: passCtrl,
                     ),
@@ -140,7 +140,7 @@ class _LoginState extends State<Login> {
                           },
                           behavior: HitTestBehavior.translucent,
                           child: Text(
-                            "Remember me",
+                            "remember_me".tr,
                             style: AppTexts.tsmr.copyWith(
                               color: AppColors.black.shade200,
                             ),
@@ -154,7 +154,7 @@ class _LoginState extends State<Login> {
                               ),
                           behavior: HitTestBehavior.translucent,
                           child: Text(
-                            " Forgot Password",
+                            "forgot_password".tr,
                             style: AppTexts.tsmr.copyWith(
                               color: AppColors.blue.shade600,
                             ),
@@ -164,7 +164,7 @@ class _LoginState extends State<Login> {
                     ),
                     const SizedBox(height: 30),
                     CustomButton(
-                      text: "LOGIN",
+                      text: "login".tr,
                       onTap: handleLogin,
                       isLoading: isLoading,
                     ),
@@ -172,11 +172,11 @@ class _LoginState extends State<Login> {
                     Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
-                        Text("Don’t have an account?", style: AppTexts.tmdr),
+                        Text("dont_have_an_account".tr, style: AppTexts.tmdr),
                         GestureDetector(
                           onTap: () => Get.to(() => Signup()),
                           child: Text(
-                            " SIGN UP ",
+                            "sign_up".tr,
                             style: AppTexts.tmdb.copyWith(
                               color: AppColors.blue.shade600,
                             ),

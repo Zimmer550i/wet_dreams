@@ -25,9 +25,6 @@ class _ReportProblemState extends State<ReportProblem> {
   @override
   void initState() {
     super.initState();
-    nameCtrl.text = "Wasiul Islam";
-    emailCtrl.text = "wasiul0491@gmail.com";
-    phoneCtrl.text = "01823456146";
   }
 
   void callBack() async {
@@ -56,7 +53,7 @@ class _ReportProblemState extends State<ReportProblem> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: CustomAppBar(title: "Report A Problem"),
+      appBar: CustomAppBar(title: "report_problem".tr),
       body: SingleChildScrollView(
         child: SafeArea(
           child: Padding(
@@ -64,24 +61,23 @@ class _ReportProblemState extends State<ReportProblem> {
             child: Column(
               children: [
                 const SizedBox(height: 20),
-                CustomTextField(title: "Name", radius: 8, controller: nameCtrl),
+                CustomTextField(title: "name".tr, radius: 8, controller: nameCtrl),
                 const SizedBox(height: 16),
                 CustomTextField(
-                  title: "Email",
+                  title: "email".tr,
                   radius: 8,
                   controller: emailCtrl,
                 ),
                 const SizedBox(height: 16),
                 CustomTextField(
-                  title: "Phone",
+                  title: "phone".tr,
                   radius: 8,
                   controller: phoneCtrl,
                 ),
                 const SizedBox(height: 16),
                 CustomTextField(
-                  title: "Explain your problem",
-                  hintText:
-                      "Explain your problem and be as specific as possible",
+                  title: "explain_your_problem".tr,
+                  hintText: "explain_your_problem_hint".tr,
                   radius: 8,
                   lines: 8,
                   controller: explainCtrl,
@@ -103,7 +99,7 @@ class _ReportProblemState extends State<ReportProblem> {
                             ),
                           )
                           : CustomButton(
-                            text: "SEND INQUIRY",
+                            text: "send_inquiry".tr,
                             onTap: callBack,
                             fontSize: 12,
                             padding: 12,

@@ -58,7 +58,7 @@ class _ChemicalCalculatorState extends State<ChemicalCalculator> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: CustomAppBar(title: "Chemical Calculator"),
+      appBar: CustomAppBar(title: "chemical_calculator".tr),
       body: SingleChildScrollView(
         child: SafeArea(
           child: Padding(
@@ -69,7 +69,7 @@ class _ChemicalCalculatorState extends State<ChemicalCalculator> {
                 Row(
                   children: [
                     Text(
-                      "PH (7.2-7.5) –",
+                      "ph_label".tr,
                       style: AppTexts.tsmr.copyWith(color: AppColors.black[50]),
                     ),
                     Spacer(),
@@ -86,7 +86,7 @@ class _ChemicalCalculatorState extends State<ChemicalCalculator> {
                 Row(
                   children: [
                     Text(
-                      "Free Chlorine (1.0 – 3.0 Ppm)",
+                      "free_chlorine_label".tr,
                       style: AppTexts.tsmr.copyWith(color: AppColors.black[50]),
                     ),
                     Spacer(),
@@ -103,7 +103,7 @@ class _ChemicalCalculatorState extends State<ChemicalCalculator> {
                 Row(
                   children: [
                     Text(
-                      "Alkalinity (100-120ppm)",
+                      "alkalinity_label".tr,
                       style: AppTexts.tsmr.copyWith(color: AppColors.black[50]),
                     ),
                     Spacer(),
@@ -120,7 +120,7 @@ class _ChemicalCalculatorState extends State<ChemicalCalculator> {
                 Row(
                   children: [
                     Text(
-                      "Iscocyanuric (CYA) (10-30ppm)",
+                      "cya_label".tr,
                       style: AppTexts.tsmr.copyWith(color: AppColors.black[50]),
                     ),
                     Spacer(),
@@ -137,7 +137,7 @@ class _ChemicalCalculatorState extends State<ChemicalCalculator> {
                 Row(
                   children: [
                     Text(
-                      "Calcium Hardness (100-150ppm)",
+                      "calcium_hardness_label".tr,
                       style: AppTexts.tsmr.copyWith(color: AppColors.black[50]),
                     ),
                     Spacer(),
@@ -156,7 +156,7 @@ class _ChemicalCalculatorState extends State<ChemicalCalculator> {
                 isLoading
                     ? CustomLoading()
                     : CustomButton(
-                      text: "ANALYSE",
+                      text: "analyse".tr,
                       fontSize: 12,
                       padding: 16,
                       radius: 8,

@@ -54,7 +54,7 @@ class Auth extends StatelessWidget {
               child: Column(
                 children: [
                   Text(
-                    "Welcome To Your\nSwimming Dreams",
+                    "welcome_to_your_swimming_dreams".tr,
                     textAlign: TextAlign.center,
                     style: AppTexts.dsmb.copyWith(
                       color: AppColors.blue.shade600,
@@ -62,7 +62,7 @@ class Auth extends StatelessWidget {
                   ),
                   const SizedBox(height: 28),
                   CustomButton(
-                    text: "Login",
+                    text: "login".tr,
                     isSecondary: true,
                     fontSize: 18,
                     onTap: () {
@@ -71,7 +71,7 @@ class Auth extends StatelessWidget {
                   ),
                   const SizedBox(height: 12),
                   CustomButton(
-                    text: "Create Account",
+                    text: "create_account".tr,
                     fontSize: 18,
                     onTap: () => Get.to(() => Signup()),
                   ),

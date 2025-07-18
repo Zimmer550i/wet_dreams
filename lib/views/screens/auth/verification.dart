@@ -70,7 +70,7 @@ class _VerificationState extends State<Verification> {
     final message = await auth.sendOtp(widget.email);
 
     if (message == "success") {
-      showSnackBar("Otp sent to ${widget.email}", isError: false);
+      showSnackBar("otp_sent_to".tr + widget.email, isError: false);
     } else {
       if (_timer != null && _timer!.isActive) {
         _timer!.cancel();
@@ -138,10 +138,10 @@ class _VerificationState extends State<Verification> {
                           ),
                         ),
                         const SizedBox(height: 30),
-                        Text("Verification", style: AppTexts.dsmb),
+                        Text("verification".tr, style: AppTexts.dsmb),
                         const SizedBox(height: 3),
                         Text(
-                          "We have sent a code to your email",
+                          "we_have_sent_a_code_to_your_email".tr,
                           style: AppTexts.tmdr,
                         ),
                         const SizedBox(height: 3),
@@ -165,7 +165,7 @@ class _VerificationState extends State<Verification> {
                     Row(
                       children: [
                         Text(
-                          "Code",
+                          "code".tr,
                           style: AppTexts.tsmr.copyWith(
                             color: AppColors.black[50],
                           ),
@@ -175,7 +175,7 @@ class _VerificationState extends State<Verification> {
                           onTap: resendOtp,
                           behavior: HitTestBehavior.translucent,
                           child: Text(
-                            " Resend ",
+                            "resend".tr,
                             style:
                                 (_timer != null && _timer!.isActive)
                                     ? AppTexts.tsmr.copyWith(
@@ -228,7 +228,7 @@ class _VerificationState extends State<Verification> {
                     ),
                     const SizedBox(height: 30),
                     CustomButton(
-                      text: "VERIFY",
+                      text: "verify".tr,
                       onTap: handleVerification,
                       isLoading: isLoading,
                     ),

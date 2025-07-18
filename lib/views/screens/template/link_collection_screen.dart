@@ -83,7 +83,7 @@ class _LinkCollectionScreenState extends State<LinkCollectionScreen> {
                                                 LaunchMode.externalApplication,
                                           );
                                         } else {
-                                          showSnackBar("Could not launch URL");
+                                          showSnackBar("could_not_launch_url".tr);
                                         }
                                       },
                                       child: Container(

@@ -23,6 +23,7 @@ class AppConstants{
     LanguageModel( languageName: 'English', countryCode: 'US', languageCode: 'en'),
     LanguageModel( languageName: 'عربى', countryCode: 'SA', languageCode: 'ar'),
     LanguageModel( languageName: 'Spanish', countryCode: 'ES', languageCode: 'es'),
+    LanguageModel( languageName: 'Bangla', countryCode: 'BD', languageCode: 'bn'),
   ];
 
 }

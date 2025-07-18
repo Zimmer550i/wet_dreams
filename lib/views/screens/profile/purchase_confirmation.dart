@@ -20,18 +20,18 @@ class PurchaseConfirmation extends StatelessWidget {
             CustomSvg(asset: "assets/icons/confetti.svg"),
             const SizedBox(height: 24),
             Text(
-              "Congratulations!",
+              "congratulations".tr,
               style: AppTexts.dxsm.copyWith(color: AppColors.black[50]),
             ),
             const SizedBox(height: 24),
             Text(
-              "You have successfully purchased the Package. Now you can enjoy it over offline from my music tab, anytime anywhere.",
+              "purchase_success_message".tr,
               textAlign: TextAlign.center,
               style: AppTexts.tsmr.copyWith(color: AppColors.black[50]),
             ),
             const SizedBox(height: 24),
             CustomButton(
-              text: "Back To Pofile",
+              text: "back_to_profile".tr,
               width: null,
               onTap:
                   () => Get.until((route) => Get.currentRoute == AppRoutes.app),

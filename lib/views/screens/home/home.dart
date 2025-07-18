@@ -53,7 +53,7 @@ class _HomeState extends State<Home> {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                      "WELCOME TO WET",
+                      "welcome_to_wet".tr,
                       style: TextStyle(
                         fontVariations: [FontVariation("wght", 700)],
                         fontSize: 12,
@@ -62,7 +62,7 @@ class _HomeState extends State<Home> {
                     ),
                     const SizedBox(height: 4),
                     Text(
-                      "Swimming Pool Office",
+                      "swimming_pool_office".tr,
                       style: AppTexts.tsmm.copyWith(color: AppColors.black[50]),
                     ),
                   ],
@@ -112,7 +112,7 @@ class _HomeState extends State<Home> {
             Align(
               alignment: Alignment.centerLeft,
               child: Text(
-                "Hey Man, Good Afternoon!",
+                "greeting_message".tr,
                 style: AppTexts.tmdb.copyWith(color: AppColors.black[50]),
               ),
             ),
@@ -255,12 +255,12 @@ class _HomeState extends State<Home> {
               children: [
                 const SizedBox(height: 75),
                 Text(
-                  "You have encountered a Premium Feature",
+                  "premium_feature_encountered".tr,
                   style: AppTexts.tmdr.copyWith(color: AppColors.black[100]),
                 ),
                 const SizedBox(height: 4),
                 Text(
-                  "Upgrade now?",
+                  "upgrade_now".tr,
                   style: AppTexts.txls.copyWith(color: AppColors.black[50]),
                 ),
                 const SizedBox(height: 20),
@@ -269,7 +269,7 @@ class _HomeState extends State<Home> {
                     const SizedBox(width: 40),
                     Expanded(
                       child: CustomButton(
-                        text: "Not now",
+                        text: "not_now".tr,
                         isSecondary: true,
                         onTap: () {
                           Get.back();
@@ -279,7 +279,7 @@ class _HomeState extends State<Home> {
                     const SizedBox(width: 18),
                     Expanded(
                       child: CustomButton(
-                        text: "Upgrade",
+                        text: "upgrade".tr,
                         onTap: () {
                           Get.back();
                           Get.to(() => Subscription());

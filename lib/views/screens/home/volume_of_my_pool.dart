@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:get/instance_manager.dart';
-import 'package:get/route_manager.dart';
+import 'package:get/get.dart';
 import 'package:wet_dreams/controllers/calculator_controller.dart';
 import 'package:wet_dreams/models/pool_volume.dart';
 import 'package:wet_dreams/utils/app_colors.dart';
@@ -25,7 +24,7 @@ class _VolumeOfMyPoolState extends State<VolumeOfMyPool> {
     4,
     (index) => TextEditingController(),
   );
-  final List<String> shapes = ["Rectangular", "Circular", "Oval"];
+  final List<String> shapes = ["rectangular".tr, "circular".tr, "oval".tr];
   final List<List<String>> fields = [
     ["length", "width", "min_depth", "max_depth"],
     ["diameter", "min_depth", "max_depth"],
@@ -149,7 +148,7 @@ class _VolumeOfMyPoolState extends State<VolumeOfMyPool> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: CustomAppBar(title: "Volume Of My Pool"),
+      appBar: CustomAppBar(title: "volume_of_my_pool".tr),
       body: Align(
         alignment: Alignment.topCenter,
         child: SingleChildScrollView(
@@ -163,7 +162,7 @@ class _VolumeOfMyPoolState extends State<VolumeOfMyPool> {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                      "Shape:",
+                      "${"shape".tr}:",
                       style: AppTexts.tsmr.copyWith(color: AppColors.black[50]),
                     ),
                     Spacer(),
@@ -185,7 +184,7 @@ class _VolumeOfMyPoolState extends State<VolumeOfMyPool> {
                 Align(
                   alignment: Alignment.centerRight,
                   child: Text(
-                    "in Meters",
+                    "in_meters".tr,
                     style: AppTexts.tsmr.copyWith(color: AppColors.black[50]),
                   ),
                 ),
@@ -195,7 +194,7 @@ class _VolumeOfMyPoolState extends State<VolumeOfMyPool> {
                 const SizedBox(height: 50),
 
                 CustomButton(
-                  text: "CONTINUE",
+                  text: "continue".tr,
                   fontSize: 12,
                   padding: 16,
                   radius: 8,

@@ -28,25 +28,25 @@ class _ProfileState extends State<Profile> {
   final List<ClickableButtonModel> data = [
     ClickableButtonModel(
       icon: AppIcons.userCircle,
-      title: "Profile Information",
+      title: "profile_information".tr,
       route: ProfileInformation(),
     ),
     ClickableButtonModel(
       icon: AppIcons.crown,
-      title: "Subscription",
+      title: "subscription".tr,
       route: Subscription(),
     ),
     ClickableButtonModel(
       icon: AppIcons.lock,
-      title: "Change Password",
+      title: "change_password".tr,
       route: ChangePassword(),
     ),
     ClickableButtonModel(
       icon: AppIcons.privacy,
-      title: "Privacy Policy",
+      title: "privacy_policy".tr,
       route: PrivacyPolicy(),
     ),
-    ClickableButtonModel(icon: AppIcons.logout, title: "Log Out"),
+    ClickableButtonModel(icon: AppIcons.logout, title: "log_out".tr),
   ];
 
   @override
@@ -129,12 +129,12 @@ class _ProfileState extends State<Profile> {
               children: [
                 const SizedBox(height: 75),
                 Text(
-                  "Are you sure you want to",
+                  "are_you_sure_you_want_to".tr,
                   style: AppTexts.tmdr.copyWith(color: AppColors.black[100]),
                 ),
                 const SizedBox(height: 4),
                 Text(
-                  "Logout?",
+                  "logout_question".tr,
                   style: AppTexts.txls.copyWith(color: AppColors.black[50]),
                 ),
                 const SizedBox(height: 20),
@@ -143,7 +143,7 @@ class _ProfileState extends State<Profile> {
                     const SizedBox(width: 40),
                     Expanded(
                       child: CustomButton(
-                        text: "Logout",
+                        text: "logout".tr,
                         isSecondary: true,
                         onTap: () async {
                           Get.back();
@@ -154,7 +154,7 @@ class _ProfileState extends State<Profile> {
                     const SizedBox(width: 18),
                     Expanded(
                       child: CustomButton(
-                        text: "Cancel",
+                        text: "cancel".tr,
                         onTap: () {
                           Get.back();
                         },

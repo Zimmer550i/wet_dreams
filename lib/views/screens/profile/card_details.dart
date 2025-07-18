@@ -25,7 +25,7 @@ class _CardDetailsState extends State<CardDetails> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: CustomAppBar(title: "Card Details"),
+      appBar: CustomAppBar(title: "card_details".tr),
       body: SingleChildScrollView(
         child: SafeArea(
           child: Padding(
@@ -34,30 +34,30 @@ class _CardDetailsState extends State<CardDetails> {
               children: [
                 const SizedBox(height: 50),
                 CustomTextField(
-                  title: "Card Holder Name",
-                  hintText: "Enter card holder's name",
+                  title: "card_holder_name".tr,
+                  hintText: "enter_card_holder_name".tr,
                   controller: nameCtrl,
                 ),
                 const SizedBox(height: 24),
                 CustomTextField(
-                  title: "Card Number",
-                  hintText: "Enter card number",
+                  title: "card_number".tr,
+                  hintText: "enter_card_number".tr,
                   controller: numCtrl,
                 ),
                 const SizedBox(height: 24),
                 CustomTextField(
-                  title: "Expire Date",
-                  hintText: "Enter card's expire date",
+                  title: "expire_date".tr,
+                  hintText: "enter_card_expire_date".tr,
                   controller: dateCtrl,
                 ),
                 const SizedBox(height: 24),
                 CustomTextField(
-                  title: "CVV",
-                  hintText: "Enter card's cvv",
+                  title: "cvv".tr,
+                  hintText: "enter_card_cvv".tr,
                   controller: cvvCtrl,
                 ),
                 const SizedBox(height: 30),
-                CustomButton(text: "Confirm Purchase", onTap: handlePayment),
+                CustomButton(text: "confirm_purchase".tr, onTap: handlePayment),
               ],
             ),
           ),

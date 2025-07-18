@@ -1,5 +1,6 @@
 import 'dart:convert';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:wet_dreams/utils/app_texts.dart';
 import 'package:wet_dreams/utils/app_icons.dart';
@@ -24,7 +25,7 @@ class _PaymentMethodState extends State<PaymentMethod> {
 
   void handleCallback() async {
     if (selectedPayment == -1) {
-      showSnackBar("Select a payment method first");
+      showSnackBar("select_payment_method_first".tr);
       return;
     }
 
@@ -57,20 +58,20 @@ class _PaymentMethodState extends State<PaymentMethod> {
           launchUrl(uri);
         }
       } else {
-        showSnackBar(body['message'] ?? "Connection error");
+        showSnackBar(body['message'] ?? "connection_error".tr);
       }
     } on Exception catch (e) {
       setState(() {
         isLoading = false;
       });
-      showSnackBar("Unexpected error: $e");
+      showSnackBar("unexpected_error".tr + e.toString());
     }
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: CustomAppBar(title: "Payment Method"),
+      appBar: CustomAppBar(title: "payment_method".tr),
       body: SafeArea(
         child: Padding(
           padding: EdgeInsets.symmetric(horizontal: 24),
@@ -78,17 +79,17 @@ class _PaymentMethodState extends State<PaymentMethod> {
             children: [
               const SizedBox(height: 20),
               Text(
-                "Select the payment method you want to use.",
+                "select_payment_method_prompt".tr,
                 style: AppTexts.tlgm.copyWith(color: AppColors.black[50]),
               ),
               const SizedBox(height: 20),
               // CustomSvg(asset: AppIcons.card),
-              paymentOptions(AppIcons.paypal, "Card", 0),
+              paymentOptions(AppIcons.paypal, "card".tr, 0),
               const SizedBox(height: 16),
-              paymentOptions(AppIcons.paypal, "Paypal", 1),
+              paymentOptions(AppIcons.paypal, "paypal".tr, 1),
               Spacer(),
               CustomButton(
-                text: "Make Payment",
+                text: "make_payment".tr,
                 isLoading: isLoading,
                 onTap: handleCallback,
               ),

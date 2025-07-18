@@ -61,7 +61,7 @@ class _ProfileInformationState extends State<ProfileInformation> {
 
     if (message == "success") {
       user.getInfo();
-      showSnackBar("User info updated", isError: false);
+      showSnackBar("user_info_updated".tr, isError: false);
     } else {
       showSnackBar(message);
     }
@@ -75,7 +75,7 @@ class _ProfileInformationState extends State<ProfileInformation> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: CustomAppBar(title: "Profile Information"),
+      appBar: CustomAppBar(title: "profile_information".tr),
       body: SingleChildScrollView(
         child: SafeArea(
           child: Padding(
@@ -106,14 +106,14 @@ class _ProfileInformationState extends State<ProfileInformation> {
                 ),
                 const SizedBox(height: 24),
                 CustomTextField(
-                  title: "Name",
+                  title: "name".tr,
                   controller: nameCtrl,
                   isDisabled: !isEditing,
                 ),
                 if (!isEditing) const SizedBox(height: 24),
                 if (!isEditing)
                   CustomTextField(
-                    title: "Email",
+                    title: "email".tr,
                     controller: emailCtrl,
                     isDisabled: !isEditing,
                   ),
@@ -125,7 +125,7 @@ class _ProfileInformationState extends State<ProfileInformation> {
                 // ),
                 const SizedBox(height: 30),
                 CustomButton(
-                  text: isEditing ? "Update Profile" : "Edit Profile",
+                  text: isEditing ? "update_profile".tr : "edit_profile".tr,
                   isLoading: isLoading,
                   onTap: () {
                     if (!isEditing) {

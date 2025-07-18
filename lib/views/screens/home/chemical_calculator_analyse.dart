@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:wet_dreams/models/chemical_result.dart';
 import 'package:wet_dreams/utils/app_colors.dart';
 import 'package:wet_dreams/utils/app_texts.dart';
@@ -12,7 +13,7 @@ class ChemicalCalculatorAnalyse extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: CustomAppBar(title: "Chemical Calculator"),
+      appBar: CustomAppBar(title: "chemical_calculator".tr),
       body: SingleChildScrollView(
         child: SafeArea(
           child: Padding(
@@ -93,25 +94,25 @@ class ChemicalCalculatorAnalyse extends StatelessWidget {
                     mainAxisSize: MainAxisSize.max,
                     children: [
                       Text(
-                        "PH: ${values.isNotEmpty ? values[0] : "XX"}",
+                        "${"ph".tr}: ${values.isNotEmpty ? values[0] : "XX"}",
                         style: AppTexts.txsr.copyWith(
                           color: AppColors.black[200],
                         ),
                       ),
                       Text(
-                        "Cl: ${values.length > 1 ? values[1] : "XX"}",
+                        "${"cl".tr}: ${values.length > 1 ? values[1] : "XX"}",
                         style: AppTexts.txsr.copyWith(
                           color: AppColors.black[200],
                         ),
                       ),
                       Text(
-                        "Alc: ${values.length > 2 ? values[2] : "XX"}",
+                        "${"alc".tr}: ${values.length > 2 ? values[2] : "XX"}",
                         style: AppTexts.txsr.copyWith(
                           color: AppColors.black[200],
                         ),
                       ),
                       Text(
-                        "CYA: ${values.length > 3 ? values[3] : "XX"}",
+                        "${"cya".tr}: ${values.length > 3 ? values[3] : "XX"}",
                         style: AppTexts.txsr.copyWith(
                           color: AppColors.black[200],
                         ),

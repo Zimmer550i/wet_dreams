@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:get/get_navigation/src/extension_navigation.dart';
-import 'package:get/instance_manager.dart';
+import 'package:get/get.dart';
 import 'package:wet_dreams/controllers/auth_controller.dart';
 import 'package:wet_dreams/utils/app_colors.dart';
 import 'package:wet_dreams/utils/app_icons.dart';
@@ -85,10 +84,10 @@ class _ForgetPasswordState extends State<ForgetPassword> {
                           ),
                         ),
                         const SizedBox(height: 30),
-                        Text("Forgot Password", style: AppTexts.dsmb),
+                        Text("forgot_password".tr, style: AppTexts.dsmb),
                         const SizedBox(height: 3),
                         Text(
-                          "Enter your email to reset your password",
+                          "enter_your_email_to_reset_your_password".tr,
                           textAlign: TextAlign.center,
                           style: AppTexts.tmdr,
                         ),
@@ -109,14 +108,14 @@ class _ForgetPasswordState extends State<ForgetPassword> {
                 child: Column(
                   children: [
                     CustomTextField(
-                      title: "Email",
-                      hintText: "Enter your email address",
+                      title: "email".tr,
+                      hintText: "enter_your_email_address".tr,
                       controller: emailCtrl,
                       radius: 10,
                     ),
                     const SizedBox(height: 30),
                     CustomButton(
-                      text: "SEND CODE",
+                      text: "send_code".tr,
                       onTap: handleResetPassword,
                       isLoading: isLoading,
                     ),

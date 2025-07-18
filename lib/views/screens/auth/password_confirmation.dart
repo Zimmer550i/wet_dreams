@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:get/route_manager.dart';
+import 'package:get/get.dart';
 import 'package:wet_dreams/utils/app_colors.dart';
 import 'package:wet_dreams/utils/app_icons.dart';
 import 'package:wet_dreams/utils/app_texts.dart';
@@ -22,17 +22,20 @@ class PasswordConfirmation extends StatelessWidget {
               CustomSvg(asset: AppIcons.success),
               const SizedBox(height: 30),
               Text(
-                "Password Changed!",
+                "password_changed".tr,
                 style: AppTexts.dsmb.copyWith(color: AppColors.black[50]),
               ),
               const SizedBox(height: 8),
               Text(
-                "Your Password Has Been Changed Successfully.",
+                "your_password_has_been_changed_successfully".tr,
                 textAlign: TextAlign.center,
                 style: AppTexts.tmdr.copyWith(color: AppColors.black[50]),
               ),
               Spacer(),
-              CustomButton(text: "CONTINUE", onTap: () => Get.off(()=> Login()),),
+              CustomButton(
+                text: "continue".tr,
+                onTap: () => Get.off(() => Login()),
+              ),
             ],
           ),
         ),
