@@ -1,9 +1,11 @@
 class ChemicalResult {
+  final int id;
   final InputValues inputValues;
   final Map<String, dynamic> adjustments;
   final DateTime createdAt;
 
   ChemicalResult({
+    required this.id,
     required this.inputValues,
     required this.adjustments,
     required this.createdAt,
@@ -11,6 +13,7 @@ class ChemicalResult {
 
   factory ChemicalResult.fromJson(Map<String, dynamic> json) {
     return ChemicalResult(
+      id: json['id'] as int,
       inputValues: InputValues.fromJson(json['input_values']),
       adjustments: Map<String, dynamic>.from(json['adjustments']),
       createdAt: DateTime.parse(json['created_at']),
@@ -19,6 +22,7 @@ class ChemicalResult {
 
   Map<String, dynamic> toJson() {
     return {
+      'id': id,
       'input_values': inputValues.toJson(),
       'adjustments': adjustments,
       'created_at': createdAt.toIso8601String(),

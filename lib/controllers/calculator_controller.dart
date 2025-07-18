@@ -87,7 +87,8 @@ class CalculatorController extends GetxController {
       final body = jsonDecode(response.body);
 
       if (response.statusCode == 200) {
-        // TODO: Delete
+        results.removeWhere((val) => val.id.toString() == id);
+        results.refresh();
 
         return "success";
       } else {

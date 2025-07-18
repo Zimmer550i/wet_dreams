@@ -37,7 +37,7 @@ class MyApp extends StatelessWidget {
         return GetBuilder<LocalizationController>(
           builder: (localizeController) {
             localizeController.setLanguage(
-              Locale.fromSubtags(languageCode: "ar"),
+              Locale.fromSubtags(languageCode: "bn"),
             );
             return GetMaterialApp(
               title: AppConstants.APP_NAME,

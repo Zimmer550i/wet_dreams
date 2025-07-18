@@ -123,5 +123,10 @@
   "volume_info": "(1م3 = 1000 لتر)",
   "salt_chlorinator": "كلورين الملح",
   "chlorinator_value": "كتاب",
-  "crop_your_image": "اقطع صورتك"
+  "crop_your_image": "اقطع صورتك",
+  "length": "الطول",
+  "width": "العرض",
+  "min_depth": "العمق الأدنى",
+  "max_depth": "العمق الأقصى",
+  "diameter": "القطر"
 }

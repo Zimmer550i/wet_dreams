@@ -30,6 +30,11 @@ class _VolumeOfMyPoolState extends State<VolumeOfMyPool> {
     ["diameter", "min_depth", "max_depth"],
     ["length", "width", "min_depth", "max_depth"],
   ];
+  final List<List<String>> fieldNames = [
+    ["length".tr, "width".tr, "min_depth".tr, "max_depth".tr],
+    ["diameter".tr, "min_depth".tr, "max_depth".tr],
+    ["length".tr, "width".tr, "min_depth".tr, "max_depth".tr],
+  ];
   int index = 0;
   bool isLoading = false;
 
@@ -39,7 +44,7 @@ class _VolumeOfMyPoolState extends State<VolumeOfMyPool> {
     if (calc.poolVolume.value == null) {
       calc
           .getVolume()
-          .then((val) => setValue(calc.poolVolume.value!))
+          .then((val) => setValue(calc.poolVolume.value))
           .onError((e, j) => showSnackBar(e.toString()));
     } else {
       setValue(calc.poolVolume.value!);
@@ -129,7 +134,10 @@ class _VolumeOfMyPoolState extends State<VolumeOfMyPool> {
     });
   }
 
-  void setValue(PoolVolume volume) {
+  void setValue(PoolVolume? volume) {
+    if (volume == null) {
+      return;
+    }
     index = shapes.indexWhere((val) => val.toLowerCase() == volume.shape);
     if (index == 0 || index == 2) {
       controllers[0].text = volume.length.toString();
@@ -189,7 +197,7 @@ class _VolumeOfMyPoolState extends State<VolumeOfMyPool> {
                   ),
                 ),
                 for (int i = 0; i < fields[index].length; i++)
-                  inputFields(fields[index][i], controller: controllers[i]),
+                  inputFields(fieldNames[index][i], controller: controllers[i]),
 
                 const SizedBox(height: 50),
 
@@ -211,16 +219,13 @@ class _VolumeOfMyPoolState extends State<VolumeOfMyPool> {
     );
   }
 
-  Row inputFields(String title, {TextEditingController? controller}) {
-    title = title.replaceAll("_", " ");
-    title = title
-        .split(" ")
-        .map((e) => e[0].toUpperCase() + e.substring(1))
-        .join(" ");
-
+  Row inputFields(String displayName, {TextEditingController? controller}) {
     return Row(
       children: [
-        Text(title, style: AppTexts.tsmr.copyWith(color: AppColors.black[50])),
+        Text(
+          displayName,
+          style: AppTexts.tsmr.copyWith(color: AppColors.black[50]),
+        ),
         Spacer(),
         CustomTextField(
           height: 30,

@@ -123,5 +123,10 @@
   "volume_info": "(1m3 = 1000 Liters)",
   "salt_chlorinator": "Salt Chlorinator",
   "chlorinator_value": "But",
-  "crop_your_image": "Crop your image"
+  "crop_your_image": "Crop your image",
+  "length": "Length",
+  "width": "Width",
+  "min_depth": "Min Depth",
+  "max_depth": "Max Depth",
+  "diameter": "Diameter"
 }

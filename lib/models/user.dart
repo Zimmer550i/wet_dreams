@@ -4,7 +4,7 @@ class User {
   final String email;
   final String? profilePic;
   final String subscriptionStatus;
-  final DateTime subscriptionExpiresOn;
+  final DateTime? subscriptionExpiresOn;
   final bool isExpired;
   final String subscriptionId;
   final String packageName;
@@ -21,7 +21,7 @@ class User {
     required this.email,
     this.profilePic,
     required this.subscriptionStatus,
-    required this.subscriptionExpiresOn,
+    this.subscriptionExpiresOn,
     required this.isExpired,
     required this.subscriptionId,
     required this.packageName,
@@ -40,7 +40,9 @@ class User {
       email: json['email'],
       profilePic: json['profile_pic'],
       subscriptionStatus: json['subscription_status'],
-      subscriptionExpiresOn: DateTime.parse(json['subscription_expires_on']),
+      subscriptionExpiresOn: json['subscription_expires_on'] != null
+          ? DateTime.parse(json['subscription_expires_on'])
+          : null,
       isExpired: json['is_expired'],
       subscriptionId: json['subscription_id'] ?? '',
       packageName: json['package_name'] ?? '',
@@ -60,7 +62,7 @@ class User {
       'email': email,
       'profile_pic': profilePic,
       'subscription_status': subscriptionStatus,
-      'subscription_expires_on': subscriptionExpiresOn.toIso8601String(),
+      'subscription_expires_on': subscriptionExpiresOn?.toIso8601String(),
       'is_expired': isExpired,
       'subscription_id': subscriptionId,
       'package_name': packageName,

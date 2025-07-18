@@ -86,6 +86,7 @@ class AuthController extends GetxController {
 
       if (response.statusCode == 200) {
         setToken(body['access_token']);
+        await Get.find<UserController>().getInfo();
 
         return "success";
       } else {

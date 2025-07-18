@@ -69,7 +69,7 @@ class _ProfileState extends State<Profile> {
                   alignment: Alignment.center,
                   child: Obx(
                     () => Text(
-                      user.userInfo.value!.fullName,
+                      user.userInfo.value?.fullName ?? "null",
                       style: AppTexts.txls.copyWith(color: AppColors.black[50]),
                     ),
                   ),

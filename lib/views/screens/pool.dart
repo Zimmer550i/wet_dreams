@@ -29,14 +29,17 @@ class _PoolState extends State<Pool> {
     setState(() {
       isLoading = true;
     });
-    calc.getVolume().then((val) {
-      setState(() {
-        m3 = calc.poolVolume.value!.volumeM3;
-      });
-    }).onError((e, j) {
-      showSnackBar(e.toString());
-      return null;
-    });
+    calc
+        .getVolume()
+        .then((val) {
+          setState(() {
+            m3 = calc.poolVolume.value?.volumeM3;
+          });
+        })
+        .onError((e, j) {
+          showSnackBar(e.toString());
+          return null;
+        });
     calc.getChemicalResults().then((message) {
       if (message != "success") {
         showSnackBar(message);
@@ -81,7 +84,12 @@ class _PoolState extends State<Pool> {
                     color: AppColors.black.shade400,
                     borderRadius: BorderRadius.circular(4),
                   ),
-                  child: Center(child: Text(m3?.ceil().toString() ?? "", style: AppTexts.txsr)),
+                  child: Center(
+                    child: Text(
+                      m3?.ceil().toString() ?? "",
+                      style: AppTexts.txsr,
+                    ),
+                  ),
                 ),
               ],
             ),
@@ -100,7 +108,9 @@ class _PoolState extends State<Pool> {
                     color: AppColors.black.shade400,
                     borderRadius: BorderRadius.circular(4),
                   ),
-                  child: Center(child: Text("chlorinator_value".tr, style: AppTexts.txsr)),
+                  child: Center(
+                    child: Text("chlorinator_value".tr, style: AppTexts.txsr),
+                  ),
                 ),
               ],
             ),
@@ -112,9 +122,8 @@ class _PoolState extends State<Pool> {
                     child: Obx(
                       () => Column(
                         children: [
-                          const SizedBox(height: 34,),
-                          for (var i in calc.results)
-                            poolInformation(i),
+                          const SizedBox(height: 34),
+                          for (var i in calc.results) poolInformation(i),
                         ],
                       ),
                     ),
@@ -130,7 +139,7 @@ class _PoolState extends State<Pool> {
     return Padding(
       padding: const EdgeInsets.only(bottom: 16),
       child: GestureDetector(
-        onTap: () => Get.to(()=> ChemicalCalculatorAnalyse(result: result)),
+        onTap: () => Get.to(() => ChemicalCalculatorAnalyse(result: result)),
         child: Container(
           width: double.infinity,
           padding: EdgeInsets.symmetric(horizontal: 8, vertical: 5),
@@ -151,9 +160,8 @@ class _PoolState extends State<Pool> {
                       style: AppTexts.txsr.copyWith(color: AppColors.black[50]),
                     ),
                     const SizedBox(height: 4),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      mainAxisSize: MainAxisSize.max,
+                    Wrap(
+                      spacing: 5,
                       children: [
                         Text(
                           "${"ph".tr}: ${result.inputValues.pH}",
@@ -185,7 +193,7 @@ class _PoolState extends State<Pool> {
                   ],
                 ),
               ),
-        
+
               Align(
                 alignment: Alignment.topRight,
                 child: PopupMenuButton<String>(
@@ -200,7 +208,20 @@ class _PoolState extends State<Pool> {
                   color: AppColors.black.shade400,
                   itemBuilder: (context) {
                     return [
-                      PopupMenuItem(child: Text("delete".tr, style: AppTexts.tsmm)),
+                      PopupMenuItem(
+                        onTap: () async {
+                          await calc
+                              .deleteChemicalResult(result.id.toString())
+                              .then((val) {
+                                if (val == "success") {
+                                  setState(() {
+                                    calc.results.remove(result);
+                                  });
+                                }
+                              });
+                        },
+                        child: Text("delete".tr, style: AppTexts.tsmm),
+                      ),
                     ];
                   },
                 ),

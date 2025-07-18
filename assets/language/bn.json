@@ -123,5 +123,10 @@
   "volume_info": "(1 ম3 = 1000 লিটার)",
   "salt_chlorinator": "সাল্ট ক্লোরিনেটর",
   "chlorinator_value": "বাট",
-  "crop_your_image": "আপনার চিত্র ক্রপ করুন"
+  "crop_your_image": "আপনার চিত্র ক্রপ করুন",
+  "length": "দৈর্ঘ্য",
+  "width": "প্রস্থ",
+  "min_depth": "সর্বনিম্ন গভীরতা",
+  "max_depth": "সর্বাধিক গভীরতা",
+  "diameter": "ব্যাস"
 }
