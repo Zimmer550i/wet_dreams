@@ -3,9 +3,11 @@ import 'package:get/get.dart';
 import 'package:wet_dreams/models/chemical_result.dart';
 import 'package:wet_dreams/models/pool_volume.dart';
 import 'package:wet_dreams/services/api_service.dart';
+import 'package:wet_dreams/services/shared_prefs_service.dart';
 
 class CalculatorController extends GetxController {
   final api = ApiService();
+  final prefs = SharedPrefsService();
   Rxn<PoolVolume> poolVolume = Rxn();
   Rxn<ChemicalResult> lastResult = Rxn();
   RxList<ChemicalResult> results = RxList();
@@ -41,6 +43,7 @@ class CalculatorController extends GetxController {
       final body = jsonDecode(response.body);
 
       if (response.statusCode == 200) {
+        SharedPrefsService.remove("getVolume");
         poolVolume.value = PoolVolume.fromJson(body['data']);
 
         return "success";
@@ -101,7 +104,12 @@ class CalculatorController extends GetxController {
 
   Future<String> getVolume() async {
     try {
-      final response = await api.get("/api-apps/pool_volumes/", authReq: true);
+      // final response = await api.get("/api-apps/pool_volumes/", authReq: true);
+      final response = await prefs.cacheResponse(
+        key: "getVolume",
+        frequency: CacheFrequency.oneDay,
+        fetchCallback: () => api.get("/api-apps/pool_volumes/", authReq: true),
+      );
       final body = jsonDecode(response.body);
 
       if (response.statusCode == 200) {

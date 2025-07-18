@@ -25,11 +25,7 @@ class _VolumeOfMyPoolState extends State<VolumeOfMyPool> {
     (index) => TextEditingController(),
   );
   final List<String> shapes = ["rectangular".tr, "circular".tr, "oval".tr];
-  final List<List<String>> fields = [
-    ["length", "width", "min_depth", "max_depth"],
-    ["diameter", "min_depth", "max_depth"],
-    ["length", "width", "min_depth", "max_depth"],
-  ];
+  final List<String> shapesFromApi = ["rectangular", "circular", "oval"];
   final List<List<String>> fieldNames = [
     ["length".tr, "width".tr, "min_depth".tr, "max_depth".tr],
     ["diameter".tr, "min_depth".tr, "max_depth".tr],
@@ -138,7 +134,7 @@ class _VolumeOfMyPoolState extends State<VolumeOfMyPool> {
     if (volume == null) {
       return;
     }
-    index = shapes.indexWhere((val) => val.toLowerCase() == volume.shape);
+    index = shapesFromApi.indexWhere((val) => val.toLowerCase() == volume.shape);
     if (index == 0 || index == 2) {
       controllers[0].text = volume.length.toString();
       controllers[1].text = volume.width.toString();
@@ -196,7 +192,7 @@ class _VolumeOfMyPoolState extends State<VolumeOfMyPool> {
                     style: AppTexts.tsmr.copyWith(color: AppColors.black[50]),
                   ),
                 ),
-                for (int i = 0; i < fields[index].length; i++)
+                for (int i = 0; i < fieldNames[index].length; i++)
                   inputFields(fieldNames[index][i], controller: controllers[i]),
 
                 const SizedBox(height: 50),
