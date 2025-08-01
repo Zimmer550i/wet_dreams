@@ -7,7 +7,7 @@ import 'package:wet_dreams/controllers/auth_controller.dart';
 import 'package:wet_dreams/services/shared_prefs_service.dart';
 
 class ApiService {
-  final String devUrl = "http://172.252.13.79:3222";
+  final String devUrl = "http://31.97.69.47:8080";
   final String prodUrl = "";
   final bool inDevelopment = true;
   final bool showAPICalls = true;

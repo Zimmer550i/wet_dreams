@@ -32,7 +32,7 @@ class _PrivacyPolicyState extends State<PrivacyPolicy> {
           child: SafeArea(
             child: Obx(
               () =>
-                  user.privacyPolicy.value == null
+                  user.isLoading.value 
                       ? Padding(
                         padding: const EdgeInsets.all(8.0),
                         child: CustomLoading(),
@@ -40,7 +40,7 @@ class _PrivacyPolicyState extends State<PrivacyPolicy> {
                       : Padding(
                         padding: const EdgeInsets.only(top: 20),
                         child: Text(
-                          user.privacyPolicy.value!,
+                          user.privacyPolicy.value ?? "",
                           style: AppTexts.txsr.copyWith(
                             color: AppColors.black[50],
                           ),
