@@ -1,3 +1,4 @@
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:purchases_flutter/purchases_flutter.dart';
 import 'package:wet_dreams/themes/dark_theme.dart';
 import 'package:wet_dreams/utils/app_colors.dart';
@@ -17,7 +18,8 @@ final GlobalKey<ScaffoldMessengerState> rootScaffoldMessengerKey =
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   // await Purchases.setLogLevel(LogLevel.debug); 
-  await Purchases.configure(PurchasesConfiguration("goog_YYMxBQOyhthDBFzXNiDCRqPbpKa")); 
+  await dotenv.load(fileName: ".env");
+  await Purchases.configure(PurchasesConfiguration(dotenv.env['PLAYSTORE_API']!)); 
   Map<String, Map<String, String>> languages = await di.init();
   SystemChrome.setSystemUIOverlayStyle(
     SystemUiOverlayStyle(
