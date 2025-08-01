@@ -74,46 +74,49 @@ class _CustomButtonState extends State<CustomButton> {
                     ),
                   ),
                 )
-                : Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  mainAxisSize: MainAxisSize.min,
-                  spacing: 8,
-                  children: [
-                    if (widget.leading != null)
-                      SvgPicture.asset(
-                        widget.leading!,
-                        height: widget.iconSize,
-                        width: widget.iconSize,
-                        colorFilter: ColorFilter.mode(
-                          widget.isSecondary
-                              ? AppColors.blue
-                              : AppColors.blue[25]!,
-                          BlendMode.srcIn,
-                        ),
-                      ),
-                    Text(
-                      widget.text,
-                      style: AppTexts.tsmb.copyWith(
-                        fontSize: widget.fontSize,
-                        color:
+                : FittedBox(
+                  fit: BoxFit.scaleDown,
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    mainAxisSize: MainAxisSize.min,
+                    spacing: 8,
+                    children: [
+                      if (widget.leading != null)
+                        SvgPicture.asset(
+                          widget.leading!,
+                          height: widget.iconSize,
+                          width: widget.iconSize,
+                          colorFilter: ColorFilter.mode(
                             widget.isSecondary
-                                ? AppColors.black
-                                : AppColors.blue.shade900,
-                      ),
-                    ),
-                    if (widget.trailing != null)
-                      SvgPicture.asset(
-                        widget.trailing!,
-                        height: widget.iconSize,
-                        width: widget.iconSize,
-                        colorFilter: ColorFilter.mode(
-                          widget.isSecondary
-                              ? AppColors.blue
-                              : AppColors.blue.shade900,
-                          BlendMode.srcIn,
+                                ? AppColors.blue
+                                : AppColors.blue[25]!,
+                            BlendMode.srcIn,
+                          ),
+                        ),
+                      Text(
+                        widget.text,
+                        style: AppTexts.tsmb.copyWith(
+                          fontSize: widget.fontSize,
+                          color:
+                              widget.isSecondary
+                                  ? AppColors.black
+                                  : AppColors.blue.shade900,
                         ),
                       ),
-                  ],
+                      if (widget.trailing != null)
+                        SvgPicture.asset(
+                          widget.trailing!,
+                          height: widget.iconSize,
+                          width: widget.iconSize,
+                          colorFilter: ColorFilter.mode(
+                            widget.isSecondary
+                                ? AppColors.blue
+                                : AppColors.blue.shade900,
+                            BlendMode.srcIn,
+                          ),
+                        ),
+                    ],
+                  ),
                 ),
       ),
     );

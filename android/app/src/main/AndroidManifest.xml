@@ -21,7 +21,8 @@
     <application
         android:label="Wet Dreams"
         android:name="${applicationName}"
-        android:icon="@mipmap/ic_launcher">
+        android:icon="@mipmap/ic_launcher"
+        android:launchMode="standard" >
         <!-- For Image Cropper -->
         <activity
           android:name="com.yalantis.ucrop.UCropActivity"

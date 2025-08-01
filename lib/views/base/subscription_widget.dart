@@ -143,7 +143,7 @@ class SubscriptionWidget extends StatelessWidget {
               text: isPurchased ? "Current Plan" : "Choose Plan",
               leading: isPurchased ? AppIcons.tickCircle : null,
               isSecondary: isPurchased,
-              onTap: isPurchased ? null : onTap,
+              onTap: onTap,
             ),
           ),
           const SizedBox(height: 20),

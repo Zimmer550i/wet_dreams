@@ -1,3 +1,4 @@
+import 'package:purchases_flutter/purchases_flutter.dart';
 import 'package:wet_dreams/themes/dark_theme.dart';
 import 'package:wet_dreams/utils/app_colors.dart';
 import 'package:wet_dreams/utils/app_constants.dart';
@@ -15,6 +16,8 @@ final GlobalKey<ScaffoldMessengerState> rootScaffoldMessengerKey =
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
+  // await Purchases.setLogLevel(LogLevel.debug); 
+  await Purchases.configure(PurchasesConfiguration("goog_YYMxBQOyhthDBFzXNiDCRqPbpKa")); 
   Map<String, Map<String, String>> languages = await di.init();
   SystemChrome.setSystemUIOverlayStyle(
     SystemUiOverlayStyle(
@@ -36,9 +39,6 @@ class MyApp extends StatelessWidget {
       builder: (themeController) {
         return GetBuilder<LocalizationController>(
           builder: (localizeController) {
-            localizeController.setLanguage(
-              Locale.fromSubtags(languageCode: "bn"),
-            );
             return GetMaterialApp(
               title: AppConstants.APP_NAME,
               debugShowCheckedModeBanner: false,
