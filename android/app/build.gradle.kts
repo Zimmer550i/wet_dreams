@@ -66,5 +66,5 @@ flutter {
 }
 
 dependencies {
-    implementation("com.android.billingclient:billing:6.0.1")
+    implementation("com.android.billingclient:billing:8.0.0")
 }

@@ -2,13 +2,22 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:purchases_flutter/purchases_flutter.dart';
 import 'package:wet_dreams/controllers/localization_controller.dart';
+import 'package:wet_dreams/controllers/user_controller.dart';
 import 'package:wet_dreams/utils/app_icons.dart';
 import 'package:wet_dreams/utils/show_snackbar.dart';
 import 'package:wet_dreams/views/base/subscription_widget.dart';
 import 'package:wet_dreams/views/base/custom_app_bar.dart';
+import 'package:wet_dreams/views/screens/profile/purchase_confirmation.dart';
 
-class Subscription extends StatelessWidget {
+class Subscription extends StatefulWidget {
   const Subscription({super.key});
+
+  @override
+  State<Subscription> createState() => _SubscriptionState();
+}
+
+class _SubscriptionState extends State<Subscription> {
+  final user = Get.find<UserController>();
 
   @override
   Widget build(BuildContext context) {
@@ -25,7 +34,7 @@ class Subscription extends StatelessWidget {
                 SubscriptionWidget(
                   icon: AppIcons.basic,
                   title: "basic_plan".tr,
-                  isPurchased: true,
+                  isPurchased: !(user.userInfo.value?.isSuperuser ?? false),
                   subTitle: "free".tr,
                   pros: [
                     "issues_frequent".tr,
@@ -41,7 +50,7 @@ class Subscription extends StatelessWidget {
                   },
                 ),
                 SubscriptionWidget(
-                  isPremium: true,
+                  isPremium: user.userInfo.value?.isSuperuser ?? false,
                   icon: AppIcons.premium,
                   title: "premium_plan".tr,
                   subTitle: "price_per_month".tr,
@@ -61,14 +70,16 @@ class Subscription extends StatelessWidget {
                         final package = offering.getPackage("\$rc_monthly");
 
                         if (package != null) {
-                          PurchaseResult purchaseResult =
-                              await Purchases.purchasePackage(package);
+                          await Purchases.purchasePackage(package);
 
-                          debugPrint("Purchase Successful: $purchaseResult");
+                          showSnackBar("Payment Successful", isError: false);
+                          Get.to(() => PurchaseConfirmation());
                         }
                       }
                     } catch (e) {
-                      showSnackBar(e.toString());
+                      showSnackBar(
+                        "Error: Something went wrong. Please try again.",
+                      );
                     }
                   },
                 ),

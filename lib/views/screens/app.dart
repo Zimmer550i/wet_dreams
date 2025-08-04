@@ -24,10 +24,14 @@ class _AppState extends State<App> {
             Expanded(
               child: PageView(
                 controller: controller,
+                onPageChanged:
+                    (value) => setState(() {
+                      index = value;
+                    }),
                 children: [
                   Home(key: PageStorageKey("home")),
                   Pool(key: PageStorageKey("pool")),
-                  Profile(key: PageStorageKey("profile"),),
+                  Profile(key: PageStorageKey("profile")),
                 ],
               ),
             ),
@@ -37,9 +41,7 @@ class _AppState extends State<App> {
                 setState(() {
                   index = p0;
                 });
-                controller.jumpToPage(
-                  index,
-                );
+                controller.jumpToPage(index);
               },
             ),
           ],

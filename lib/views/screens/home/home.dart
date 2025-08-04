@@ -147,8 +147,8 @@ class _HomeState extends State<Home> {
                                                 .value!
                                                 .subscriptionStatus !=
                                             "subscribed") {
-                                          // premiumFeature(context);
-                                          // return;
+                                          premiumFeature(context);
+                                          return;
                                         }
                                       }
                                       switch (e.type) {

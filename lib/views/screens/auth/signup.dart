@@ -56,7 +56,6 @@ class _SignupState extends State<Signup> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: SingleChildScrollView(
-        reverse: true,
         child: Column(
           children: [
             Stack(
