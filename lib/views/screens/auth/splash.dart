@@ -35,7 +35,12 @@ class _SplashState extends State<Splash> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Center(child: Image.asset("assets/images/splash.png")),
+      body: Center(
+        child: Image.asset(
+          "assets/images/splash.png",
+          width: MediaQuery.of(context).size.width / 2,
+        ),
+      ),
     );
   }
 }

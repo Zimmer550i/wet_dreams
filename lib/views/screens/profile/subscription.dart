@@ -65,9 +65,12 @@ class _SubscriptionState extends State<Subscription> {
                   onTap: () async {
                     try {
                       final offerings = await Purchases.getOfferings();
+                      debugPrint(offerings.toString());
                       final offering = offerings.getOffering("premium_plan_1");
+                      debugPrint(offering.toString());
                       if (offering != null) {
                         final package = offering.getPackage("\$rc_monthly");
+                        debugPrint(package.toString());
 
                         if (package != null) {
                           await Purchases.purchasePackage(package);
@@ -77,6 +80,7 @@ class _SubscriptionState extends State<Subscription> {
                         }
                       }
                     } catch (e) {
+                      debugPrint(e.toString());
                       showSnackBar(
                         "Error: Something went wrong. Please try again.",
                       );

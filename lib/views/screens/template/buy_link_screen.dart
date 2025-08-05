@@ -35,85 +35,88 @@ class _BuyLinkScreenState extends State<BuyLinkScreen> {
       appBar: CustomAppBar(title: "buy_link".tr),
       body: SingleChildScrollView(
         child: SafeArea(
-          child: Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 30),
-            child: Obx(
-              () =>
-                  home.item.value == null
-                      ? Padding(
-                        padding: const EdgeInsets.all(8.0),
-                        child: CustomLoading(),
-                      )
-                      : Container(
-                        padding: EdgeInsets.symmetric(
-                          horizontal: 18,
-                          vertical: 24,
-                        ),
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(8),
-                          color: AppColors.black.shade400,
-                        ),
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.center,
-                          children: [
-                            CustomSvg(
-                              asset:
-                                  ApiService().baseUrl + home.item.value!.image,
-                              size: 80,
-                            ),
-                            Padding(
-                              padding: const EdgeInsets.symmetric(
-                                horizontal: 40,
+          child: Align(
+            alignment: Alignment.topCenter,
+            child: Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 30),
+              child: Obx(
+                () =>
+                    home.item.value == null
+                        ? Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: CustomLoading(),
+                        )
+                        : Container(
+                          padding: EdgeInsets.symmetric(
+                            horizontal: 18,
+                            vertical: 24,
+                          ),
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(8),
+                            color: AppColors.black.shade400,
+                          ),
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.center,
+                            children: [
+                              CustomSvg(
+                                asset:
+                                    ApiService().baseUrl + home.item.value!.image,
+                                size: 80,
                               ),
-                              child: Text(
-                                home.item.value!.title,
+                              Padding(
+                                padding: const EdgeInsets.symmetric(
+                                  horizontal: 40,
+                                ),
+                                child: Text(
+                                  home.item.value!.title,
+                                  textAlign: TextAlign.center,
+                                  style: AppTexts.tlgb.copyWith(
+                                    color: AppColors.black[50],
+                                  ),
+                                ),
+                              ),
+                              Text(
+                                home.item.value!.shortTitle ?? "",
                                 textAlign: TextAlign.center,
-                                style: AppTexts.tlgb.copyWith(
+                                style: AppTexts.txsr.copyWith(
                                   color: AppColors.black[50],
                                 ),
                               ),
-                            ),
-                            Text(
-                              home.item.value!.shortTitle ?? "",
-                              textAlign: TextAlign.center,
-                              style: AppTexts.txsr.copyWith(
-                                color: AppColors.black[50],
+                              const SizedBox(height: 16),
+                              Text(
+                                home.item.value!.description,
+                                style: AppTexts.txsr,
                               ),
-                            ),
-                            const SizedBox(height: 16),
-                            Text(
-                              home.item.value!.description,
-                              style: AppTexts.txsr,
-                            ),
-                            const SizedBox(height: 20),
-                            CustomButton(
-                              text: "buy_product".tr,
-                              trailing: AppIcons.forward,
-                              iconSize: 20,
-                              height: 40,
-                              fontSize: 12,
-                              padding: 24,
-                              width: null,
-                              onTap: () async {
-                                if (home.item.value!.externalSourceUrl !=
-                                    null) {
-                                  final Uri url = Uri.parse(
-                                    home.item.value!.externalSourceUrl!,
-                                  );
-                                  if (await canLaunchUrl(url)) {
-                                    await launchUrl(
-                                      url,
-                                      mode: LaunchMode.externalApplication,
+                              const SizedBox(height: 20),
+                              CustomButton(
+                                text: "buy_product".tr,
+                                trailing: AppIcons.forward,
+                                iconSize: 20,
+                                height: 40,
+                                fontSize: 12,
+                                padding: 24,
+                                width: null,
+                                onTap: () async {
+                                  if (home.item.value!.externalSourceUrl !=
+                                      null) {
+                                    final Uri url = Uri.parse(
+                                      home.item.value!.externalSourceUrl!,
                                     );
-                                  } else {
-                                    showSnackBar("could_not_launch_url".tr);
+                                    if (await canLaunchUrl(url)) {
+                                      await launchUrl(
+                                        url,
+                                        mode: LaunchMode.externalApplication,
+                                      );
+                                    } else {
+                                      showSnackBar("could_not_launch_url".tr);
+                                    }
                                   }
-                                }
-                              },
-                            ),
-                          ],
+                                },
+                              ),
+                            ],
+                          ),
                         ),
-                      ),
+              ),
             ),
           ),
         ),

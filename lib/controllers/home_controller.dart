@@ -20,7 +20,7 @@ class HomeController extends GetxController {
       homeButtons = RxList.empty();
       final response = await prefs.cacheResponse(
         key: "home",
-        frequency: CacheFrequency.sixHours,
+        frequency: CacheFrequency.oneHour,
         fetchCallback: () {
           return api.get("/api-apps/DashboardServices/", authReq: true);
         },
