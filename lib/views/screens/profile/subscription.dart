@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:purchases_flutter/purchases_flutter.dart';
@@ -63,6 +65,12 @@ class _SubscriptionState extends State<Subscription> {
                     "tricks_and_secrets".tr,
                   ],
                   onTap: () async {
+                    if (Platform.isIOS) {
+                      showSnackBar(
+                        "Subscription not implemented due to Apple not allowing it. Will be implemented later after this Review.",
+                      );
+                      return;
+                    }
                     try {
                       final offerings = await Purchases.getOfferings();
                       debugPrint(offerings.toString());

@@ -13,7 +13,7 @@ class ChemicalResult {
 
   factory ChemicalResult.fromJson(Map<String, dynamic> json) {
     return ChemicalResult(
-      id: json['id'] as int,
+      id: int.parse(json['id']),
       inputValues: InputValues.fromJson(json['input_values']),
       adjustments: Map<String, dynamic>.from(json['adjustments']),
       createdAt: DateTime.parse(json['created_at']),

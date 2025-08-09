@@ -20,8 +20,8 @@ class AppConstants{
       r"^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$"
   );
   static List<LanguageModel> languages = [
-    LanguageModel( languageName: 'English', countryCode: 'US', languageCode: 'en'),
     LanguageModel( languageName: 'Spanish', countryCode: 'ES', languageCode: 'es'),
+    LanguageModel( languageName: 'English', countryCode: 'US', languageCode: 'en'),
   ];
 
 }

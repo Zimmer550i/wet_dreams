@@ -21,6 +21,7 @@ class HomeController extends GetxController {
       final response = await prefs.cacheResponse(
         key: "home",
         frequency: CacheFrequency.oneHour,
+        override: true,
         fetchCallback: () {
           return api.get("/api-apps/DashboardServices/", authReq: true);
         },
@@ -49,6 +50,7 @@ class HomeController extends GetxController {
       final response = await prefs.cacheResponse(
         key: "homeItems:$id",
         frequency: CacheFrequency.sixHours,
+        override: true,
         fetchCallback: () {
           return api.get(
             "/api-apps/ViewAllItems/",
@@ -87,6 +89,7 @@ class HomeController extends GetxController {
       final response = await prefs.cacheResponse(
         key: "item:$id",
         frequency: CacheFrequency.oneHour,
+        override: true,
         fetchCallback: () {
           return api.get(
             "/api-apps/ViewSingleItem/",
