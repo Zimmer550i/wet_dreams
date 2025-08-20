@@ -36,41 +36,7 @@ class AppIcons {
   static const String card = 'assets/icons/card.svg';
   static const String bellBig = 'assets/icons/bell_big.svg';
   static const String threeDot = 'assets/icons/three_dot.svg';
+  static const String language = 'assets/icons/language.svg';
 
-  // New spc_icons
-  static const String frame = 'assets/icons/spc_icons/Frame.svg';
-  static const String frame1 = 'assets/icons/spc_icons/Frame_1.svg';
-  static const String frame2 = 'assets/icons/spc_icons/Frame_2.svg';
-  static const String frame3 = 'assets/icons/spc_icons/Frame_3.svg';
-  static const String frame4 = 'assets/icons/spc_icons/Frame_4.svg';
-  static const String frame5 = 'assets/icons/spc_icons/Frame_5.svg';
-  static const String frame6 = 'assets/icons/spc_icons/Frame_6.svg';
-  static const String frame7 = 'assets/icons/spc_icons/Frame_7.svg';
-  static const String frame8 = 'assets/icons/spc_icons/Frame_8.svg';
-  static const String frame9 = 'assets/icons/spc_icons/Frame_9.svg';
-  static const String frame10 = 'assets/icons/spc_icons/Frame_10.svg';
-  static const String frame11 = 'assets/icons/spc_icons/Frame_11.svg';
-  static const String frame12 = 'assets/icons/spc_icons/Frame_12.svg';
-  static const String frame13 = 'assets/icons/spc_icons/Frame_13.svg';
-  static const String frame14 = 'assets/icons/spc_icons/Frame_14.svg';
-  static const String frame15 = 'assets/icons/spc_icons/Frame_15.svg';
-  static const String frame16 = 'assets/icons/spc_icons/Frame_16.svg';
-  static const String frame17 = 'assets/icons/spc_icons/Frame_17.svg';
-  static const String frame18 = 'assets/icons/spc_icons/Frame_18.svg';
-  static const String frame19 = 'assets/icons/spc_icons/Frame_19.svg';
-  static const String frame20 = 'assets/icons/spc_icons/Frame_20.svg';
-  static const String frame21 = 'assets/icons/spc_icons/Frame_21.svg';
-  static const String frame22 = 'assets/icons/spc_icons/Frame_22.svg';
-  static const String frame23 = 'assets/icons/spc_icons/Frame_23.svg';
-  static const String frame24 = 'assets/icons/spc_icons/Frame_24.svg';
-  static const String frame25 = 'assets/icons/spc_icons/Frame_25.svg';
-  static const String frame26 = 'assets/icons/spc_icons/Frame_26.svg';
-  static const String frame27 = 'assets/icons/spc_icons/Frame_27.svg';
-  static const String frame28 = 'assets/icons/spc_icons/Frame_28.svg';
-  static const String frame29 = 'assets/icons/spc_icons/Frame_29.svg';
-  static const String frame30 = 'assets/icons/spc_icons/Frame_30.svg';
-  static const String frame31 = 'assets/icons/spc_icons/Frame_31.svg';
-  static const String frame32 = 'assets/icons/spc_icons/Frame_32.svg';
-  static const String frame33 = 'assets/icons/spc_icons/Frame_33.svg';
-  static const String frame34 = 'assets/icons/spc_icons/Frame_34.svg';
+  static const String frame33 = 'assets/icons/Frame_33.svg';
 }

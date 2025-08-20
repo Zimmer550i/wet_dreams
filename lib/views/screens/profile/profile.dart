@@ -11,6 +11,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
 import 'package:wet_dreams/views/screens/profile/change_password.dart';
+import 'package:wet_dreams/views/screens/profile/language.dart';
 import 'package:wet_dreams/views/screens/profile/privacy_policy.dart';
 import 'package:wet_dreams/views/screens/profile/profile_information.dart';
 import 'package:wet_dreams/views/screens/profile/subscription.dart';
@@ -35,6 +36,11 @@ class _ProfileState extends State<Profile> {
       icon: AppIcons.crown,
       title: "subscription".tr,
       route: Subscription(),
+    ),
+    ClickableButtonModel(
+      icon: AppIcons.language,
+      title: "language".tr,
+      route: Language(),
     ),
     ClickableButtonModel(
       icon: AppIcons.lock,

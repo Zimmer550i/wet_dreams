@@ -134,7 +134,9 @@ class _VolumeOfMyPoolState extends State<VolumeOfMyPool> {
     if (volume == null) {
       return;
     }
-    index = shapesFromApi.indexWhere((val) => val.toLowerCase() == volume.shape);
+    index = shapesFromApi.indexWhere(
+      (val) => val.toLowerCase() == volume.shape,
+    );
     if (index == 0 || index == 2) {
       controllers[0].text = volume.length.toString();
       controllers[1].text = volume.width.toString();
@@ -146,7 +148,9 @@ class _VolumeOfMyPoolState extends State<VolumeOfMyPool> {
       controllers[2].text = volume.maxDepth.toString();
     }
 
-    setState(() {});
+    if (mounted) {
+      setState(() {});
+    }
   }
 
   @override

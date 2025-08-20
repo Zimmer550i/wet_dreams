@@ -1,5 +1,3 @@
-import 'dart:io';
-
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:purchases_flutter/purchases_flutter.dart';
@@ -34,9 +32,9 @@ class _SubscriptionState extends State<Subscription> {
               children: [
                 const SizedBox(height: 0),
                 SubscriptionWidget(
+                  isPurchased: user.userInfo.value?.packageName == "Basic Plan",
                   icon: AppIcons.basic,
                   title: "basic_plan".tr,
-                  isPurchased: !(user.userInfo.value?.isSuperuser ?? false),
                   subTitle: "free".tr,
                   pros: [
                     "issues_frequent".tr,
@@ -52,7 +50,7 @@ class _SubscriptionState extends State<Subscription> {
                   },
                 ),
                 SubscriptionWidget(
-                  isPremium: user.userInfo.value?.isSuperuser ?? false,
+                  isPurchased: user.userInfo.value?.packageName == "Premium Plan",
                   icon: AppIcons.premium,
                   title: "premium_plan".tr,
                   subTitle: "price_per_month".tr,
@@ -65,12 +63,6 @@ class _SubscriptionState extends State<Subscription> {
                     "tricks_and_secrets".tr,
                   ],
                   onTap: () async {
-                    if (Platform.isIOS) {
-                      showSnackBar(
-                        "Subscription not implemented due to Apple not allowing it. Will be implemented later after this Review.",
-                      );
-                      return;
-                    }
                     try {
                       final offerings = await Purchases.getOfferings();
                       debugPrint(offerings.toString());
@@ -81,8 +73,16 @@ class _SubscriptionState extends State<Subscription> {
                         debugPrint(package.toString());
 
                         if (package != null) {
+                          await Purchases.logIn(user.userInfo.value!.email);
+                          final appUserID = await Purchases.appUserID;
+                          debugPrint("Paid user: $appUserID");
                           await Purchases.purchasePackage(package);
 
+                          user.getInfo().then((message) {
+                            if (message == "success") {
+                              user.userInfo.value!.packageName = "Premium Plan";
+                            }
+                          });
                           showSnackBar("Payment Successful", isError: false);
                           Get.to(() => PurchaseConfirmation());
                         }

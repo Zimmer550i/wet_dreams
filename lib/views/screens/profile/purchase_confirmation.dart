@@ -32,6 +32,7 @@ class PurchaseConfirmation extends StatelessWidget {
             const SizedBox(height: 24),
             CustomButton(
               text: "back_to_profile".tr,
+              
               width: null,
               onTap:
                   () => Get.until((route) => Get.currentRoute == AppRoutes.app),

@@ -129,5 +129,6 @@
   "min_depth": "Min Depth",
   "max_depth": "Max Depth",
   "diameter": "Diameter",
-  "error_something_wrong": "Error: Something went wrong. Please try again."
+  "error_something_wrong": "Error: Something went wrong. Please try again.",
+  "language": "Language"
 }

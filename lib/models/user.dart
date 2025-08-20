@@ -7,7 +7,7 @@ class User {
   final DateTime? subscriptionExpiresOn;
   final bool isExpired;
   final String subscriptionId;
-  final String packageName;
+  String packageName;
   final bool isVerified;
   final bool isActive;
   final bool isStaff;

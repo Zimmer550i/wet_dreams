@@ -129,5 +129,6 @@
   "min_depth": "Profundidad mínima",
   "max_depth": "Profundidad máxima",
   "diameter": "Diámetro",
-  "error_something_wrong": "Error: Algo salió mal. Por favor, inténtalo de nuevo."
+  "error_something_wrong": "Error: Algo salió mal. Por favor, inténtalo de nuevo.",
+  "language": "Idioma"
 }
