@@ -37,6 +37,7 @@ class AppIcons {
   static const String bellBig = 'assets/icons/bell_big.svg';
   static const String threeDot = 'assets/icons/three_dot.svg';
   static const String language = 'assets/icons/language.svg';
+  static const String accountDeletation = 'assets/icons/account_deletation.svg';
 
   static const String frame33 = 'assets/icons/Frame_33.svg';
 }

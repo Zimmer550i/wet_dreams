@@ -130,6 +130,27 @@ class UserController extends GetxController {
     }
   }
 
+  Future<String> deleteUserAccount() async {
+    isLoading.value = true;
+    try {
+      final response = await api.get(
+        "/api-apps/delete_user/",
+        authReq: true,
+      );
+
+      if (response.statusCode == 200) {
+
+        return "success";
+      } else {
+        return jsonDecode(response.body)['message'] ?? "Connection Error";
+      }
+    } catch (e) {
+      return "Unexpected error: ${e.toString()}";
+    } finally {
+      isLoading(false);
+    }
+  }
+
   Future<String> _getNotifications() async {
     try {
       final response = await api.get(

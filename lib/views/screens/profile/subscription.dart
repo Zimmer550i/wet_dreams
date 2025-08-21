@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:purchases_flutter/purchases_flutter.dart';
-import 'package:wet_dreams/controllers/localization_controller.dart';
 import 'package:wet_dreams/controllers/user_controller.dart';
 import 'package:wet_dreams/utils/app_icons.dart';
 import 'package:wet_dreams/utils/show_snackbar.dart';
@@ -43,14 +42,11 @@ class _SubscriptionState extends State<Subscription> {
                     "problem_in_my_pool".tr,
                   ],
                   cons: ["calculator_of_chemicals".tr, "tricks_and_secrets".tr],
-                  onTap: () {
-                    Get.find<LocalizationController>().setLanguage(
-                      Locale.fromSubtags(languageCode: "es"),
-                    );
-                  },
+                  onTap: () {},
                 ),
                 SubscriptionWidget(
-                  isPurchased: user.userInfo.value?.packageName == "Premium Plan",
+                  isPurchased:
+                      user.userInfo.value?.packageName == "Premium Plan",
                   icon: AppIcons.premium,
                   title: "premium_plan".tr,
                   subTitle: "price_per_month".tr,
@@ -63,6 +59,9 @@ class _SubscriptionState extends State<Subscription> {
                     "tricks_and_secrets".tr,
                   ],
                   onTap: () async {
+                    if (user.userInfo.value?.packageName == "Premium Plan") {
+                      return;
+                    }
                     try {
                       final offerings = await Purchases.getOfferings();
                       debugPrint(offerings.toString());

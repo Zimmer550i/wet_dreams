@@ -10,6 +10,7 @@ import 'package:wet_dreams/views/base/profile_picture.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
+import 'package:wet_dreams/views/screens/profile/account_deletation.dart';
 import 'package:wet_dreams/views/screens/profile/change_password.dart';
 import 'package:wet_dreams/views/screens/profile/language.dart';
 import 'package:wet_dreams/views/screens/profile/privacy_policy.dart';
@@ -51,6 +52,11 @@ class _ProfileState extends State<Profile> {
       icon: AppIcons.privacy,
       title: "privacy_policy".tr,
       route: PrivacyPolicy(),
+    ),
+    ClickableButtonModel(
+      icon: AppIcons.accountDeletation,
+      title: "account_deletion_title".tr,
+      route: AccountDeletation(),
     ),
     ClickableButtonModel(icon: AppIcons.logout, title: "log_out".tr),
   ];
