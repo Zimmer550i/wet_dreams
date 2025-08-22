@@ -8,7 +8,7 @@ void showSnackBar(String message, {bool isError = true}) {
     SnackBar(
       backgroundColor: isError ? AppColors.red : AppColors.blue,
       content: Text(
-        message,
+        message.contains("<!DOCTYPE html>") ? "Something went wrong! Please try again.": message,
         style: TextStyle(
           fontVariations: [FontVariation("wght", 400)],
           fontSize: 14,
