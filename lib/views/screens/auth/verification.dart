@@ -86,7 +86,7 @@ class _VerificationState extends State<Verification> {
     }
 
     setState(() {
-      sec = 30;
+      sec = 10;
     });
 
     _timer = Timer.periodic(Duration(seconds: 1), (timer) {

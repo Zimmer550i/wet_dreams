@@ -112,7 +112,7 @@ class _HomeState extends State<Home> {
             Align(
               alignment: Alignment.centerLeft,
               child: Text(
-                "greeting_message".tr,
+                "greeting_message".trArgs([user.userInfo.value!.fullName]),
                 style: AppTexts.tmdb.copyWith(color: AppColors.black[50]),
               ),
             ),

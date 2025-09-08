@@ -211,6 +211,13 @@ class _VolumeOfMyPoolState extends State<VolumeOfMyPool> {
                   isLoading: isLoading,
                   onTap: handleCallback,
                 ),
+
+                const SizedBox(height: 30),
+
+                ClipRRect(
+                  borderRadius: BorderRadiusGeometry.circular(8),
+                  child: Image.asset("assets/images/calculation.png"),
+                ),
               ],
             ),
           ),

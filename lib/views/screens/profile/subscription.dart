@@ -35,13 +35,8 @@ class _SubscriptionState extends State<Subscription> {
                   icon: AppIcons.basic,
                   title: "basic_plan".tr,
                   subTitle: "free".tr,
-                  pros: [
-                    "issues_frequent".tr,
-                    "maintenance_newspaper".tr,
-                    "but_products".tr,
-                    "problem_in_my_pool".tr,
-                  ],
-                  cons: ["calculator_of_chemicals".tr, "tricks_and_secrets".tr],
+                  pros: ["feature_1".tr, "feature_2".tr, "feature_3".tr],
+                  cons: ["feature_4".tr, "feature_5".tr, "feature_6".tr],
                   onTap: () {},
                 ),
                 SubscriptionWidget(
@@ -51,12 +46,12 @@ class _SubscriptionState extends State<Subscription> {
                   title: "premium_plan".tr,
                   subTitle: "price_per_month".tr,
                   pros: [
-                    "issues_frequent".tr,
-                    "maintenance_newspaper".tr,
-                    "but_products".tr,
-                    "problem_in_my_pool".tr,
-                    "calculator_of_chemicals".tr,
-                    "tricks_and_secrets".tr,
+                    "feature_1".tr,
+                    "feature_2".tr,
+                    "feature_3".tr,
+                    "feature_4".tr,
+                    "feature_5".tr,
+                    "feature_6".tr,
                   ],
                   onTap: () async {
                     if (user.userInfo.value?.packageName == "Premium Plan") {

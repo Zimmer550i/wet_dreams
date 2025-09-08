@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:wet_dreams/utils/app_colors.dart';
 import 'package:wet_dreams/utils/app_icons.dart';
 import 'package:wet_dreams/utils/app_texts.dart';
@@ -21,16 +22,16 @@ class CustomBottomNavbar extends StatelessWidget {
             offset: Offset(0, 2),
             blurRadius: 16,
             color: Colors.black.withAlpha(27),
-          )
+          ),
         ],
       ),
       child: Padding(
         padding: const EdgeInsets.symmetric(vertical: 10),
         child: Row(
           children: [
-            item("Home", AppIcons.home, 0),
-            item("Pool", AppIcons.pool, 1),
-            item("Settings", AppIcons.settings, 2),
+            item("home".tr, AppIcons.home, 0),
+            item("my_pool".tr, AppIcons.pool, 1),
+            item("settings".tr, AppIcons.settings, 2),
           ],
         ),
       ),
