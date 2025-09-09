@@ -60,10 +60,10 @@ class _SubscriptionState extends State<Subscription> {
                     try {
                       final offerings = await Purchases.getOfferings();
                       debugPrint(offerings.toString());
-                      final offering = offerings.getOffering("premium_plan_1");
+                      final offering = offerings.getOffering("premium_yearly");
                       debugPrint(offering.toString());
                       if (offering != null) {
-                        final package = offering.getPackage("\$rc_monthly");
+                        final package = offering.getPackage("\$rc_annual");
                         debugPrint(package.toString());
 
                         if (package != null) {
