@@ -9,32 +9,18 @@
       }
     ]
   },
-  "identifier" : "28B3A5BD",
+  "identifier" : "41EA4FC2",
   "nonRenewingSubscriptions" : [
 
   ],
   "products" : [
-    {
-      "displayPrice" : "3.99",
-      "familyShareable" : false,
-      "internalID" : "6749445695",
-      "localizations" : [
-        {
-          "description" : "This enables all the in-app features",
-          "displayName" : "Premium Plan",
-          "locale" : "en_US"
-        }
-      ],
-      "productID" : "in_app_purchase_key",
-      "referenceName" : "In-App Purchase key",
-      "type" : "NonConsumable"
-    }
+
   ],
   "settings" : {
     "_applicationInternalID" : "6749312378",
     "_developerTeamID" : "LRCGRAU93S",
     "_failTransactionsEnabled" : false,
-    "_lastSynchronizedDate" : 777015724.31487203,
+    "_lastSynchronizedDate" : 779342348.15354598,
     "_locale" : "en_US",
     "_storefront" : "USA",
     "_storeKitErrors" : [
@@ -115,6 +101,39 @@
           "productID" : "premium_plan_1",
           "recurringSubscriptionPeriod" : "P1M",
           "referenceName" : "Premium Plan",
+          "subscriptionGroupID" : "21745724",
+          "type" : "RecurringSubscription",
+          "winbackOffers" : [
+
+          ]
+        },
+        {
+          "adHocOffers" : [
+
+          ],
+          "codeOffers" : [
+
+          ],
+          "displayPrice" : "44.99",
+          "familyShareable" : false,
+          "groupNumber" : 2,
+          "internalID" : "6751537361",
+          "introductoryOffer" : null,
+          "localizations" : [
+            {
+              "description" : "Desbloquear todas las funciones",
+              "displayName" : "Plan Premium",
+              "locale" : "es_ES"
+            },
+            {
+              "description" : "Unlock all features in-app.",
+              "displayName" : "Premium Plan",
+              "locale" : "en_US"
+            }
+          ],
+          "productID" : "premium_plan_yearly",
+          "recurringSubscriptionPeriod" : "P1Y",
+          "referenceName" : "Premium Plan Yearly",
           "subscriptionGroupID" : "21745724",
           "type" : "RecurringSubscription",
           "winbackOffers" : [

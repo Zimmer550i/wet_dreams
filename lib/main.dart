@@ -29,7 +29,7 @@ void main() async {
   } else if (Platform.isIOS) {
     await Purchases.configure(
       PurchasesConfiguration(dotenv.env['APPSTORE_API']!),
-    ); 
+    );
   }
 
   Map<String, Map<String, String>> languages = await di.init();
