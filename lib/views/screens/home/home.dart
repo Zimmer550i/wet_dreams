@@ -145,8 +145,8 @@ class _HomeState extends State<Home> {
                                         if (user
                                                 .userInfo
                                                 .value!
-                                                .packageName !=
-                                            "Premium Plan") {
+                                                .subscriptionStatus !=
+                                            "subscribed") {
                                           premiumFeature(context);
                                           return;
                                         }

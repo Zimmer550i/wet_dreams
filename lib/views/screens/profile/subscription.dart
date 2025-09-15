@@ -41,7 +41,7 @@ class _SubscriptionState extends State<Subscription> {
                 ),
                 SubscriptionWidget(
                   isPurchased:
-                      user.userInfo.value?.packageName == "Premium Plan",
+                      user.userInfo.value?.subscriptionStatus == "subscribed",
                   icon: AppIcons.premium,
                   title: "premium_plan".tr,
                   subTitle: "price_per_month".tr,
@@ -54,7 +54,7 @@ class _SubscriptionState extends State<Subscription> {
                     "feature_6".tr,
                   ],
                   onTap: () async {
-                    if (user.userInfo.value?.packageName == "Premium Plan") {
+                    if (user.userInfo.value?.subscriptionStatus == "subscribed") {
                       return;
                     }
                     try {
@@ -74,7 +74,7 @@ class _SubscriptionState extends State<Subscription> {
 
                           user.getInfo().then((message) {
                             if (message == "success") {
-                              user.userInfo.value!.packageName = "Premium Plan";
+                              
                             }
                           });
                           showSnackBar("Payment Successful", isError: false);

@@ -43,7 +43,7 @@ class _PoolState extends State<Pool> {
     WidgetsBinding.instance.addPostFrameCallback((_) {
       final user = Get.find<UserController>();
 
-      if (user.userInfo.value!.packageName != "Premium Plan") {
+      if (user.userInfo.value!.subscriptionStatus != "subscribed") {
         premiumFeature(context);
         return;
       }
